@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591391198878.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "942EC7DB",
+    "lastKnownWriteTime" : 1591391196,
+    "last_content_update" : 1591391196,
+    "path" : "~/Documents/CoreMicro/R/hello.R",
+    "project_path" : "R/hello.R",
+    "properties" : {
+        "cursorPosition" : "17,1",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

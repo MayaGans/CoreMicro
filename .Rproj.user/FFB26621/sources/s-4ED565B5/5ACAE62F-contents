@@ -1,0 +1,10 @@
+Package: CoreMicro
+Type: Package
+Title: Test core microbiome methods at once
+Version: 0.1.0
+Author: 
+Maintainer:
+Description: 
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
