@@ -1,9 +1,12 @@
 Package: CoreMicro
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Testing Widely Used Core Microbiome Methods 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: as.person(c(
+    "Maya Gans <jaffe.maya@gmail.com> [aut, cre]", 
+    "Gordon Custer <gcuster@uwyo.edu.com> [aut]"
+  ))
+Maintainer: <jaffe.maya@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
