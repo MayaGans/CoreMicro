@@ -10,21 +10,21 @@ combine_plots(
   combined_otu_data,
   low = "#EAE6f3",
   high = "#432976",
-  legend_title = "OTU Abudance"
+  legend_title = "Taxa Count"
 )
 
 \method{combine_plots}{default}(
   combined_otu_data,
   low = "#EAE6f3",
   high = "#432976",
-  legend_title = "OTU Abudance"
+  legend_title = "Taxa Count"
 )
 
 \method{combine_plots}{core_methods}(
   combined_otu_data,
   low = "#EAE6f3",
   high = "#432976",
-  legend_title = "OTU Abudance"
+  legend_title = "Taxa Count"
 )
 }
 \arguments{

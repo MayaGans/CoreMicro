@@ -20,10 +20,7 @@
 #'
 #' @export
 
-combine_plots <- function(combined_otu_data,
-                            low = "#EAE6f3",
-                            high = "#432976",
-                            legend_title = "OTU Abudance") {
+combine_plots <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", legend_title = "Taxa Count") {
   UseMethod("combine_plots", combined_otu_data)
 }
 
@@ -33,10 +30,7 @@ combine_plots <- function(combined_otu_data,
 #' @return NULL
 #' @export
 #' @rdname combine_plots
-combine_plots.default <- function(combined_otu_data,
-                                    low = "#EAE6f3",
-                                    high = "#432976",
-                                    legend_title = "OTU Abudance") {
+combine_plots.default <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", legend_title = "Taxa Count") {
   x <- deparse(substitute(combined_otu_data))
   rlang::abort(
     glue::glue("to create plot, {x} must be of type core_methods. Please run core_methods({x})  prior to plotting")
@@ -53,10 +47,7 @@ combine_plots.default <- function(combined_otu_data,
 #' @export
 #' @rdname combine_plots
 combine_plots.core_methods  <-
-  function(combined_otu_data,
-           low = "#EAE6f3",
-           high = "#432976",
-           legend_title = "OTU Abudance") {
+  function(combined_otu_data, low = "#EAE6f3",high = "#432976", legend_title = "Taxa Count") {
 
     combined_otu_data %>%
       ggplot() +
