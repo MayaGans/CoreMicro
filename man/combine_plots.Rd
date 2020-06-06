@@ -2,13 +2,21 @@
 % Please edit documentation in R/combine_plot.R
 \name{combine_plots}
 \alias{combine_plots}
-\title{Combine Plot}
+\alias{combine_plots.default}
+\alias{combine_plots.core_methods}
+\title{Combined Plots
+
+Generate a plot using the output from \code{combined_methods}}
 \usage{
-combine_plots(
+combine_plots(combined_otu_data)
+
+\method{combine_plots}{default}(combined_otu_data)
+
+\method{combine_plots}{core_methods}(
   combined_otu_data,
   low = "#EAE6f3",
   high = "#432976",
-  legend_title
+  legend_title = "OTU Abudance"
 )
 }
 \arguments{
@@ -18,12 +26,16 @@ combine_plots(
 
 \item{high}{the hexidecimal code of the high color}
 
-\item{legend_title}{the}
+\item{legend_title}{title display above legend}
 }
 \value{
+\code{NULL}
+
 a dataframe with all observed taxa, their inclusion to the core by method (delineated as a 1 or 0), the mean, variance, and coefficient of variation.
 }
 \description{
+Combined Plots
+
 Generate a plot using the output from \code{combined_methods}
 }
 \examples{

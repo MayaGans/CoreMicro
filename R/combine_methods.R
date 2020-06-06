@@ -14,7 +14,7 @@
 #' @export
 
 combine_methods <- function(otu_table) {
-  summarize_OTUS(otu_table) %>%
+  temp <- summarize_OTUS(otu_table) %>%
     dplyr::mutate(
       `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),
       `Proprortion of Sequence Reads and Replicates` = X %in% prop_reads_and_reps(otu_table),
@@ -26,4 +26,8 @@ combine_methods <- function(otu_table) {
                                           "Proportion of Sequence Replicates",
                                           "Proportion of Sequence Reads and Replicates",
                                           "Hard Cut Off")))
+
+  class(temp) <- append(class(temp),"core_methods")
+  print(class(temp))
+  return(temp)
 }

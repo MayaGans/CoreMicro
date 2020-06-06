@@ -15,7 +15,10 @@ LazyData: true
 Imports: 
     dplyr,
     magrittr,
-    ggplot2
+    ggplot2,
+    glue,
+    purrr,
+    rlang
 RoxygenNote: 7.1.0
 Depends: 
     R (>= 2.10)
