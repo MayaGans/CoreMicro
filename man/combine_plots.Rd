@@ -48,7 +48,12 @@ Generate a plot using the output from \code{combined_methods}
 \examples{
 \dontrun{
 combined_arabidopsis <- combine_methods(arabidopsis)
-combine_plots(combined_arabidopsis, high = "#2D5062", low = "#E6ECF1", legend_title = "Arabidopsis Taxa Count")
+combine_plots(
+  combined_arabidopsis,
+   high = "#2D5062",
+   low = "#E6ECF1",
+   legend_title = "Arabidopsis Taxa Count"
+)
 }
 
 }
