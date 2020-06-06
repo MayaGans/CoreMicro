@@ -31,10 +31,13 @@ combine_plots <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", 
 #' @export
 #' @rdname combine_plots
 combine_plots.default <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", legend_title = "Taxa Count") {
+
   x <- deparse(substitute(combined_otu_data))
+
   rlang::abort(
     glue::glue("to create plot, {x} must be of type core_methods. Please run core_methods({x})  prior to plotting")
     )
+
 }
 
 
@@ -60,6 +63,7 @@ combine_plots.core_methods  <-
       guides(color = FALSE) +
       ylab("Coefficient of Variance") +
       labs(fill = legend_title)
+
 }
 
 
