@@ -1,18 +1,26 @@
-# CoreMicro
-An R package to compare various core microbiome methods 
+CoreMicro
+=========
 
-# Introduction
-....todo....
+<!-- badges: start -->
+<!-- badges: end -->
+The goal of CoreMicro is to …
 
-# Installation
-You can install the development version of applicable from GitHub with:
+Installation
+------------
 
-```{r}
-# install.packages("devtools")
-devtools::install_github("MayaGans/CoreMicro"")
+You can install the released version of CoreMicro from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("CoreMicro")
 ```
 
-# Vignettes
-To learn about how to use CoreMicro, check out the vignette:
+Example
+-------
 
-`vignette("analysis_and_plots", "CoreMicro")`: A complete tutorial on the functions within our package!
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(CoreMicro)
+## basic example code
+```
