@@ -10,6 +10,7 @@
 #'
 #' @importFrom tidyr pivot_longer
 #' @import dplyr
+#' @importFrom rlang .data
 #'
 #' @export
 

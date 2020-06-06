@@ -9,6 +9,7 @@
 #' @importFrom tidyr pivot_longer
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
+#' @importFrom rlang .data
 #'
 #' @export
 

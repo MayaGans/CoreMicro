@@ -4,13 +4,21 @@
 \alias{combine_plots}
 \alias{combine_plots.default}
 \alias{combine_plots.core_methods}
-\title{Combined Plots
-
-Generate a plot using the output from \code{combined_methods}}
+\title{Generate a plot using the output from \code{combined_methods}}
 \usage{
-combine_plots(combined_otu_data)
+combine_plots(
+  combined_otu_data,
+  low = "#EAE6f3",
+  high = "#432976",
+  legend_title = "OTU Abudance"
+)
 
-\method{combine_plots}{default}(combined_otu_data)
+\method{combine_plots}{default}(
+  combined_otu_data,
+  low = "#EAE6f3",
+  high = "#432976",
+  legend_title = "OTU Abudance"
+)
 
 \method{combine_plots}{core_methods}(
   combined_otu_data,
@@ -29,17 +37,18 @@ combine_plots(combined_otu_data)
 \item{legend_title}{title display above legend}
 }
 \value{
-\code{NULL}
+a ggplot2 object of methods...
 
-a dataframe with all observed taxa, their inclusion to the core by method (delineated as a 1 or 0), the mean, variance, and coefficient of variation.
+a dataframe with all observed taxa, their inclusion to the core by method (delineated as a 1 or 0),
+the mean, variance, and coefficient of variation.
 }
 \description{
-Combined Plots
-
 Generate a plot using the output from \code{combined_methods}
 }
 \examples{
+\dontrun{
 combined_arabidopsis <- combine_methods(arabidopsis)
 combine_plots(combined_arabidopsis, high = "#2D5062", low = "#E6ECF1", legend_title = "Arabidopsis Taxa Count")
+}
 
 }

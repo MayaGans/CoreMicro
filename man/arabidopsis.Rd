@@ -5,13 +5,13 @@
 \alias{arabidopsis}
 \title{Arabidopsis QTL data on gravitropism}
 \format{
-An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14890 rows and 289 columns.
 }
 \source{
 \href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
 }
 \usage{
-data(grav)
+data(arabidopsis)
 }
 \description{
 Data from a QTL experiment on gravitropism in
@@ -21,7 +21,7 @@ increments over eight hours.
 }
 \examples{
 data(arabidopsis)
-combine_methods(arabidopsid)
+combine_methods(arabidopsis)
 }
 \references{
 Moore et al. (2013) Genetics 195:1077-1086
