@@ -1,0 +1,16 @@
+utils::globalVariables(c(
+  "X",
+  "name",
+  "Mean",
+  "CV",
+  "value",
+  "otuappearance",
+  "s",
+  "prop",
+  "row_sum",
+  "num_sites",
+  "N",
+  "abundance",
+  "var",
+  "Variance"
+))
