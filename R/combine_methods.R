@@ -18,7 +18,7 @@ combine_methods <- function(otu_table) {
   temp <- summarize_OTUS(otu_table) %>%
     dplyr::mutate(
       `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),
-      `Proprortion of Sequence Reads and Replicates` = X %in% prop_reads_and_reps(otu_table),
+      `Proportion of Sequence Reads and Replicates` = X %in% prop_reads_and_reps(otu_table),
       `Hard Cut Off` = X %in% hard_cutoff(otu_table),
       `Proportion of Sequence Replicates` = X %in% prop_reps(otu_table)) %>%
     dplyr::mutate_if(is.logical, as.numeric) %>%
@@ -29,6 +29,5 @@ combine_methods <- function(otu_table) {
                                           "Hard Cut Off")))
 
   class(temp) <- append(class(temp),"core_methods")
-  print(class(temp))
   return(temp)
 }

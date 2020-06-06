@@ -17,11 +17,11 @@ library(tidyr)
 
 Comes with arabidopsis dataset - blah blah
 
-```{r}
-arabidopsis <- data("arabidopsis")
+```{r, results='hide'}
+arabidopsis
 ```
 
-# Neccessary Data Structure for {CoreMico}
+# Data Structure for {CoreMico}
 
 In order to perform all analyses, data must be in the following structure:
 
@@ -94,8 +94,10 @@ combine_arab <- combine_methods(arabidopsis)
 
 # Plot
 
-This function takes on the output of `combine_methods`. This plot........ The function has one neccessary argument, but you can include the low and high colors as well as a more informative legend title. 
+This function takes on the output of `combine_methods`. This plot........ The function has one neccessary argument, `combined_otu_data`, but you can include the low and high colors for hex fills as well as a more informative legend title: 
 
-```{r}
-combine_plots(combine_arab)
+```{r, fig.width=9, fig.height=3}
+combine_plots(combine_arab, high= "#1B301E", low = "#E1E4E1", legend_title = "Arabidopsis Taxa Count")
 ```
+
+

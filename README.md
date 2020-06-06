@@ -28,6 +28,4 @@ arabidopsis %>% # use built in dataset
   combine_plots() # plot using hexbins
 ```
 
-    ## [1] "tbl_df"       "tbl"          "data.frame"   "core_methods"
-
-![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](man/figures/plot.png)
