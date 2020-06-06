@@ -1,0 +1,19 @@
+covr <- file_coverage(
+  c(
+    "R/combine_methods.R",
+    "R/combine_plot.R",
+    "R/hard_cutoff.R",
+    "R/prop_reads.R",
+    "R/prop_reps.R",
+    "R/prop_reads_and_reps.R",
+    "R/hard_cutoff.R"
+  ),
+  c(
+    "tests/testthat/test-combine_methods.R",
+    "tests/testthat/test-combine_plot.R",
+    "tests/testthat/test-core_methods.R",
+    "tests/testthat/test-summarize_OTUs.R"
+  )
+)
+covr
+report(covr)
