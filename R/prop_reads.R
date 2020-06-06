@@ -1,6 +1,9 @@
 #' Proportion of Reads:
 #'
-#' @description This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. In this example, a taxa will be assigned to the core if they account for the first 75% of the reads
+#' @description This method assigns taxa to the core if they are in the top X% of reads.
+#' Taxa are ranked in abundance and the cumulative sum is recorded.
+#' Any taxa which appears before some cutoff percentage is included in the core.
+#' In this example, a taxa will be assigned to the core if they account for the first 75% of the reads
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
 #' @return the names of OTUs which meet the proportion of reads criteria

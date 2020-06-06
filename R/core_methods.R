@@ -1,12 +1,19 @@
 #' Combine Methods
 #'
-#' @description A wrapper for the \code{prop_reads}, \code{prop_reps}, \code{prop_reads_and_reps} and \code{hard_cutoff} methods
+#' @description A wrapper for the \code{prop_reads},
+#' \code{prop_reps},
+#' \code{prop_reads_and_reps} and
+#' \code{hard_cutoff} methods
 #'
-#' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
-#' @return a dataframe with all observed taxa, their inclusion to the core by method (delineated as a 1 or 0), the mean, variance, and coefficient of variation.
+#' @param otu_table a dataframe of OTUs where
+#' the first row is the OTU ID and column names refer to sites
+#'
+#' @return a dataframe with all observed taxa,
+#' their inclusion to the core by method (delineated as a 1 or 0),
+#' the mean, variance, and coefficient of variation.
 #'
 #' @examples
-#' combine_methods(arabidopsis)
+#' core_methods(arabidopsis)
 #'
 #' @importFrom tidyr pivot_longer
 #' @import dplyr
@@ -14,7 +21,7 @@
 #'
 #' @export
 
-combine_methods <- function(otu_table) {
+core_methods <- function(otu_table) {
   temp <- summarize_OTUS(otu_table) %>%
     dplyr::mutate(
       `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),

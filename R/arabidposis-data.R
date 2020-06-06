@@ -18,5 +18,5 @@
 #'
 #' @examples
 #' data(arabidopsis)
-#' combine_methods(arabidopsis)
+#' core_methods(arabidopsis)
 "arabidopsis"

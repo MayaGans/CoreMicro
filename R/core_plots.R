@@ -7,9 +7,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' combined_arabidopsis <- combine_methods(arabidopsis)
-#' combine_plots(
-#'   combined_arabidopsis,
+#' core_arabidopsis <- combine_methods(arabidopsis)
+#' core_plots(
+#'   core_arabidopsis,
 #'    high = "#2D5062",
 #'    low = "#E6ECF1",
 #'    legend_title = "Arabidopsis Taxa Count"
@@ -20,8 +20,13 @@
 #'
 #' @export
 
-combine_plots <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", legend_title = "Taxa Count") {
-  UseMethod("combine_plots", combined_otu_data)
+core_plots <- function(combined_otu_data,
+                       low = "#EAE6f3",
+                       high = "#432976",
+                       legend_title = "Taxa Count") {
+
+  UseMethod("core_plots", combined_otu_data)
+
 }
 
 
@@ -29,13 +34,18 @@ combine_plots <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", 
 #' @importFrom rlang abort
 #' @return NULL
 #' @export
-#' @rdname combine_plots
-combine_plots.default <- function(combined_otu_data, low = "#EAE6f3", high = "#432976", legend_title = "Taxa Count") {
+#' @rdname core_plots
+core_plots.default <- function(combined_otu_data,
+                               low = "#EAE6f3",
+                               high = "#432976",
+                               legend_title = "Taxa Count") {
 
   x <- deparse(substitute(combined_otu_data))
 
   rlang::abort(
-    glue::glue("to create plot, {x} must be of type core_methods. Please run core_methods({x})  prior to plotting")
+    glue::glue("to create plot,
+               {x} must be of type core_methods.
+               Please run core_methods({x})  prior to plotting")
     )
 
 }
@@ -44,13 +54,16 @@ combine_plots.default <- function(combined_otu_data, low = "#EAE6f3", high = "#4
 #' @importFrom rlang .data
 #' @import ggplot2
 #'
-#' @return a dataframe with all observed taxa, their inclusion to the core by method (delineated as a 1 or 0),
+#' @return a dataframe with all observed taxa,
+#' their inclusion to the core by method (delineated as a 1 or 0),
 #' the mean, variance, and coefficient of variation.
 #'
 #' @export
-#' @rdname combine_plots
-combine_plots.core_methods  <-
-  function(combined_otu_data, low = "#EAE6f3",high = "#432976", legend_title = "Taxa Count") {
+#' @rdname core_plots
+core_plots.core_methods  <- function(combined_otu_data,
+                                     low = "#EAE6f3",
+                                     high = "#432976",
+                                     legend_title = "Taxa Count") {
 
     combined_otu_data %>%
       ggplot() +

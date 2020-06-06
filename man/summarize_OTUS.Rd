@@ -7,7 +7,8 @@
 summarize_OTUS(otu_table)
 }
 \arguments{
-\item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
+\item{otu_table}{a dataframe of OTUs
+where the first row is the OTU ID and column names refer to sites}
 }
 \value{
 a dataframe with the Mean, Variance and CV for each OTU

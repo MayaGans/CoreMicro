@@ -17,7 +17,11 @@ hard_cutoff(otu_table, cutoff = 25, sites = 5)
 the names of OTUs which meet the hard cut off criteria
 }
 \description{
-This method assigns taxa to the core if they are present in more than a pre-determined number of sites and have a total abidance greater than a pre-determined number of reads. In our example we set the minimum number of sites to 5 and the minimum number of reads to 25. Here we use the hard cut off described in Lundberg (2012), but realize this is any threshold.
+This method assigns taxa to the core
+if they are present in more than a pre-determined number of sites
+and have a total abidance greater than a pre-determined number of reads.
+In our example we set the minimum number of sites to 5 and the minimum number of reads to 25.
+Here we use the hard cut off described in Lundberg (2012), but realize this is any threshold.
 }
 \examples{
 prop_reads(arabidopsis)

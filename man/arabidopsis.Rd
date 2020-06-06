@@ -21,7 +21,7 @@ increments over eight hours.
 }
 \examples{
 data(arabidopsis)
-combine_methods(arabidopsis)
+core_methods(arabidopsis)
 }
 \references{
 Moore et al. (2013) Genetics 195:1077-1086

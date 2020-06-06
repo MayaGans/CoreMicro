@@ -1,7 +1,7 @@
 Package: CoreMicro
 Type: Package
 Title: Testing Widely Used Core Microbiome Methods 
-Version: 0.1.0
+Version: 0.0.1
 Authors@R: as.person(c(
     "Maya Gans <jaffe.maya@gmail.com> [aut, cre]", 
     "Gordon Custer <gcuster@uwyo.edu.com> [aut]"
@@ -9,6 +9,8 @@ Authors@R: as.person(c(
 Maintainer: <jaffe.maya@gmail.com>
 Description: Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted
     with simulated and empirical data.
+URL: https://github.com/MayaGans/CoreMicro, file:///Users/mayagans/Documents/CoreMicro/docs/index.html
+BugReports: https://github.com/MayaGans/CoreMicro/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -17,7 +19,6 @@ Imports:
     magrittr,
     ggplot2,
     glue,
-    purrr,
     rlang,
     tidyr
 RoxygenNote: 7.1.0

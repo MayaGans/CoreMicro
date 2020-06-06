@@ -15,7 +15,11 @@ prop_reads_and_reps(otu_table, sites = 0.5)
 the names of OTUs which meet the proportion of reads and replicate criteria
 }
 \description{
-This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.01% of the total reads for the entire otu table and be present in at least 50% of sites.
+This method assigns taxa to the core
+if they account for some proportion of the total reads for the sequencing run
+and if they are present in at least x% of the total number of replicates.
+In this example, a core taxa must account for 0.01% of the total reads
+for the entire otu table and be present in at least 50% of sites.
 }
 \examples{
 prop_reads(arabidopsis)

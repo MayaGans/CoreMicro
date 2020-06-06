@@ -24,8 +24,8 @@ This is a basic example which shows you how to solve a common problem:
 library(CoreMicro)
 
 arabidopsis %>% # use built in dataset
-  combine_methods() %>% # create taxa presence absence table per core method
-  combine_plots() # plot using hexbins
+  core_methods() %>% # create taxa presence absence table per core method
+  core_plots() # plot using hexbins
 ```
 
 ![](man/figures/plot.png)

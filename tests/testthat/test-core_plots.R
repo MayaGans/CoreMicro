@@ -1,4 +1,4 @@
-context("combine plots")
+context("core plots")
 
 test_that("combined plot works", {
 

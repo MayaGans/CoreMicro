@@ -87,17 +87,17 @@ The main function of the package is `combine_methods`, a function which prints y
 
 ```{r}
 (
-combine_arab <- combine_methods(arabidopsis)
+combine_arab <- core_methods(arabidopsis)
 )
 ```
 
 
 # Plot
 
-This function takes on the output of `combine_methods`. This plot........ The function has one neccessary argument, `combined_otu_data`, but you can include the low and high colors for hex fills as well as a more informative legend title: 
+This function takes on the output of `core_methods`. This plot........ The function has one neccessary argument, `combined_otu_data`, but you can include the low and high colors for hex fills as well as a more informative legend title: 
 
 ```{r, fig.width=9, fig.height=3}
-combine_plots(combine_arab, high= "#1B301E", low = "#E1E4E1", legend_title = "Arabidopsis Taxa Count")
+core_plots(combine_arab, high= "#1B301E", low = "#E1E4E1", legend_title = "Arabidopsis Taxa Count")
 ```
 
 

@@ -1,3 +1,3 @@
-# CoreMicro 0.1.0
+# CoreMicro 0.0.1
 
 First CRAN version
