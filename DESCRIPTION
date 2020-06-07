@@ -9,7 +9,7 @@ Authors@R: as.person(c(
 Maintainer: <jaffe.maya@gmail.com>
 Description: Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted
     with simulated and empirical data.
-URL: https://mayagans.github.io/CoreMicro/index.html
+URL: https://mayagans.github.io/CoreMicro/
 BugReports: https://github.com/MayaGans/CoreMicro/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
