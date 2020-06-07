@@ -6,7 +6,7 @@
 #' @return a dataframe with the Mean, Variance and CV for each OTU
 #'
 #' @examples
-#' summarize_OTUS(arabidopsis)
+#' summarise_taxa(arabidopsis)
 #'
 #' @importFrom tidyr pivot_longer
 #' @importFrom dplyr group_by
@@ -15,7 +15,7 @@
 #'
 #' @export
 
-summarize_OTUS <- function(otu_table) {
+summarise_taxa <- function(otu_table) {
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
     dplyr::group_by(X) %>%

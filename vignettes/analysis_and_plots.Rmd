@@ -40,7 +40,7 @@ Where the first row is your taxa names and **must be called X** and all subseque
 What is this... 
 
 ```{r}
-summarize_OTUS(arabidopsis)
+summarise_taxa(arabidopsis)
 ```
 
 # Single Methods

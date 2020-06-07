@@ -22,7 +22,7 @@
 #' @export
 
 core_methods <- function(otu_table) {
-  temp <- summarize_OTUS(otu_table) %>%
+  temp <- summarise_taxa(otu_table) %>%
     dplyr::mutate(
       `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),
       `Proportion of Sequence Reads and Replicates` = X %in% prop_reads_and_reps(otu_table),
