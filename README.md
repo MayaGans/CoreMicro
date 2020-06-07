@@ -2,7 +2,6 @@ CoreMicro
 =========
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/MayaGans/CoreMicro/branch/master/graph/badge.svg)](https://codecov.io/gh/MayaGans/CoreMicro?branch=master)
 <!-- badges: end -->
 
 The goal of CoreMicro is to …
