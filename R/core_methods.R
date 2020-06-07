@@ -1,6 +1,8 @@
 #' Combine Methods
 #'
-#' @description A wrapper for the \code{prop_reads},
+#' @description A wrapper for
+#' \code{summarise_taxa}
+#' \code{prop_reads},
 #' \code{prop_reps},
 #' \code{prop_reads_and_reps} and
 #' \code{hard_cutoff} methods

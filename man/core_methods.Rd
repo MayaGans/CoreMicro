@@ -16,7 +16,9 @@ their inclusion to the core by method (delineated as a 1 or 0),
 the mean, variance, and coefficient of variation.
 }
 \description{
-A wrapper for the \code{prop_reads},
+A wrapper for
+\code{summarise_taxa}
+\code{prop_reads},
 \code{prop_reps},
 \code{prop_reads_and_reps} and
 \code{hard_cutoff} methods
