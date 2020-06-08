@@ -1,13 +1,8 @@
-#' Arabidopsis QTL data on gravitropism
+#' Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods
 #'
 #' Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
 #' core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
 #' for our comparisons of core assignment methods.
-#'
-#' from a QTL experiment on gravitropism in
-#' Arabidopsis, with data on 162 recombinant inbred lines (Ler x
-#' Cvi). The outcome is the root tip angle (in degrees) at two-minute
-#' increments over eight hours.
 #'
 #' @docType data
 #'

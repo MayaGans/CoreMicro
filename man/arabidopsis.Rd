@@ -3,7 +3,7 @@
 \docType{data}
 \name{arabidopsis}
 \alias{arabidopsis}
-\title{Arabidopsis QTL data on gravitropism}
+\title{Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14890 rows and 289 columns.
 }
@@ -17,12 +17,6 @@ data(arabidopsis)
 Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
 core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
 for our comparisons of core assignment methods.
-}
-\details{
-from a QTL experiment on gravitropism in
-Arabidopsis, with data on 162 recombinant inbred lines (Ler x
-Cvi). The outcome is the root tip angle (in degrees) at two-minute
-increments over eight hours.
 }
 \examples{
 data(arabidopsis)
