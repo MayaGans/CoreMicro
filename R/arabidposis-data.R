@@ -16,7 +16,7 @@
 #' Arabidopsis thaliana root microbiome, Nature. 488 (2012) 86–90. doi:10.1038/nature11237.
 #' (\href{https://www.nature.com/articles/nature11237}{Nature})
 #'
-#'What does this mean?
+#'What does QTL Archive thing mean?
 #' @source \href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
 #'
 #' @examples
