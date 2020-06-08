@@ -7,8 +7,8 @@
 #' Here we use the hard cut off described in Lundberg (2012), but realize this is any threshold.
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
-#' @param cutoff the threshhold minimum number of reads
-#' @param sites the theshhold minimum number of sites
+#' @param cutoff the threshhold minimum number of reads - defaults to 25
+#' @param sites the theshhold minimum number of sites - defaults to 5
 #'
 #' @return the names of OTUs which meet the hard cut off criteria
 #'

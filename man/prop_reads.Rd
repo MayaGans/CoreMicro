@@ -4,10 +4,12 @@
 \alias{prop_reads}
 \title{Proportion of Reads:}
 \usage{
-prop_reads(otu_table)
+prop_reads(otu_table, perc = 0.75)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
+
+\item{perc}{blah blah}
 }
 \value{
 the names of OTUs which meet the proportion of reads criteria

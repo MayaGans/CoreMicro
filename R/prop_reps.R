@@ -8,7 +8,7 @@
 #'
 #' @param otu_table a dataframe of OTUs where
 #' the first row is the OTU ID and column names refer to sites
-#'
+#' @param perc_total_reads some definition
 #' @return the names of OTUs which meet the proportion of replicate criteria
 #'
 #' @examples
@@ -20,11 +20,13 @@
 #'
 #' @export
 
-prop_reps <- function(otu_table) {
+prop_reps <- function(otu_table, perc_total_reads = 10) {
+
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
     dplyr::group_by(X) %>%
     dplyr::summarise(abundance = sum(value)) %>%
-    dplyr::filter(abundance > 10*ncol(otu_table)) %>%
+    dplyr::filter(abundance > perc_total_reads * ncol(otu_table)) %>%
     dplyr::pull(X)
+
 }

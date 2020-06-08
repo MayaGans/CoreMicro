@@ -4,11 +4,13 @@
 \alias{prop_reps}
 \title{Proportion of Replicates}
 \usage{
-prop_reps(otu_table)
+prop_reps(otu_table, perc_total_reads = 10)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where
 the first row is the OTU ID and column names refer to sites}
+
+\item{perc_total_reads}{some definition}
 }
 \value{
 the names of OTUs which meet the proportion of replicate criteria

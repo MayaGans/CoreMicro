@@ -6,6 +6,7 @@
 #' In this example, a taxa will be assigned to the core if they account for the first 75% of the reads
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
+#' @param perc blah blah
 #' @return the names of OTUs which meet the proportion of reads criteria
 #'
 #' @examples
@@ -17,7 +18,7 @@
 #'
 #' @export
 
-prop_reads <- function(otu_table) {
+prop_reads <- function(otu_table, perc = 0.75) {
   otu_table %>%
     tidyr::pivot_longer(-X) %>%
     dplyr::group_by(X) %>%
@@ -26,6 +27,6 @@ prop_reads <- function(otu_table) {
     dplyr::mutate(s = sum(otuappearance),
            prop = otuappearance/s,
            cumsum = cumsum(prop)) %>%
-    dplyr::filter(cumsum <= 0.75) %>%
+    dplyr::filter(cumsum <= perc) %>%
     dplyr::pull(X)
 }
