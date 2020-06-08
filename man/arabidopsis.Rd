@@ -14,7 +14,12 @@ An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, 
 data(arabidopsis)
 }
 \description{
-Data from a QTL experiment on gravitropism in
+Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
+core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
+for our comparisons of core assignment methods.
+}
+\details{
+from a QTL experiment on gravitropism in
 Arabidopsis, with data on 162 recombinant inbred lines (Ler x
 Cvi). The outcome is the root tip angle (in degrees) at two-minute
 increments over eight hours.
