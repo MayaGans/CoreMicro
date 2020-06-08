@@ -15,7 +15,7 @@ library(tidyr)
 
 # Introduction
 
-Comes with arabidopsis dataset - blah blah blah 
+Tell us what is going on with our datset and package. 
 
 ```{r, results='hide'}
 arabidopsis
