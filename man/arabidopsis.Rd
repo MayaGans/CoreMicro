@@ -8,7 +8,7 @@
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14890 rows and 289 columns.
 }
 \source{
-\href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
+\href{https://www.nature.com/articles/nature11237}{Nature}
 }
 \usage{
 data(arabidopsis)

@@ -16,7 +16,7 @@
 #' (\href{https://www.nature.com/articles/nature11237}{Nature})
 #'
 #'What does QTL Archive thing mean?
-#' @source \href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
+#' @source \href{https://www.nature.com/articles/nature11237}{Nature}
 #'
 #' @examples
 #' data(arabidopsis)
