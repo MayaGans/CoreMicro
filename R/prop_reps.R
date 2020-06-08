@@ -6,6 +6,8 @@
 #' In this example, a core taxa must account for 0.01% of the total reads
 #' for the entire otu table and be present in at least 50% of sites.
 #'
+#' According to the mansucript it should be 0.5 x totalreps. I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
+#'
 #' @param otu_table a dataframe of OTUs where
 #' the first row is the OTU ID and column names refer to sites
 #' @param perc_total_reads some definition
@@ -20,7 +22,8 @@
 #'
 #' @export
 
-prop_reps <- function(otu_table, perc_total_reads = 10) {
+
+prop_reps <- function(otu_table, perc_total_reads = 0.5) {
 
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
