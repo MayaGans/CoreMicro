@@ -9,9 +9,9 @@ hard_cutoff(otu_table, cutoff = 25, sites = 5)
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
 
-\item{cutoff}{the threshhold minimum number of reads}
+\item{cutoff}{the threshhold minimum number of reads - defaults to 25}
 
-\item{sites}{the theshhold minimum number of sites}
+\item{sites}{the theshhold minimum number of sites - defaults to 5}
 }
 \value{
 the names of OTUs which meet the hard cut off criteria
