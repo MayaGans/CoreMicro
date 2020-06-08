@@ -4,13 +4,17 @@
 \alias{prop_reps}
 \title{Proportion of Replicates}
 \usage{
-prop_reps(otu_table, perc_total_reads = 10)
+prop_reps(otu_table, perc_total_reads = 10, taxa_as_rows = TRUE)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where
 the first row is the OTU ID and column names refer to sites}
 
 \item{perc_total_reads}{some definition}
+
+\item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
+and the sites are columns. The default value is \code{TRUE},
+if \code{FALSE} data will be transposed for downstream analysis.}
 }
 \value{
 the names of OTUs which meet the proportion of replicate criteria

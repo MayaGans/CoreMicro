@@ -10,6 +10,10 @@
 #' @param otu_table a dataframe of OTUs where
 #' the first row is the OTU ID and column names refer to sites
 #'
+#' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
+#' and the sites are columns. The default value is \code{TRUE},
+#' if \code{FALSE} data will be transposed for downstream analysis.
+#'
 #' @return a dataframe with all observed taxa,
 #' their inclusion to the core by method (delineated as a 1 or 0),
 #' the mean, variance, and coefficient of variation.
@@ -23,7 +27,14 @@
 #'
 #' @export
 
-core_methods <- function(otu_table) {
+core_methods <- function(otu_table, taxa_as_rows = TRUE) {
+
+  # transpose data if rows are not taxa
+  if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
+
+  # rename first column `X`
+  names(otu_table)[1] <- "X"
+
   temp <- summarise_taxa(otu_table) %>%
     dplyr::mutate(
       `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),
@@ -39,4 +50,5 @@ core_methods <- function(otu_table) {
 
   class(temp) <- append(class(temp),"core_methods")
   return(temp)
+
 }

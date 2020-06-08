@@ -4,11 +4,15 @@
 \alias{summarise_taxa}
 \title{Calculate the mean, variance and CV of each OTU}
 \usage{
-summarise_taxa(otu_table)
+summarise_taxa(otu_table, taxa_as_rows = TRUE)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs
 where the first row is the OTU ID and column names refer to sites}
+
+\item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
+and the sites are columns. The default value is \code{TRUE},
+if \code{FALSE} data will be transposed for downstream analysis.}
 }
 \value{
 a dataframe with the Mean, Variance and CV for each OTU

@@ -7,6 +7,11 @@
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
 #' @param perc blah blah
+#'
+#' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
+#' and the sites are columns. The default value is \code{TRUE},
+#' if \code{FALSE} data will be transposed for downstream analysis.
+#'
 #' @return the names of OTUs which meet the proportion of reads criteria
 #'
 #' @examples
@@ -18,7 +23,14 @@
 #'
 #' @export
 
-prop_reads <- function(otu_table, perc = 0.75) {
+prop_reads <- function(otu_table, perc = 0.75, taxa_as_rows =TRUE) {
+
+  # transpose data if rows are not taxa
+  if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
+
+  # rename first column `X`
+  names(otu_table)[1] <- "X"
+
   otu_table %>%
     tidyr::pivot_longer(-X) %>%
     dplyr::group_by(X) %>%
