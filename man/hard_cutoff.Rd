@@ -4,7 +4,7 @@
 \alias{hard_cutoff}
 \title{Hard Cut-Off}
 \usage{
-hard_cutoff(otu_table, cutoff = 25, sites = 5)
+hard_cutoff(otu_table, cutoff = 25, sites = 5, taxa_as_rows = TRUE)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
@@ -12,6 +12,10 @@ hard_cutoff(otu_table, cutoff = 25, sites = 5)
 \item{cutoff}{the threshhold minimum number of reads - defaults to 25}
 
 \item{sites}{the theshhold minimum number of sites - defaults to 5}
+
+\item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
+and the sites are columns. The default value is \code{TRUE},
+if \code{FALSE} data will be transposed for downstream analysis.}
 }
 \value{
 the names of OTUs which meet the hard cut off criteria

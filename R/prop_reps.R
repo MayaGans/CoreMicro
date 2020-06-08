@@ -10,7 +10,13 @@
 #'
 #' @param otu_table a dataframe of OTUs where
 #' the first row is the OTU ID and column names refer to sites
+#'
 #' @param perc_total_reads some definition
+#'
+#' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
+#' and the sites are columns. The default value is \code{TRUE},
+#' if \code{FALSE} data will be transposed for downstream analysis.
+#'
 #' @return the names of OTUs which meet the proportion of replicate criteria
 #'
 #' @examples
@@ -22,8 +28,7 @@
 #'
 #' @export
 
-
-prop_reps <- function(otu_table, perc_total_reads = 0.5) {
+prop_reps <- function(otu_table, perc_total_reads = 0.5, taxa_as_rows = TRUE) {
 
   otu_table %>%
     tidyr::pivot_longer(-1) %>%

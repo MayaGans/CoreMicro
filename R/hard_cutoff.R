@@ -10,6 +10,10 @@
 #' @param cutoff the threshhold minimum number of reads - defaults to 25
 #' @param sites the theshhold minimum number of sites - defaults to 5
 #'
+#' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
+#' and the sites are columns. The default value is \code{TRUE},
+#' if \code{FALSE} data will be transposed for downstream analysis.
+#'
 #' @return the names of OTUs which meet the hard cut off criteria
 #'
 #' @examples
@@ -21,7 +25,14 @@
 #'
 #' @export
 
-hard_cutoff <- function(otu_table, cutoff = 25, sites = 5) {
+hard_cutoff <- function(otu_table, cutoff = 25, sites = 5, taxa_as_rows = TRUE) {
+
+  # transpose data if rows are not taxa
+  if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
+
+  # rename first column `X`
+  names(otu_table)[1] <- "X"
+
   otu_table %>%
     tidyr::pivot_longer(-X) %>%
     dplyr::select(-name) %>%

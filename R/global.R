@@ -12,5 +12,6 @@ utils::globalVariables(c(
   "N",
   "abundance",
   "var",
-  "Variance"
+  "Variance",
+  "key"
 ))
