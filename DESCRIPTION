@@ -1,14 +1,20 @@
 Package: CoreMicro
 Type: Package
-Title: Testing Widely Used Core Microbiome Methods 
+Title: Testing  Widely Used Core Microbiome Assignment Methods 
 Version: 0.0.1
 Authors@R: as.person(c(
     "Maya Gans <jaffe.maya@gmail.com> [aut, cre]", 
-    "Gordon Custer <gcuster@uwyo.edu.com> [aut]"
+    "Gordon Custer <gordon.custer91@gmail.com> [aut]"
   ))
 Maintainer: <jaffe.maya@gmail.com>
 Description: Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted
-    with simulated and empirical data.
+    with simulated and empirical data. Package allows for the comparison of commonly utilized methods for assignment of 
+    taxa into core or non-core groups. Package includes tools for calculation of summary statistics for taxon abundance data
+    and visualization of subsequent core and non-core assignments. Each of the four core assignment methods included can
+    be customized to alter thresholds required for core inclusion. This allows researchers to alter cutoffs and determine
+    if core assignment methods agree at certain cutoffs, facilitating comparison of multiple core assignment methods. As per
+    the companion manuscript, core assignments should only be used for biological interpretation when assignment is robust
+    to methodology, e.g. multiple methods agree on core assignment. 
 URL: https://mayagans.github.io/CoreMicro/
 BugReports: https://github.com/MayaGans/CoreMicro/issues
 License: MIT + file LICENSE

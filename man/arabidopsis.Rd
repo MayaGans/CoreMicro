@@ -3,28 +3,31 @@
 \docType{data}
 \name{arabidopsis}
 \alias{arabidopsis}
-\title{Arabidopsis QTL data on gravitropism}
+\title{Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14890 rows and 289 columns.
 }
 \source{
-\href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
+\href{https://www.nature.com/articles/nature11237}{Nature}
 }
 \usage{
 data(arabidopsis)
 }
 \description{
-Data from a QTL experiment on gravitropism in
-Arabidopsis, with data on 162 recombinant inbred lines (Ler x
-Cvi). The outcome is the root tip angle (in degrees) at two-minute
-increments over eight hours.
+Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
+core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
+for our comparisons of core assignment methods.
 }
 \examples{
 data(arabidopsis)
 core_methods(arabidopsis)
 }
 \references{
-Moore et al. (2013) Genetics 195:1077-1086
-(\href{https://www.ncbi.nlm.nih.gov/pubmed/23979570}{PubMed})
+D.S. Lundberg, S.L. Lebeis, S.H. Paredes, S. Yourstone, J. Gehring, S. Malfatti, J. Tremblay, A. Engelbrektson,
+V. Kunin, T.G. del Rio, R.C. Edgar, T. Eickhorst, R.E. Ley, P. Hugenholtz, S.G. Tringe, J.L. Dangl, Defining the core
+Arabidopsis thaliana root microbiome, Nature. 488 (2012) 86–90. doi:10.1038/nature11237.
+(\href{https://www.nature.com/articles/nature11237}{Nature})
+
+What does QTL Archive thing mean?
 }
 \keyword{datasets}
