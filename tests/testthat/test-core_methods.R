@@ -41,11 +41,11 @@ test_that("prop reads and reps method works", {
 
 test_that("combining methods works", {
   values <- core_methods(dummy) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,0,1,1,1,1,1,0,0))
+  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
 })
 
 
 test_that("combining methods works when transposed", {
   values <- core_methods(dummy_t, taxa_as_rows = FALSE) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,0,1,1,1,1,1,0,0))
+  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
 })
