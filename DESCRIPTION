@@ -26,7 +26,8 @@ Imports:
     ggplot2,
     glue,
     rlang,
-    tidyr
+    tidyr,
+    ggVennDiagram
 RoxygenNote: 7.1.0
 Depends: 
     R (>= 2.10)
