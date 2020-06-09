@@ -30,6 +30,12 @@
 
 prop_reps <- function(otu_table, perc_total_reads = 0.5, taxa_as_rows = TRUE) {
 
+  # transpose data if rows are not taxa
+  if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
+
+  # rename first column `X`
+  names(otu_table)[1] <- "X"
+
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
     dplyr::group_by(X) %>%
