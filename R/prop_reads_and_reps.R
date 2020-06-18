@@ -3,6 +3,7 @@
 #' @description This method assigns taxa to the core
 #' if they account for some proportion of the total reads for the sequencing run
 #' and if they are present in at least x% of the total number of replicates.
+#'
 #' In this example, a core taxa must account for 0.01% of the total reads
 #' for the entire otu table and be present in at least 50% of sites.
 #'
@@ -24,7 +25,7 @@
 #'
 #' @export
 
-prop_reads_and_reps <- function(otu_table, sites = 0.5, taxa_as_rows = TRUE) {
+prop_reads_and_reps <- function(otu_table, sites = 0.5, total_reads = 0.01, taxa_as_rows = TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -38,7 +39,7 @@ prop_reads_and_reps <- function(otu_table, sites = 0.5, taxa_as_rows = TRUE) {
     dplyr::mutate(row_sum = sum(value)) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(s = sum(unique(row_sum))) %>%
-    dplyr::filter(value > 0) %>%
+    dplyr::filter(value > total_reads*(100)) %>%
     dplyr::group_by(X) %>%
     dplyr::summarise(
       num_sites = n(),
