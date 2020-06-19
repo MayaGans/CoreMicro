@@ -4,13 +4,13 @@
 \alias{prop_reps}
 \title{Proportion of Replicates}
 \usage{
-prop_reps(otu_table, perc_total_reads = 0.5, taxa_as_rows = TRUE)
+prop_reps(otu_table, prop_reps = 0.5, taxa_as_rows = TRUE)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where
 the first row is the OTU ID and column names refer to sites}
 
-\item{perc_total_reads}{some definition}
+\item{prop_reps}{some definition}
 
 \item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
 and the sites are columns. The default value is \code{TRUE},
@@ -26,7 +26,8 @@ and if they are present in at least x% of the total number of replicates.
 In this example, a core taxa must account for 0.01% of the total reads
 for the entire otu table and be present in at least 50% of sites.
 
-According to the mansucript it should be 0.5 x totalreps. I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
+According to the mansucript it should be 0.5 x total reps.
+I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
 }
 \examples{
 prop_reps(arabidopsis)

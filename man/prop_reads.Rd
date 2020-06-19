@@ -4,12 +4,12 @@
 \alias{prop_reads}
 \title{Proportion of Reads:}
 \usage{
-prop_reads(otu_table, perc = 0.75, taxa_as_rows = TRUE)
+prop_reads(otu_table, prop_reads = 0.75, taxa_as_rows = TRUE)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
 
-\item{perc}{blah blah}
+\item{prop_reads}{blah blah}
 
 \item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
 and the sites are columns. The default value is \code{TRUE},
