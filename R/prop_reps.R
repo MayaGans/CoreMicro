@@ -6,12 +6,13 @@
 #' In this example, a core taxa must account for 0.01% of the total reads
 #' for the entire otu table and be present in at least 50% of sites.
 #'
-#' According to the mansucript it should be 0.5 x totalreps. I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
+#' According to the mansucript it should be 0.5 x total reps.
+#' I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
 #'
 #' @param otu_table a dataframe of OTUs where
 #' the first row is the OTU ID and column names refer to sites
 #'
-#' @param perc_total_reads some definition
+#' @param prop_reps some definition
 #'
 #' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
 #' and the sites are columns. The default value is \code{TRUE},
@@ -28,7 +29,7 @@
 #'
 #' @export
 
-prop_reps <- function(otu_table, perc_total_reads = 0.5, taxa_as_rows = TRUE) {
+prop_reps <- function(otu_table, prop_reps = 0.5, taxa_as_rows = TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -40,7 +41,7 @@ prop_reps <- function(otu_table, perc_total_reads = 0.5, taxa_as_rows = TRUE) {
     tidyr::pivot_longer(-1) %>%
     dplyr::group_by(X) %>%
     dplyr::summarise(abundance = sum(value)) %>%
-    dplyr::filter(abundance > perc_total_reads * ncol(otu_table)) %>%
+    dplyr::filter(abundance > prop_reps * ncol(otu_table)) %>%
     dplyr::pull(X)
 
 }

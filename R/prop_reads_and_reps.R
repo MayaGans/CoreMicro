@@ -25,7 +25,7 @@
 #'
 #' @export
 
-prop_reads_and_reps <- function(otu_table, propreps = 0.5, propreads = 0.02, taxa_as_rows = TRUE) {
+prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.02, taxa_as_rows = TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -33,7 +33,7 @@ prop_reads_and_reps <- function(otu_table, propreps = 0.5, propreads = 0.02, tax
   # rename first column `X`
   names(otu_table)[1] <- "X"
 
-  t <- otu_table %>%
+  otu_table %>%
     tidyr::pivot_longer(-X) %>%
     dplyr::group_by(X) %>%
     # count the number of reads of each OTU across sites
@@ -54,8 +54,8 @@ prop_reads_and_reps <- function(otu_table, propreps = 0.5, propreads = 0.02, tax
       N = ncol(otu_table) - 1) %>%
     dplyr::ungroup() %>%
     # this one gives us results
-    dplyr::filter(num_sites >= N * propreps) %>%
+    dplyr::filter(num_sites >= N * prop_reps) %>%
     # this leaves us with nothing...
-    dplyr::filter(num_reads >= propreads*s) %>%
+    dplyr::filter(num_reads >= prop_reads*s) %>%
     dplyr::pull(X)
 }
