@@ -22,8 +22,8 @@ common_core <- function(data, threshhold = 0) {
         dplyr::filter(value != 0) %>%
         dplyr::group_by(X) %>%
         dplyr::summarise(
-          count = sum(value),
-          types = list(unique(as.character(name)))
+          num_methods = sum(value),
+          methods = list(unique(as.character(name)))
         )
     ) %>%
     tidyr::replace_na(replace = list(count = 0L)) %>%
