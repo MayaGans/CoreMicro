@@ -13,5 +13,6 @@ utils::globalVariables(c(
   "abundance",
   "var",
   "Variance",
-  "key"
+  "key",
+  "taxa_data"
 ))

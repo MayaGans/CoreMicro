@@ -4,16 +4,21 @@
 \alias{prop_reads_and_reps}
 \title{Proportion of Reads and Replicates:}
 \usage{
-prop_reads_and_reps(otu_table, sites = 0.5, taxa_as_rows = TRUE)
+prop_reads_and_reps(
+  otu_table,
+  prop_reps = 0.5,
+  prop_reads = 2e-04,
+  taxa_as_rows = TRUE
+)
 }
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
 
-\item{sites}{the percent of sites the OTU needs to be present in}
-
 \item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
 and the sites are columns. The default value is \code{TRUE},
 if \code{FALSE} data will be transposed for downstream analysis.}
+
+\item{sites}{the percent of sites the OTU needs to be present in}
 }
 \value{
 the names of OTUs which meet the proportion of reads and replicate criteria
@@ -22,7 +27,8 @@ the names of OTUs which meet the proportion of reads and replicate criteria
 This method assigns taxa to the core
 if they account for some proportion of the total reads for the sequencing run
 and if they are present in at least x% of the total number of replicates.
-In this example, a core taxa must account for 0.01% of the total reads
+
+In this example, a core taxa must account for 0.02% of the total reads
 for the entire otu table and be present in at least 50% of sites.
 }
 \examples{

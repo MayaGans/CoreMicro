@@ -23,7 +23,7 @@ arabidopsis
 
 # Data Structure for {CoreMico}
 
-In order to perform all analyses, data must be in the following structure:
+By default {coremicro} assumes your data is in a wide format:
 
 ```{r, echo=FALSE, warning=FALSE}
 tibble(
@@ -33,7 +33,7 @@ tibble(
 ) %>% gt()
 ```
 
-Where the first row is your taxa names and **must be called X** and all subsequent rows are numeric containing your taxa counts.
+Where the first column is your taxa names, and all subsequent columns are numeric containing your taxa counts. If your data is in long format you can set `taxa_as_rows = FALSE`
 
 # Mean, Variance, Covariance
 
@@ -94,10 +94,18 @@ combine_arab <- core_methods(arabidopsis)
 
 # Plot
 
+## Histo-bins
+
 This function takes on the output of `core_methods`. This plot........ The function has one neccessary argument, `combined_otu_data`, but you can include the low and high colors for hex fills as well as a more informative legend title: 
 
 ```{r, fig.width=9, fig.height=3}
 core_plots(combine_arab, high= "#1B301E", low = "#E1E4E1", legend_title = "Arabidopsis Taxa Count")
 ```
 
+## Venn Diagram
 
+Explanation
+
+```{r}
+combine_arab %>% core_venn()
+```

@@ -2,9 +2,12 @@
 
 S3method(core_plots,core_methods)
 S3method(core_plots,default)
+S3method(core_venn,core_methods)
+S3method(core_venn,default)
 export("%>%")
 export(core_methods)
 export(core_plots)
+export(core_venn)
 export(hard_cutoff)
 export(prop_reads)
 export(prop_reads_and_reps)

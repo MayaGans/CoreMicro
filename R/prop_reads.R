@@ -6,7 +6,7 @@
 #' In this example, a taxa will be assigned to the core if they account for the first 75% of the reads
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
-#' @param perc blah blah
+#' @param prop_reads blah blah
 #'
 #' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
 #' and the sites are columns. The default value is \code{TRUE},
@@ -23,7 +23,7 @@
 #'
 #' @export
 
-prop_reads <- function(otu_table, perc = 0.75, taxa_as_rows =TRUE) {
+prop_reads <- function(otu_table, prop_reads = 0.75, taxa_as_rows =TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -39,6 +39,6 @@ prop_reads <- function(otu_table, perc = 0.75, taxa_as_rows =TRUE) {
     dplyr::mutate(s = sum(otuappearance),
            prop = otuappearance/s,
            cumsum = cumsum(prop)) %>%
-    dplyr::filter(cumsum <= perc) %>%
+    dplyr::filter(cumsum <= prop_reads) %>%
     dplyr::pull(X)
 }

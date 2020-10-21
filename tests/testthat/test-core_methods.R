@@ -30,8 +30,8 @@ test_that("prop reads method works", {
 })
 
 test_that("prop reps method works", {
-  expect_equal(prop_reps(dummy), c("OTU_1", "OTU_3"))
-  expect_equal(prop_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_3"))
+  expect_equal(prop_reps(dummy), c("OTU_1", "OTU_2", "OTU_3"))
+  expect_equal(prop_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
 })
 
 test_that("prop reads and reps method works", {
@@ -41,11 +41,11 @@ test_that("prop reads and reps method works", {
 
 test_that("combining methods works", {
   values <- core_methods(dummy) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,0,1,1,1,1,1,0,0))
+  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
 })
 
 
 test_that("combining methods works when transposed", {
   values <- core_methods(dummy_t, taxa_as_rows = FALSE) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,0,1,1,1,1,1,0,0))
+  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
 })

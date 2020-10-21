@@ -26,8 +26,9 @@ Imports:
     ggplot2,
     glue,
     rlang,
-    tidyr
-RoxygenNote: 7.1.0
+    tidyr,
+    ggVennDiagram
+RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
 Suggests: 
