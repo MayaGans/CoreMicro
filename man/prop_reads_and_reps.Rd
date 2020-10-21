@@ -7,7 +7,7 @@
 prop_reads_and_reps(
   otu_table,
   prop_reps = 0.5,
-  prop_reads = 0.02,
+  prop_reads = 2e-04,
   taxa_as_rows = TRUE
 )
 }

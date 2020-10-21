@@ -25,7 +25,7 @@
 #'
 #' @export
 
-prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.02, taxa_as_rows = TRUE) {
+prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.0002, taxa_as_rows = TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -38,9 +38,10 @@ prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.02, t
     dplyr::group_by(X) %>%
     # count the number of reads of each OTU across sites
     dplyr::mutate(num_reads = sum(value)) %>%
+    # number of sites (should be the same number for entire column)
     dplyr::add_count(X) %>%
     dplyr::ungroup() %>%
-    # get total number of reads for every unique OTU
+    # get total number of reads for the entire OTU table
     dplyr::mutate(s = sum(num_reads)/n) %>%
     dplyr::ungroup() %>%
     # remove the rows with no values
@@ -49,12 +50,11 @@ prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.02, t
     dplyr::group_by(X) %>%
     dplyr::mutate(
       # sites per OTU
-      num_sites = n(),
-      # total sites
-      N = ncol(otu_table) - 1) %>%
+      num_sites = n()
+    ) %>%
     dplyr::ungroup() %>%
     # this one gives us results
-    dplyr::filter(num_sites >= N * prop_reps) %>%
+    dplyr::filter(num_sites >= n * prop_reps) %>%
     # this leaves us with nothing...
     dplyr::filter(num_reads >= prop_reads*s) %>%
     dplyr::pull(X)
