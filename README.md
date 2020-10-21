@@ -20,7 +20,7 @@ Example
 -------
 
 This is a basic example which shows you how to solve a common problem:
-
+TestTest[test] 
 ``` r
 library(CoreMicro)
 
