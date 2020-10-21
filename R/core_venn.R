@@ -50,10 +50,6 @@ core_venn.default <- function(combined_taxa_data,
 
 }
 
-
-#' @importFrom ggplot2 scale_fill_gradient
-#' @importFrom ggVennDiagram ggVennDiagram
-#
 #' @return a venn diagram of the taxa included within each core method
 #'
 #' @export
@@ -67,7 +63,7 @@ core_venn.core_methods <- function(combined_taxa_data,
                                      high = "#7E191B") {
 
     temp <-
-      combined_taxa_data %>%
+      data.frame(combined_taxa_data) %>%
       dplyr::filter(value == 1) %>%
       dplyr::select(X, name)
 
@@ -81,4 +77,3 @@ core_venn.core_methods <- function(combined_taxa_data,
     )
 
 }
-
