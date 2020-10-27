@@ -16,6 +16,13 @@ You can install the released version of CoreMicro from
 install.packages("CoreMicro")
 ```
 
+You can install the released version of applicable from CRAN with:
+
+```
+# install.packages("devtools")
+devtools::install_github("MayaGans/CoreMicro")
+```
+
 Example
 -------
 
@@ -30,3 +37,10 @@ arabidopsis %>% # use built in dataset
 ```
 
 ![](man/figures/plot.png)
+
+Vignettes
+------
+
+To learn about how to use CoreMicro, check out the vignette:
+
+vignette("analysis_and_plots", "CoreMicro"): Learn how to use all functions exported by the package
