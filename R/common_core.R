@@ -27,5 +27,5 @@ common_core <- function(data, threshhold = 0) {
         )
     ) %>%
     tidyr::replace_na(replace = list(count = 0L)) %>%
-    dplyr::filter(num_methods > threshhold)
+    dplyr::filter(num_methods == threshhold)
 }
