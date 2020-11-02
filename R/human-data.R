@@ -1,24 +1,17 @@
-#' Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods
-#'
-#' Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
-#' core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
-#' for our comparisons of core assignment methods.
+#' Descritpion for subset of the human microbiome dataset used for comparison of core assignment methods. 
+#' Methods for filtering of the original dataset can be found in data-raw/human.R. 
 #'
 #' @docType data
 #'
-#' @usage data(arabidopsis)
+#' @usage data(human_stool)
 #'
 #' @keywords datasets
 #'
-#' @references D.S. Lundberg, S.L. Lebeis, S.H. Paredes, S. Yourstone, J. Gehring, S. Malfatti, J. Tremblay, A. Engelbrektson,
-#' V. Kunin, T.G. del Rio, R.C. Edgar, T. Eickhorst, R.E. Ley, P. Hugenholtz, S.G. Tringe, J.L. Dangl, Defining the core
-#' Arabidopsis thaliana root microbiome, Nature. 488 (2012) 86–90. doi:10.1038/nature11237.
-#' (\href{https://www.nature.com/articles/nature11237}{Nature})
+#' @references 
 #'
-#'What does QTL Archive thing mean?
-#' @source \href{https://www.nature.com/articles/nature11237}{Nature}
+#' @source \href{https://hmpdacc.org/ihmp/} 
 #'
 #' @examples
-#' data(arabidopsis)
-#' core_methods(arabidopsis)
-"arabidopsis"
+#' data(human_stool)
+#' core_methods(human_stool)
+"human_stool"
