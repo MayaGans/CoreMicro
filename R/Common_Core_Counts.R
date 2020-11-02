@@ -30,10 +30,16 @@
 
 
 
-
+#X<-as.character(rownames(otu_human_a))
+#otu_human_a<-cbind(X, otu_human_a)
+#rownames(otu_human_a)=NULL
+#names(otu_human_a)
+#rownames(otu_human_a)
 
 #HMBP
-#human_core<-core_methods(otu_human_a_t)
+#human_tib<-as_tibble(otu_human_a)
+#human_core<-core_methods(otu_test, taxa_as_rows = T)
+
 #human_core_df<- data.frame(human_core)
 #table(human_core_df$name, human_core_df$value)
 
