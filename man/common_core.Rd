@@ -2,10 +2,7 @@
 % Please edit documentation in R/common_core.R
 \name{common_core}
 \alias{common_core}
-\title{Using the core_methods output,
-return a dataframe of taxa IDs,
-the number of core methods they are included in,
-and the name of the core methods of inclusion}
+\title{Common Core}
 \usage{
 common_core(data, threshhold = 0)
 }
