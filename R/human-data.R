@@ -10,6 +10,8 @@
 #' @references 
 #'
 #' @source \href{https://hmpdacc.org/ihmp/} 
+#' @source \href{http://downloads.hmpdacc.org/data/HMQCP/otu_table_psn_v35.txt.gz}
+#' @source \href{http://downloads.hmpdacc.org/data/HMQCP/v35_map_uniquebyPSN.txt.bz2}
 #'
 #' @examples
 #' data(human_stool)
