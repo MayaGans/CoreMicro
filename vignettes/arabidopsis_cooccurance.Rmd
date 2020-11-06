@@ -26,51 +26,34 @@ library(igraph)
 library(visNetwork)
 ```
 
-```{#r}
-hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/v35_map_uniquebyPSN.txt", sep = "\t")
-rownames(hmbp_md)<-hmbp_md$X.SampleID
-hmbp_md$X.SampleID = NULL
+```{r}
+arab_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/Lundberg454_MetadataF.csv")
+rownames(arab_md) <- arab_md$Sample
+arab_md$Sample = NULL
 
-hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/otu_table_psn_v35.txt", sep = "\t")
-#end long so it grabs everything
-names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
-rownames(hmbp_otu)<-hmbp_otu$.OTU.ID
-hmbp_otu$.OTU_ID = NULL
+arab_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/lundfull.csv")
+rownames(arab_otu)<-arab_otu$Sample  
+arab_otu$Sample  = NULL
 
-hmpb_tax<-as.character(hmbp_otu$onsensus.Lineage)
-#export and split to meet structure for inclusinon in phyloseq object
-```
+arab_tabb<-otu_table(arab_otu, taxa_are_rows = T)
+arab_sample_data<-sample_data(arab_md)
 
-```{#r}
-commonalities<-intersect(names(hmbp_otu), rownames(hmbp_md))
-hmbp_otu_sub<-hmbp_otu[,names(hmbp_otu) %in% commonalities]
-hmbp_md_sub<-hmbp_md[rownames(hmbp_md) %in% commonalities,]
-
-human_tax<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/Human_taxonomy.csv", header = T)
-rownames(human_tax)<-human_tax$OTU_ID
-human_tax$OTU_ID=NULL
-human_tax<-as.matrix(human_tax)
-
-human_tab<-otu_table(hmbp_otu_sub, taxa_are_rows = T)
-human_sample_data<-sample_data(hmbp_md_sub)
-human_taxonomy<-tax_table(human_tax)
-
-human_ps<-phyloseq(human_tab, human_sample_data, human_taxonomy)
+arab_ps<-phyloseq(arab_tabb, arab_sample_data)
 #subset to those samples that our core analysis was conducted with
-hmbp_working_set<-subset_samples(physeq = human_ps, HMPbodysubsite=="Stool")
-human_working_set <- prune_taxa(taxa_sums(hmbp_working_set) >=1, hmbp_working_set)
+arab_working_set<-subset_samples(physeq = arab_ps, Soil.Type=="M21" & Treatment == "R")
+arab_m21_r<- prune_taxa(taxa_sums(arab_working_set) >=1, arab_working_set)
 ```
 
 Assign core membership
 
 ```{r}
-human_core_df <- core_methods(human_stool) %>% data.frame()
-table(human_core_df$name, human_core_df$value)
+arab_core_df <- core_methods(arabidopsis) %>% data.frame()
+table(arab_core_df$name, arab_core_df$value)
 
 # Create table all taxa that are never assigned.
-wide_human <- pivot_wider(human_core_df)
+wide_arab <- pivot_wider(arab_core_df)
 #table(rowSums(wide_human[,5:8]))
-wide_human$num_methods <- (rowSums(wide_human[,5:8]))
+wide_arab$num_methods <- (rowSums(wide_arab[,5:8]))
 #tables number assigned by each method to add in paper. 
 #table(wide_human$`Proportion of Sequence Reads`)
 #table(wide_human$`Proportion of Sequence Reads and Replicates`)
@@ -78,12 +61,12 @@ wide_human$num_methods <- (rowSums(wide_human[,5:8]))
 #table(wide_human$`Proportion of Sequence Replicates`)
 
 #pull out those common taxa found by all
-core_4 <-(wide_human[wide_human$num_methods==4,])$X
+core_4 <-(wide_arab[wide_arab$num_methods==4,])$X
 #pull out those taxa included by each method
-prop_seq_reads_core <- (wide_human[wide_human$`Proportion of Sequence Reads`==1,])$X
-prop_seq_readsnrep_core <-(wide_human[wide_human$`Proportion of Sequence Reads and Replicates`==1,])$X
-HC_core <- (wide_human[wide_human$`Hard Cut Off`==1,])$X
-prop_rep_core <- (wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$X
+prop_seq_reads_core <- (wide_arab[wide_arab$`Proportion of Sequence Reads`==1,])$X
+prop_seq_readsnrep_core <-(wide_arab[wide_arab$`Proportion of Sequence Reads and Replicates`==1,])$X
+HC_core <- (wide_arab[wide_arab$`Hard Cut Off`==1,])$X
+prop_rep_core <- (wide_arab[wide_arab$`Proportion of Sequence Replicates`==1,])$X
 ```
 
 # Adonis
@@ -91,9 +74,8 @@ prop_rep_core <- (wide_human[wide_human$`Proportion of Sequence Replicates`==1,]
 ## Prep Data
 
 ```{r}
-md_a<-data.frame(sample_data(human_working_set))
-md_a$visitno<-as.factor(md_a$visitno)
-otu_a<-data.frame(otu_table(human_working_set))
+md_a<-data.frame(sample_data(arab_m21_r))
+otu_a<-data.frame(otu_table(arab_m21_r))
 otu_a_t<-data.frame(t(otu_a))
 otu_a_t<-data.frame(otu_a_t)
 ```
@@ -103,12 +85,12 @@ otu_a_t<-data.frame(otu_a_t)
 ```{r}
 adonis_binary <- function(data) {
   dist <- parallelDist(data.matrix(data), method = "binary")
-  adonis(dist ~ visitno + sex + RUNCENTER, data=md_a)
+  adonis(dist ~ Developmental + Arabidopsis , data=md_a)
 }
 
 adonis_bray <- function(data) {
   dist <- parallelDist(data.matrix(data), method = "bray")
-  adonis(dist ~ visitno + sex + RUNCENTER, data=md_a)
+  adonis(dist ~ Developmental + Arabidopsis, data=md_a)
 }
 ```
 
@@ -163,9 +145,8 @@ adonis_bray(human_prop_rep_core)
 
 #Network analysis 
 ```{r}
-md_a<-data.frame(sample_data(human_working_set))
-md_a$visitno<-as.factor(md_a$visitno)
-otu_a<-data.frame(otu_table(human_working_set))
+md_a<-data.frame(sample_data(arab_m21_r))
+otu_a<-data.frame(otu_table(arab_m21_r))
 
 #Network of full dataset
 #http://pablobarbera.com/big-data-upf/html/02b-networks-descriptive-analysis.html
@@ -175,20 +156,20 @@ network_test_dat2 <- network_test_dat %>% mutate_if(is.numeric, ~1 * (. > 0))
 
 rownames(network_test_dat2)<-rownames(network_test_dat)
 
-network_human<-hyperg(as.matrix(network_test_dat2))
+network_arab<-hyperg(as.matrix(network_test_dat2))
 
-hyperg_human_network_sig <- backbone.extract(network_human, alpha = .0001, class = "igraph", fwer = "bonferroni", narrative = TRUE)
+hyperg_arab_network_sig <- backbone.extract(network_arab, alpha = .0001, class = "igraph", fwer = "bonferroni", narrative = TRUE)
 
 #Gives same output as below.
-#sorted_degree_human_nodes<-sort(degree(hyperg_human_network_sig), decreasing = T)
+#sorted_degree_arab_nodes<-sort(degree(hyperg_arab_network_sig), decreasing = T)
 
-node_extract_full_human<-hyperg_human_network_sig[[]]
+node_extract_full_arab<-hyperg_arab_network_sig[[]]
 
-nodes_with_sig_full_human<-node_extract_full_human[lapply(node_extract_full_human,length)>0]
+nodes_with_sig_full_arab<-node_extract_full_arab[lapply(node_extract_full_arab,length)>0]
 
-full_human_node_w_num_edges<-sort(lengths(nodes_with_sig_full_human), decreasing = T) 
-str(full_human_node_w_num_edges)
-human_node_list<-names(full_human_node_w_num_edges)
+full_arab_node_w_num_edges<-sort(lengths(nodes_with_sig_full_arab), decreasing = T) 
+str(full_arab_node_w_num_edges)
+arab_node_list<-names(full_arab_node_w_num_edges)
 ```
 
 Comparison of human nodes with taxa identified by core methods
@@ -196,11 +177,11 @@ Intersetion of core assignment methods with global signficance network nodes
 
 ```{r}
 uncommon_core_intersect <- function(data) {
-  full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(data, human_node_list)]
+  full_arab_node_w_num_edges[!names(full_arab_node_w_num_edges) %in% intersect(data, arab_node_list)]
 }
 
 common_core_intersect <- function(data) {
-  full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(data, human_node_list)]
+  full_arab_node_w_num_edges[names(full_arab_node_w_num_edges) %in% intersect(data, arab_node_list)]
 }
 ```
 
@@ -238,7 +219,7 @@ taxa_in_core_by_any_method <- unique(
   )
 
 #taxa in network with edge > 1
-full_human_node_w_num_edges
+full_arab_node_w_num_edges
 
 #could be accomplished with just the intersect command too. Its currenlty the long way.
 shared_core_network_taxa <- common_core_intersect(taxa_in_core_by_any_method)
@@ -266,13 +247,13 @@ barplot(counts)
 ```{r, warning=FALSE, message=FALSE}
 list(
   core = taxa_in_core_by_any_method,
-  network = human_node_list
+  network = arab_node_list
 ) %>%
   ggVennDiagram::ggVennDiagram(label = "both", category.names = c("", ""), size = 2, color = "black") +
   annotate("text", x = -1.3, y = 0.8, label = "CORE", fontface =2) +
   annotate("text", x = 5.3, y = 0.8, label = "NETWORK", fontface =2) +
   scale_fill_gradient(high = "grey", low = "white") +
-  guides(fill = FALSE) 
+  guides(fill = FALSE) + ggtitle("Overalap of Important Taxa \n Arabidopsis") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
 

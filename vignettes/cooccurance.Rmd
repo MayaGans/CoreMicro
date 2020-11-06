@@ -179,6 +179,8 @@ network_human<-hyperg(as.matrix(network_test_dat2))
 
 hyperg_human_network_sig <- backbone.extract(network_human, alpha = .0001, class = "igraph", fwer = "bonferroni", narrative = TRUE)
 
+#test<-hub_score(hyperg_human_network_sig, scale = T)[1]
+
 #Gives same output as below.
 #sorted_degree_human_nodes<-sort(degree(hyperg_human_network_sig), decreasing = T)
 
@@ -272,7 +274,7 @@ list(
   annotate("text", x = -1.3, y = 0.8, label = "CORE", fontface =2) +
   annotate("text", x = 5.3, y = 0.8, label = "NETWORK", fontface =2) +
   scale_fill_gradient(high = "grey", low = "white") +
-  guides(fill = FALSE) 
+  guides(fill = FALSE) + ggtitle("Overalap of Important taxa \nHuman Microbiome") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
 
