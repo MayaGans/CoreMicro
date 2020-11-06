@@ -1,3 +1,5 @@
+#' Common Core
+#' 
 #' Using the core_methods output,
 #' return a dataframe of taxa IDs,
 #' the number of core methods they are included in,
