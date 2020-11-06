@@ -1,12 +1,14 @@
-#' Descritpion for human_ps dataset and human_working_set subset from the human microbiome project. This datsaet was used for comparison
-#' of core assignment methods. This phyloseq object (human_ps) contains all samples from the human microbiome project
-#' from the human microbiome project dataset. Methods for filtering of the original dataset to include only stool samples can be found in data-raw/human.R. 
-#' The entire raw human datset is named human_ps. The stool subset of the human dateset is named human_working_set. 
+#' Descritpion for human microbiome project phyloseq objects. 
+#' 
+#' This datsaet was used for comparison of core assignment methods. This human_ps phyloseq object contains all samples
+#' from the human microbiome project. Methods for filtering of the original dataset to include only stool
+#' samples can be found in data-raw/human.R. The entire raw human datset is named human_ps. 
+#' The stool subset of the human dateset is named human_working_set. 
 #'
 #' @docType data
 #'
 #' @usage data(human_ps)
-#' @usage data(human_working_set)
+#' @usage data(human_working_set_ps)
 #'
 #' @keywords datasets, human microbiome, stool
 #'
@@ -21,4 +23,4 @@
 #' data(human_ps)
 #' data(human_working_set)
 "human_ps"
-"human_working_set"
+"human_working_set_ps"
