@@ -8,20 +8,17 @@
 #' for the entire otu table and be present in at least 50% of sites.
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
-#' @param sites the percent of sites the OTU needs to be present in
 #'
 #' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
 #' and the sites are columns. The default value is \code{TRUE},
 #' if \code{FALSE} data will be transposed for downstream analysis.
+#' @param prop_reads percentage of reads
+#' @param prop_reps percentage of replicates
 #'
 #' @return the names of OTUs which meet the proportion of reads and replicate criteria
 #'
 #' @examples
 #' prop_reads(arabidopsis)
-#'
-#' @importFrom tidyr pivot_longer
-#' @import dplyr
-#' @importFrom rlang .data
 #'
 #' @export
 
@@ -34,28 +31,29 @@ prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.0002,
   names(otu_table)[1] <- "X"
 
   otu_table %>%
-    tidyr::pivot_longer(-X) %>%
-    dplyr::group_by(X) %>%
+    tidyr::pivot_longer(-.data$X) %>%
+    dplyr::group_by(.data$X) %>%
     # count the number of reads of each OTU across sites
-    dplyr::mutate(num_reads = sum(value)) %>%
+    dplyr::mutate(num_reads = sum(.data$value)) %>%
     # number of sites (should be the same number for entire column)
-    dplyr::add_count(X) %>%
+    dplyr::add_count(.data$X) %>%
     dplyr::ungroup() %>%
     # get total number of reads for the entire OTU table
-    dplyr::mutate(s = sum(num_reads)/n) %>%
+    dplyr::mutate(s = sum(.data$num_reads)/.data$n) %>%
     dplyr::ungroup() %>%
     # remove the rows with no values
     # so we can count the number of sites each OTU is present in
-    dplyr::filter(value > 0) %>%
-    dplyr::group_by(X) %>%
+    dplyr::filter(.data$value > 0) %>%
+    dplyr::group_by(.data$X) %>%
     dplyr::mutate(
       # sites per OTU
-      num_sites = n()
+      num_sites = dplyr::n()
     ) %>%
     dplyr::ungroup() %>%
     # this one gives us results
-    dplyr::filter(num_sites >= n * prop_reps) %>%
+    dplyr::filter(.data$num_sites >= .data$n * prop_reps) %>%
     # this leaves us with nothing...
-    dplyr::filter(num_reads >= prop_reads*s) %>%
-    dplyr::pull(X)
+    dplyr::filter(.data$num_reads >= prop_reads * .data$s) %>%
+    dplyr::pull(.data$X) %>%
+    unique()
 }

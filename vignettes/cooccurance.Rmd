@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 Load packages
-```{r setup, include=FALSE}
+```{#r setup, include=FALSE}
 library(CoreMicro)
 library(phyloseq)
 library(parallelDist)
@@ -63,7 +63,7 @@ human_working_set <- prune_taxa(taxa_sums(hmbp_working_set) >=1, hmbp_working_se
 
 Assign core membership
 
-```{r}
+```{#r}
 human_core_df <- core_methods(human_stool) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
 
@@ -90,7 +90,7 @@ prop_rep_core <- (wide_human[wide_human$`Proportion of Sequence Replicates`==1,]
 
 ## Prep Data
 
-```{r}
+```{#r}
 md_a<-data.frame(sample_data(human_working_set))
 md_a$visitno<-as.factor(md_a$visitno)
 otu_a<-data.frame(otu_table(human_working_set))
@@ -100,7 +100,7 @@ otu_a_t<-data.frame(otu_a_t)
 
 ## Create Binary and Bray Functions 
 
-```{r}
+```{#r}
 adonis_binary <- function(data) {
   dist <- parallelDist(data.matrix(data), method = "binary")
   adonis(dist ~ visitno + sex + RUNCENTER, data=md_a)
@@ -114,7 +114,7 @@ adonis_bray <- function(data) {
 
 ### full human microbiome stool dataset
 
-```{r}
+```{#r}
 adonis_binary(otu_a_t)
 adonis_bray(otu_a_t)
 ```
@@ -122,7 +122,7 @@ adonis_bray(otu_a_t)
 ### Core 4
 
 Core 4
-```{r}
+```{#r}
 human_core_4 <- otu_a_t[,names(otu_a_t) %in% core_4]
 
 adonis_binary(human_core_4)
@@ -130,7 +130,7 @@ adonis_bray(human_core_4)
 ```
 
 Prop Seq reads
-```{r}
+```{#r}
 human_prop_seq_reads_core <- otu_a_t[,names(otu_a_t) %in% prop_seq_reads_core]
 
 adonis_binary(human_prop_seq_reads_core)
@@ -138,7 +138,7 @@ adonis_bray(human_prop_seq_reads_core)
 ```
 
 Prop Read N Rep
-```{r}
+```{#r}
 human_prop_rnr_core<- otu_a_t[,names(otu_a_t) %in% prop_seq_readsnrep_core]
 
 adonis_binary(human_prop_seq_reads_core)
@@ -146,7 +146,7 @@ adonis_bray(human_prop_seq_reads_core)
 ```
 
 HC
-```{r}
+```{#r}
 human_HC_core <- otu_a_t[,names(otu_a_t) %in% HC_core]
 
 adonis_binary(human_HC_core)
@@ -154,7 +154,7 @@ adonis_bray(human_HC_core)
 ```
 
 Prop Rep
-```{r}
+```{#r}
 human_prop_rep_core <- otu_a_t[,names(otu_a_t) %in% prop_rep_core]
 
 adonis_binary(human_prop_rep_core)
@@ -162,7 +162,7 @@ adonis_bray(human_prop_rep_core)
 ```
 
 #Network analysis 
-```{r}
+```{#r}
 md_a<-data.frame(sample_data(human_working_set))
 md_a$visitno<-as.factor(md_a$visitno)
 otu_a<-data.frame(otu_table(human_working_set))
@@ -194,7 +194,7 @@ human_node_list<-names(full_human_node_w_num_edges)
 Comparison of human nodes with taxa identified by core methods
 Intersetion of core assignment methods with global signficance network nodes
 
-```{r}
+```{#r}
 uncommon_core_intersect <- function(data) {
   full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(data, human_node_list)]
 }
@@ -204,7 +204,7 @@ common_core_intersect <- function(data) {
 }
 ```
 
-```{r}
+```{#r}
 #Core_4
 uncommon_core_intersect(core_4)
 common_core_intersect(core_4)
@@ -227,7 +227,7 @@ common_core_intersect(HC_core)
 ```
 
 Barplot of inclusion by group status
-```{r}
+```{#r}
 taxa_in_core_by_any_method <- unique(
   c(
     as.character(prop_seq_reads_core), 
@@ -263,7 +263,7 @@ counts<-c(
 barplot(counts)
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{#r, warning=FALSE, message=FALSE}
 list(
   core = taxa_in_core_by_any_method,
   network = human_node_list

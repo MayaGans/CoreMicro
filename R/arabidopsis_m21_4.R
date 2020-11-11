@@ -7,9 +7,10 @@
 #' named arabidopsis_ps. The M21_R subset of the arabidopsis dateset is named arabidopsis_m21_r_ps. 
 #' 
 #'
+#'
 #' @docType data
 #'
-#' @usage data(arabidopsis_ps)
+#' @usage data(arabidopsis_m21_4)
 #'
 #' @keywords datasets
 #'
@@ -22,5 +23,5 @@
 #' @source \href{https://www.nature.com/articles/nature11237}{Nature}
 #'
 #' @examples
-#' data(arabidopsis_ps)
-"arabidopsis_ps"
+#' data(arabidopsis_m21_4)
+"arabidopsis_m21_4"

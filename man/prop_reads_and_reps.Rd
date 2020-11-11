@@ -14,11 +14,13 @@ prop_reads_and_reps(
 \arguments{
 \item{otu_table}{a dataframe of OTUs where the first row is the OTU ID and column names refer to sites}
 
+\item{prop_reps}{percentage of replicates}
+
+\item{prop_reads}{percentage of reads}
+
 \item{taxa_as_rows}{\code{logical} data must be in a format where the taxa are rows
 and the sites are columns. The default value is \code{TRUE},
 if \code{FALSE} data will be transposed for downstream analysis.}
-
-\item{sites}{the percent of sites the OTU needs to be present in}
 }
 \value{
 the names of OTUs which meet the proportion of reads and replicate criteria

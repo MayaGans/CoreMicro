@@ -27,8 +27,6 @@ core_venn <- function(combined_taxa_data,
 }
 
 
-#' @importFrom glue glue
-#' @importFrom rlang abort
 #' @return NULL
 #' @export
 #' @rdname core_venn
@@ -64,8 +62,8 @@ core_venn.core_methods <- function(combined_taxa_data,
 
     temp <-
       data.frame(combined_taxa_data) %>%
-      dplyr::filter(value == 1) %>%
-      dplyr::select(X, name)
+      dplyr::filter(.data$value == 1) %>%
+      dplyr::select(.data$X, .data$name)
 
     temp <- lapply(split(temp, temp$name), `[[`, "X")
 

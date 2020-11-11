@@ -12,11 +12,6 @@
 #' @examples
 #' summarise_taxa(arabidopsis)
 #'
-#' @importFrom tidyr pivot_longer
-#' @importFrom dplyr group_by
-#' @importFrom dplyr summarise
-#' @importFrom rlang .data
-#'
 #' @export
 
 summarise_taxa <- function(otu_table, taxa_as_rows = TRUE) {
@@ -29,8 +24,8 @@ summarise_taxa <- function(otu_table, taxa_as_rows = TRUE) {
 
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
-    dplyr::group_by(X) %>%
-    dplyr::summarise(Mean = mean(value),
-                     Variance = var(value),
-                     CV = Variance/Mean)
+    dplyr::group_by(.data$X) %>%
+    dplyr::summarise(Mean = mean(.data$value),
+                     Variance = stats::var(.data$value),
+                     CV = .data$Variance/.data$Mean)
 }

@@ -18,16 +18,16 @@ common_core <- function(data, threshhold = 0) {
   dat <- data.frame(data)
 
   dat %>%
-    dplyr::distinct(X) %>%
+    dplyr::distinct(.data$X) %>%
     dplyr::left_join(
       dat %>%
-        dplyr::filter(value != 0) %>%
-        dplyr::group_by(X) %>%
+        dplyr::filter(.data$value != 0) %>%
+        dplyr::group_by(.data$X) %>%
         dplyr::summarise(
-          num_methods = sum(value),
-          methods = list(unique(as.character(name)))
+          num_methods = sum(.data$value),
+          methods = list(unique(as.character(.data$name)))
         )
     ) %>%
     tidyr::replace_na(replace = list(count = 0L)) %>%
-    dplyr::filter(num_methods == threshhold)
+    dplyr::filter(.data$num_methods == .data$threshhold)
 }

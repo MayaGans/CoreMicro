@@ -19,10 +19,6 @@
 #' @examples
 #' prop_reads(arabidopsis)
 #'
-#' @importFrom tidyr pivot_longer
-#' @import dplyr
-#' @importFrom rlang .data
-#'
 #' @export
 
 hard_cutoff <- function(otu_table, cutoff = 25, sites = 5, taxa_as_rows = TRUE) {
@@ -34,11 +30,13 @@ hard_cutoff <- function(otu_table, cutoff = 25, sites = 5, taxa_as_rows = TRUE) 
   names(otu_table)[1] <- "X"
 
   otu_table %>%
-    tidyr::pivot_longer(-X) %>%
-    dplyr::select(-name) %>%
-    dplyr::filter(value > cutoff) %>%
-    dplyr::group_by(X) %>%
-    dplyr::summarise(count = n()) %>%
-    dplyr::filter(count >= sites) %>%
-    dplyr::pull(X)
+    tidyr::pivot_longer(-.data$X) %>%
+    dplyr::select(-.data$name) %>%
+    dplyr::filter(.data$value > cutoff) %>%
+    dplyr::group_by(.data$X) %>%
+    dplyr::count() %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(.data$n >= sites) %>%
+    dplyr::pull(.data$X)
 }
+
