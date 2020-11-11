@@ -30,8 +30,6 @@ core_plots <- function(combined_otu_data,
 }
 
 
-#' @importFrom glue glue
-#' @importFrom rlang abort
 #' @return NULL
 #' @export
 #' @rdname core_plots
@@ -67,12 +65,12 @@ core_plots.core_methods  <- function(combined_otu_data,
 
     combined_otu_data %>%
       ggplot() +
-      aes(x = log(Mean), y = CV, color = as.factor(value)) +
+      aes(x = log(.data$Mean), y = .data$CV, color = as.factor(.data$value)) +
       geom_hex(bins = 30) +
       scale_color_manual(values = c("lightgray", "black")) +
       scale_fill_gradient(low = low, high = high) +
       theme_bw() +
-      facet_grid(.~ name) +
+      facet_grid(.~ .data$name) +
       guides(color = FALSE) +
       ylab("Coefficient of Variance") +
       labs(fill = legend_title)

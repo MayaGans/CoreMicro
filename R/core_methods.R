@@ -19,11 +19,7 @@
 #' the mean, variance, and coefficient of variation.
 #'
 #' @examples
-#' core_methods(arabidopsis)
-#'
-#' @importFrom tidyr pivot_longer
-#' @import dplyr
-#' @importFrom rlang .data
+#' \dontrun{core_methods(arabidopsis)}
 #'
 #' @export
 
@@ -37,13 +33,13 @@ core_methods <- function(otu_table, taxa_as_rows = TRUE) {
 
   temp <- summarise_taxa(otu_table) %>%
     dplyr::mutate(
-      `Proportion of Sequence Reads` = X %in% prop_reads(otu_table),
-      `Proportion of Sequence Reads and Replicates` = X %in% prop_reads_and_reps(otu_table),
-      `Hard Cut Off` = X %in% hard_cutoff(otu_table),
-      `Proportion of Sequence Replicates` = X %in% prop_reps(otu_table)) %>%
+      `Proportion of Sequence Reads` = .data$X %in% prop_reads(otu_table),
+      `Proportion of Sequence Reads and Replicates` = .data$X %in% prop_reads_and_reps(otu_table),
+      `Hard Cut Off` = .data$X %in% hard_cutoff(otu_table),
+      `Proportion of Sequence Replicates` = .data$X %in% prop_reps(otu_table)) %>%
     dplyr::mutate_if(is.logical, as.numeric) %>%
     tidyr::pivot_longer(cols = 5:8) %>%
-    dplyr::mutate(name = factor(name, levels = c("Proportion of Sequence Reads",
+    dplyr::mutate(name = factor(.data$name, levels = c("Proportion of Sequence Reads",
                                           "Proportion of Sequence Replicates",
                                           "Proportion of Sequence Reads and Replicates",
                                           "Hard Cut Off")))

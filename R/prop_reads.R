@@ -17,10 +17,6 @@
 #' @examples
 #' prop_reads(arabidopsis)
 #'
-#' @importFrom tidyr pivot_longer
-#' @import dplyr
-#' @importFrom rlang .data
-#'
 #' @export
 
 prop_reads <- function(otu_table, prop_reads = 0.75, taxa_as_rows =TRUE) {
@@ -32,13 +28,13 @@ prop_reads <- function(otu_table, prop_reads = 0.75, taxa_as_rows =TRUE) {
   names(otu_table)[1] <- "X"
 
   otu_table %>%
-    tidyr::pivot_longer(-X) %>%
-    dplyr::group_by(X) %>%
-    dplyr::summarise(otuappearance = sum(value)) %>%
-    dplyr::arrange(-otuappearance) %>%
-    dplyr::mutate(s = sum(otuappearance),
-           prop = otuappearance/s,
-           cumsum = cumsum(prop)) %>%
+    tidyr::pivot_longer(-.data$X) %>%
+    dplyr::group_by(.data$X) %>%
+    dplyr::summarise(otuappearance = sum(.data$value)) %>%
+    dplyr::arrange(-.data$otuappearance) %>%
+    dplyr::mutate(s = sum(.data$otuappearance),
+           prop = .data$otuappearance/.data$s,
+           cumsum = cumsum(.data$prop)) %>%
     dplyr::filter(cumsum <= prop_reads) %>%
-    dplyr::pull(X)
+    dplyr::pull(.data$X)
 }

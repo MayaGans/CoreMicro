@@ -6,10 +6,8 @@
 transpose_taxa <- function(taxa_table) {
   suppressWarnings(
     taxa_table %>%
-      tidyr::gather(key = key, value = value, 2:ncol(taxa_table)) %>%
+      tidyr::gather(key = "key", value = "value", 2:ncol(taxa_table)) %>%
       tidyr::spread(key = names(taxa_table)[1], value = "value") %>%
-      dplyr::rename("X" = key)
+      dplyr::rename("X" = .data$key)
   )
 }
-
-

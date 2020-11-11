@@ -7,7 +7,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(human_ps)
+#' @usage data(human_working_set)
 #'
 #' @keywords datasets, human microbiome, stool
 #'
@@ -19,5 +19,5 @@
 #' @source \href{http://downloads.hmpdacc.org/data/HMQCP/v35_map_uniquebyPSN.txt.bz2}{http://downloads.hmpdacc.org/data/HMQCP/v35_map_uniquebyPSN.txt.bz2}
 #'
 #' @examples
-#' \dontrun{data(human_ps)}
-"human_ps"
+#' data(human_working_set)
+"human_working_set"

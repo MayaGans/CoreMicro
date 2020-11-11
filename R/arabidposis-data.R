@@ -19,6 +19,6 @@
 #' @source \href{https://www.nature.com/articles/nature11237}{Nature}
 #'
 #' @examples
-#' data(arabidopsis)
-#' core_methods(arabidopsis)
+#' \dontrun{data(arabidopsis)}
+#' \dontrun{core_methods(arabidopsis)}
 "arabidopsis"

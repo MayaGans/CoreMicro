@@ -18,7 +18,6 @@ dummy_t <- tidyr::tibble(
     OTU_3 = c(10,30,15,12,9)
 )
 
-
 test_that("hard cut off works", {
   expect_equal(hard_cutoff(dummy), "OTU_1")
   expect_equal(hard_cutoff(dummy_t, taxa_as_rows = FALSE), "OTU_1")
@@ -35,17 +34,18 @@ test_that("prop reps method works", {
 })
 
 test_that("prop reads and reps method works", {
-  expect_equal(prop_reads_and_reps(dummy), c("OTU_1", "OTU_2", "OTU_3"))
-  expect_equal(prop_reads_and_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
+   expect_equal(prop_reads_and_reps(dummy), c("OTU_1", "OTU_2", "OTU_3"))
+   expect_equal(prop_reads_and_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
 })
 
 test_that("combining methods works", {
-  values <- core_methods(dummy) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
+  values <- data.frame(core_methods(dummy)) %>% dplyr::arrange(name) %>% dplyr::pull(value)
+  expect_equal(values, c(1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0))
 })
 
 
 test_that("combining methods works when transposed", {
-  values <- core_methods(dummy_t, taxa_as_rows = FALSE) %>% dplyr::arrange(name) %>% dplyr::pull(value)
-  expect_equal(values, c(1,0,0,1,1,1,1,1,1,1,0,0))
+  values <- data.frame(core_methods(dummy_t, taxa_as_rows = FALSE)) %>% dplyr::arrange(name) %>% dplyr::pull(value)
+  expect_equal(values, c(1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0))
 })
+

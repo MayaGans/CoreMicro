@@ -23,10 +23,6 @@
 #' @examples
 #' prop_reps(arabidopsis)
 #'
-#' @importFrom tidyr pivot_longer
-#' @import dplyr
-#' @importFrom rlang .data
-#'
 #' @export
 
 prop_reps <- function(otu_table, prop_reps = 0.5, taxa_as_rows = TRUE) {
@@ -39,9 +35,9 @@ prop_reps <- function(otu_table, prop_reps = 0.5, taxa_as_rows = TRUE) {
 
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
-    dplyr::group_by(X) %>%
-    dplyr::summarise(abundance = sum(value)) %>%
-    dplyr::filter(abundance > prop_reps * ncol(otu_table)) %>%
-    dplyr::pull(X)
+    dplyr::group_by(.data$X) %>%
+    dplyr::summarise(abundance = sum(.data$value)) %>%
+    dplyr::filter(.data$abundance > prop_reps * ncol(otu_table)) %>%
+    dplyr::pull(.data$X)
 
 }
