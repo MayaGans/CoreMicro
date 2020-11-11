@@ -23,8 +23,8 @@ Descritpion for subset of the human microbiome dataset used for comparison of co
 Methods for filtering of the original dataset can be found in data-raw/human.R.
 }
 \examples{
-data(human_stool)
-core_methods(human_stool)
+\dontrun{data(human_stool)}
+\dontrun{core_methods(human_stool)}
 }
 \references{
 Consortium, Human Microbiome Project, and others. 2012. “Structure, Function and Diversity of the Healthy Human Microbiome.” 

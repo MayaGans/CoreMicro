@@ -60,7 +60,7 @@ hard_cutoff(arabidopsis)
 What this method is, arguments you can change 
 
 ```{r, eval=FALSE}
-prop_reads(arabidopsis)
+sum_reads(arabidopsis)
 ```
 
 ### Proportion of Sequence Replicates

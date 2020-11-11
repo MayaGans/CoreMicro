@@ -28,6 +28,6 @@ A wrapper for
 \code{hard_cutoff} methods
 }
 \examples{
-core_methods(arabidopsis)
+\dontrun{core_methods(arabidopsis)}
 
 }

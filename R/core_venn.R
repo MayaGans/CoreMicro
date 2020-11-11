@@ -15,7 +15,7 @@
 #' }
 #' @export
 core_venn <- function(combined_taxa_data,
-                             category_names = c("Proportion of \n Sequence Reads",
+                             category_names = c("Summation of \n Sequence Reads",
                                                 "Proportion of \n Sequence Replicates",
                                                 "Proportion of \n Sequence Reads and Replicates",
                                                 "Hard Cut Off"),
@@ -31,7 +31,7 @@ core_venn <- function(combined_taxa_data,
 #' @export
 #' @rdname core_venn
 core_venn.default <- function(combined_taxa_data,
-                             category_names = c("Proportion of \n Sequence Reads",
+                             category_names = c("Summation of \n Sequence Reads",
                                                 "Proportion of \n Sequence Replicates",
                                                 "Proportion of \n Sequence Reads and Replicates",
                                                 "Hard Cut Off"),
@@ -53,7 +53,7 @@ core_venn.default <- function(combined_taxa_data,
 #' @export
 #' @rdname core_venn
 core_venn.core_methods <- function(combined_taxa_data,
-                                     category_names = c("Proportion of \n Sequence Reads",
+                                     category_names = c("Summation of \n Sequence Reads",
                                                         "Proportion of \n Sequence Replicates",
                                                         "Proportion of \n Sequence Reads and Replicates",
                                                         "Hard Cut Off"),
