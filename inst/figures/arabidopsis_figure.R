@@ -182,7 +182,7 @@ ggplot(middlecircle,aes(x,y)) +
   annotate("text", x = 1, y=-2, label = "Proportion of Replicates") +
   annotate("text", x = -1.05, y=-2, label = "Hard Cut Off") +
   annotate("text", x = 0, y=0.2, label = "Network") +
-  annotate("text", x = 0, y=-0, label = center, size= 8) +
+  annotate("text", x = 0, y=-0, label = center, , size= 8) +
   annotate("text", x = 1.2, y=1.2, label = diff1, size= 8) +
   annotate("text", x = 0.5, y=0.8, label = union1, size= 8) +
   annotate("text", x = 1.2, y=-1.2, label = diff2, size= 8) +
@@ -191,7 +191,7 @@ ggplot(middlecircle,aes(x,y)) +
   annotate("text", x = -0.5, y=0.8, label = union3, size= 8) +
   annotate("text", x = -1.2, y=-1.2, label = diff4, size= 8) +
   annotate("text", x = -0.5, y=-0.8, label = union4, size= 8) +
-  ggtitle("Arabidopsis Dataset") +
+  ggtitle(italic('Arabidopsis') ~ "Dataset") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 
 
