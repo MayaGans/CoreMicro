@@ -223,7 +223,9 @@ ggplot(middlecircle,aes(x,y)) +
   annotate("text", x = -1.2, y=1.2, label = diff3, size= 8) +
   annotate("text", x = -0.5, y=0.8, label = union3, size= 8) +
   annotate("text", x = -1.2, y=-1.2, label = diff4, size= 8) +
-  annotate("text", x = -0.5, y=-0.8, label = union4, size= 8)
+  annotate("text", x = -0.5, y=-0.8, label = union4, size= 8) +
+  ggtitle("Human Microbiome Dataset") +
+  theme(plot.title = element_text(hjust = 0.5, size = 20))
   
 
 

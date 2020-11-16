@@ -8,36 +8,36 @@ library(igraph)
 library(visNetwork)
   
 
-hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/v35_map_uniquebyPSN.txt", sep = "\t")
-rownames(hmbp_md)<-hmbp_md$X.SampleID
-hmbp_md$X.SampleID = NULL
+# hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/v35_map_uniquebyPSN.txt", sep = "\t")
+# rownames(hmbp_md)<-hmbp_md$X.SampleID
+# hmbp_md$X.SampleID = NULL
 
-hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/otu_table_psn_v35.txt", sep = "\t")
-#end long so it grabs everything
-names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
-rownames(hmbp_otu)<-hmbp_otu$.OTU.ID
-hmbp_otu$.OTU_ID = NULL
+# hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/otu_table_psn_v35.txt", sep = "\t")
+# end long so it grabs everything
+# names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
+# rownames(hmbp_otu)<-hmbp_otu$.OTU.ID
+# hmbp_otu$.OTU_ID = NULL
     
-hmpb_tax<-as.character(hmbp_otu$onsensus.Lineage)
+# hmpb_tax<-as.character(hmbp_otu$onsensus.Lineage)
 #export and split to meet structure for inclusinon in phyloseq object
 
-commonalities<-intersect(names(hmbp_otu), rownames(hmbp_md))
-hmbp_otu_sub<-hmbp_otu[,names(hmbp_otu) %in% commonalities]
-hmbp_md_sub<-hmbp_md[rownames(hmbp_md) %in% commonalities,]
-
-human_tax<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/Human_taxonomy.csv", header = T)
-rownames(human_tax)<-human_tax$OTU_ID
-human_tax$OTU_ID=NULL
-human_tax<-as.matrix(human_tax)
-
-human_tab<-otu_table(hmbp_otu_sub, taxa_are_rows = T)
-human_sample_data<-sample_data(hmbp_md_sub)
-human_taxonomy<-tax_table(human_tax)
-
-human_ps<-phyloseq(human_tab, human_sample_data, human_taxonomy)
-#subset to those samples that our core analysis was conducted with
-hmbp_working_set<-subset_samples(physeq = human_ps, HMPbodysubsite=="Stool")
-human_working_set <- prune_taxa(taxa_sums(hmbp_working_set) >=1, hmbp_working_set)
+# commonalities<-intersect(names(hmbp_otu), rownames(hmbp_md))
+# hmbp_otu_sub<-hmbp_otu[,names(hmbp_otu) %in% commonalities]
+# hmbp_md_sub<-hmbp_md[rownames(hmbp_md) %in% commonalities,]
+# 
+# human_tax<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/Human_taxonomy.csv", header = T)
+# rownames(human_tax)<-human_tax$OTU_ID
+# human_tax$OTU_ID=NULL
+# human_tax<-as.matrix(human_tax)
+# 
+# human_tab<-otu_table(hmbp_otu_sub, taxa_are_rows = T)
+# human_sample_data<-sample_data(hmbp_md_sub)
+# human_taxonomy<-tax_table(human_tax)
+# 
+# human_ps<-phyloseq(human_tab, human_sample_data, human_taxonomy)
+# #subset to those samples that our core analysis was conducted with
+# hmbp_working_set<-subset_samples(physeq = human_ps, HMPbodysubsite=="Stool")
+# human_working_set <- prune_taxa(taxa_sums(hmbp_working_set) >=1, hmbp_working_set)
 
 human_core_df <- core_methods(human_stool) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
@@ -55,7 +55,7 @@ wide_human$num_methods <- (rowSums(wide_human[,5:8]))
 #pull out those common taxa found by all
 core_4 <-(wide_human[wide_human$num_methods==4,])$X
 #pull out those taxa included by each method
-prop_seq_reads_core <- (wide_human[wide_human$`Proportion of Sequence Reads`==1,])$X
+prop_seq_reads_core <- (wide_human[wide_human$`Summation of Sequence Reads`==1,])$X
 prop_seq_readsnrep_core <-(wide_human[wide_human$`Proportion of Sequence Reads and Replicates`==1,])$X
 HC_core <- (wide_human[wide_human$`Hard Cut Off`==1,])$X
 prop_rep_core <- (wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$X
@@ -143,7 +143,7 @@ common_core_intersect <- function(data) {
 uncommon_core_intersect(core_4)
 common_core_intersect(core_4)
 
-#Prop_Reads
+#Sum_Reads
 uncommon_core_intersect(prop_seq_reads_core)
 common_core_intersect(prop_seq_reads_core)
 
@@ -199,6 +199,5 @@ counts<-c(
     annotate("text", x = 5.3, y = 0.8, label = "NETWORK", fontface =2) +
     scale_fill_gradient(high = "grey", low = "white") +
     guides(fill = FALSE) 
-  
-                                  
-                                  
+
+
