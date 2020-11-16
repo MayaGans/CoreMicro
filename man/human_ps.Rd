@@ -24,7 +24,7 @@ samples can be found in data-raw/human.R. The entire raw human datset is named h
 The stool subset of the human dateset is named human_working_set.
 }
 \examples{
-data(human_ps)
+\dontrun{data(human_ps)}
 }
 \references{
 Consortium, Human Microbiome Project, and others. 2012. “Structure, Function and Diversity of the Healthy Human Microbiome.” 

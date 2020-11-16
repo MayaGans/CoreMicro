@@ -8,7 +8,7 @@
 \usage{
 core_venn(
   combined_taxa_data,
-  category_names = c("Proportion of \\n Sequence Reads",
+  category_names = c("Summation of \\n Sequence Reads",
     "Proportion of \\n Sequence Replicates",
     "Proportion of \\n Sequence Reads and Replicates", "Hard Cut Off"),
   low = "white",
@@ -17,7 +17,7 @@ core_venn(
 
 \method{core_venn}{default}(
   combined_taxa_data,
-  category_names = c("Proportion of \\n Sequence Reads",
+  category_names = c("Summation of \\n Sequence Reads",
     "Proportion of \\n Sequence Replicates",
     "Proportion of \\n Sequence Reads and Replicates", "Hard Cut Off"),
   low = "white",
@@ -26,7 +26,7 @@ core_venn(
 
 \method{core_venn}{core_methods}(
   combined_taxa_data,
-  category_names = c("Proportion of \\n Sequence Reads",
+  category_names = c("Summation of \\n Sequence Reads",
     "Proportion of \\n Sequence Replicates",
     "Proportion of \\n Sequence Reads and Replicates", "Hard Cut Off"),
   low = "white",

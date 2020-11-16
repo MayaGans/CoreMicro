@@ -1,4 +1,4 @@
-#' Proportion of Reads:
+#' Summation of Reads:
 #'
 #' @description This method assigns taxa to the core if they are in the top X% of reads.
 #' Taxa are ranked in abundance and the cumulative sum is recorded.
@@ -6,7 +6,7 @@
 #' In this example, a taxa will be assigned to the core if they account for the first 75% of the reads
 #'
 #' @param otu_table a dataframe of OTUs where the first row is the OTU ID and column names refer to sites
-#' @param prop_reads blah blah
+#' @param readn count of reads needed
 #'
 #' @param taxa_as_rows \code{logical} data must be in a format where the taxa are rows
 #' and the sites are columns. The default value is \code{TRUE},
@@ -15,11 +15,11 @@
 #' @return the names of OTUs which meet the proportion of reads criteria
 #'
 #' @examples
-#' prop_reads(arabidopsis)
+#' sum_reads(arabidopsis)
 #'
 #' @export
 
-prop_reads <- function(otu_table, prop_reads = 0.75, taxa_as_rows =TRUE) {
+sum_reads <- function(otu_table, readn = 0.75, taxa_as_rows =TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -35,6 +35,6 @@ prop_reads <- function(otu_table, prop_reads = 0.75, taxa_as_rows =TRUE) {
     dplyr::mutate(s = sum(.data$otuappearance),
            prop = .data$otuappearance/.data$s,
            cumsum = cumsum(.data$prop)) %>%
-    dplyr::filter(cumsum <= prop_reads) %>%
+    dplyr::filter(cumsum <= readn) %>%
     dplyr::pull(.data$X)
 }

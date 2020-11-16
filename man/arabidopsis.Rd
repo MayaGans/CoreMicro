@@ -19,8 +19,8 @@ core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosph
 for our comparisons of core assignment methods.
 }
 \examples{
-data(arabidopsis)
-core_methods(arabidopsis)
+\dontrun{data(arabidopsis)}
+\dontrun{core_methods(arabidopsis)}
 }
 \references{
 D.S. Lundberg, S.L. Lebeis, S.H. Paredes, S. Yourstone, J. Gehring, S. Malfatti, J. Tremblay, A. Engelbrektson,

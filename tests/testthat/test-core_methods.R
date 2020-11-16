@@ -23,9 +23,9 @@ test_that("hard cut off works", {
   expect_equal(hard_cutoff(dummy_t, taxa_as_rows = FALSE), "OTU_1")
 })
 
-test_that("prop reads method works", {
-  expect_equal(prop_reads(dummy), "OTU_1")
-  expect_equal(prop_reads(dummy_t, taxa_as_rows = FALSE), "OTU_1")
+test_that("sum reads method works", {
+  expect_equal(sum_reads(dummy), "OTU_1")
+  expect_equal(sum_reads(dummy_t, taxa_as_rows = FALSE), "OTU_1")
 })
 
 test_that("prop reps method works", {
