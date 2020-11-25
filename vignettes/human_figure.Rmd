@@ -1,4 +1,21 @@
+---
+title: "Figure: Human Venn Diagram"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Figure: Human Venn Diagram}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
 library(phyloseq)
 library(parallelDist)
 library(vegan)
@@ -6,12 +23,19 @@ library(backbone)
 library(tidyverse)
 library(igraph)
 library(visNetwork)
+```
 
+
+```{r, eval=FALSE}
 human_core_df <- core_methods(human_stool) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
+```
 
+```{r, eval=FALSE}
+human_working_set <- readRDS("../data-raw/human_working_set.rda")
+```
 
-
+```{r, eval=FALSE}
 # Create table all taxa that are never assigned.
 wide_human<-pivot_wider(human_core_df)
 #table(rowSums(wide_human[,5:8]))
@@ -83,6 +107,9 @@ adonis(human_prop_rep_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 md_a<-data.frame(sample_data(human_working_set))
 md_a$visitno<-as.factor(md_a$visitno)
 otu_a<-data.frame(otu_table(human_working_set))
+```
+
+```{r, eval=FALSE}
 #Network of full dataset
 #http://pablobarbera.com/big-data-upf/html/02b-networks-descriptive-analysis.html
 network_test_dat<-otu_a
@@ -128,8 +155,10 @@ summary(taxa_only_in_network)
 # I think this would be better as a venn diagram actaully. 
 counts<-(c(length(Shared_core_network_taxa), length(taxa_only_in_core), length(taxa_only_in_network)))
 barplot(counts)
+```
 
 
+```{r, eval=FALSE}
 circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
   r = diameter / 2
   tt <- seq(0,2*pi,length.out = npoints)
@@ -168,3 +197,4 @@ ggplot(middlecircle,aes(x,y)) +
   annotate("text", x = -0.5, y=-0.8, label = length(core_network_commanlity_HC), size= 8) +
   ggtitle("Human Microbiome Dataset") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
+```

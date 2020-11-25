@@ -1,8 +1,8 @@
 ---
-title: "analysis_and_plots"
+title: "Analysis and Plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{analysis_and_plots}
+  %\VignetteIndexEntry{Analysis and Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

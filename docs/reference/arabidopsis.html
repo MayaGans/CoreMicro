@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arabidopsis QTL data on gravitropism — arabidopsis • CoreMicro</title>
+<title>Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods — arabidopsis • CoreMicro</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,10 @@
 
 
 
-<meta property="og:title" content="Arabidopsis QTL data on gravitropism — arabidopsis" />
-<meta property="og:description" content="Data from a QTL experiment on gravitropism in
-Arabidopsis, with data on 162 recombinant inbred lines (Ler x
-Cvi). The outcome is the root tip angle (in degrees) at two-minute
-increments over eight hours." />
+<meta property="og:title" content="Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods — arabidopsis" />
+<meta property="og:description" content="Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
+core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
+for our comparisons of core assignment methods." />
 
 
 
@@ -98,7 +97,28 @@ increments over eight hours." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/analysis_and_plots.html">analysis_and_plots</a>
+      <a href="../articles/analysis_and_plots.html">Analysis and Plots</a>
+    </li>
+    <li>
+      <a href="../articles/arabidopsis_figure.html">Figure: Arabidopsis Venn Diagram</a>
+    </li>
+    <li>
+      <a href="../articles/co-occurance.html">Human Microbiome Cooccurance</a>
+    </li>
+    <li>
+      <a href="../articles/common-counts.html">Common Counts</a>
+    </li>
+    <li>
+      <a href="../articles/figure1.html">Figure 1</a>
+    </li>
+    <li>
+      <a href="../articles/figure2.html">Figure 2</a>
+    </li>
+    <li>
+      <a href="../articles/figure3.html">Figure 3</a>
+    </li>
+    <li>
+      <a href="../articles/human_figure.html">Figure: Human Venn Diagram</a>
     </li>
   </ul>
 </li>
@@ -126,19 +146,18 @@ increments over eight hours." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Arabidopsis QTL data on gravitropism</h1>
+    <h1>Descritpion for subset of Arabidopsis dataset used for comparison of core assignment methods</h1>
     <small class="dont-index">Source: <a href='https://github.com/MayaGans/CoreMicro/blob/master/R/arabidposis-data.R'><code>R/arabidposis-data.R</code></a></small>
     <div class="hidden name"><code>arabidopsis.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Data from a QTL experiment on gravitropism in
-Arabidopsis, with data on 162 recombinant inbred lines (Ler x
-Cvi). The outcome is the root tip angle (in degrees) at two-minute
-increments over eight hours.</p>
+    <p>Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire
+core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
+for our comparisons of core assignment methods.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>arabidopsis</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -146,28 +165,19 @@ increments over eight hours.</p>
     <p>An object of class <code>spec_tbl_df</code> (inherits from <code>tbl_df</code>, <code>tbl</code>, <code>data.frame</code>) with 14890 rows and 289 columns.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://phenome.jax.org/projects/Moore1b'>QTL Archive</a></p>
+    <p><a href='https://www.nature.com/articles/nature11237'>Nature</a></p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Moore et al. (2013) Genetics 195:1077-1086
-(<a href='https://www.ncbi.nlm.nih.gov/pubmed/23979570'>PubMed</a>)</p>
+    <p>D.S. Lundberg, S.L. Lebeis, S.H. Paredes, S. Yourstone, J. Gehring, S. Malfatti, J. Tremblay, A. Engelbrektson,
+V. Kunin, T.G. del Rio, R.C. Edgar, T. Eickhorst, R.E. Ley, P. Hugenholtz, S.G. Tringe, J.L. Dangl, Defining the core
+Arabidopsis thaliana root microbiome, Nature. 488 (2012) 86–90. doi:10.1038/nature11237.
+(<a href='https://www.nature.com/articles/nature11237'>Nature</a>)</p>
+<p>What does QTL Archive thing mean?</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>arabidopsis</span>)
-<span class='fu'><a href='core_methods.html'>core_methods</a></span>(<span class='no'>arabidopsis</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 59,560 x 6</span><span>
-#&gt;    X            Mean Variance    CV name                                   value
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                                  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> OTU_100   0.368    0.707   1.92  Hard Cut Off                               0
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Replicates          0
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Hard Cut Off                               0
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Replicates          0
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> OTU_10000 0.698    5.85    8.38  Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> OTU_10000 0.698    5.85    8.38  Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #949494;'># … with 59,550 more rows</span><span></div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'><a href='core_methods.html'>core_methods</a></span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +193,7 @@ increments over eight hours.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
