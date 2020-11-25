@@ -1,3 +1,21 @@
+---
+title: "Figure 1"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Figure 1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
 library(MCMCpack)
 library(tidyverse)
 library(ggplot2)
@@ -5,8 +23,12 @@ library(RColorBrewer)
 library(gridExtra)
 library(patchwork)
 library(tidyverse)
+```
 
-# set the structure of our simlulated taxa table (not proritions of taxa, just rows by columns and expected core)
+
+# set the structure of our simlulated taxa table (not proritions of taxa, just 
+```{r, eval=FALSE}
+rows by columns and expected core)
 ntaxa<-1000
 ncore<-25
 nsites<-50
@@ -119,17 +141,22 @@ for(trt in 1:(nrow(sim.df))){
   sim.df$PropReps_FP_num[trt] <- mean(tmp.err.PropRepsFP) 
   sim.df$PropReadReps_FP_num[trt] <- mean(tmp.err.PropReadRepsFP)
 }
+```
 
+
+```{r, eval=FALSE}
 myPalette <- c("#800000", "#A04040", "#DFBFBF", "#ffffff", "#0b45a3")
 myPalette2 <- c("#ffffff", "#C2D1E8", "#678BC6", "#0b45a3")
 myPalette3 <- c("#ffffff", "#C2D1E8")
+```
 
-# Here we change the TP-FP to an integer not the ratio. 
-# With the ratios we were assuming all calls TP vs. 
-# FP were equally valuable. 
-# With this we just look at the differencea and make no
-# assumiption of the value. 
+Here we change the TP-FP to an integer not the ratio. 
+With the ratios we were assuming all calls TP vs. 
+FP were equally valuable. 
+With this we just look at the differencea and make no
+assumiption of the value. 
 
+```{r, eval=FALSE}
 sim.df$HardCut_ratio <- sim.df$HardCut_TP_num - sim.df$HardCut_FP_num
 sim.df$PropRead_ratio <- sim.df$PropRead_TP_num - sim.df$PropRead_FP_num
 sim.df$PropReps_ratio <- sim.df$PropReps_TP_num - sim.df$PropReps_FP_num
@@ -155,7 +182,9 @@ sim.df_all <- sim.df %>%
            ) %>%
            factor(levels = c("Summation Sequence Reads", "Proportion of Sequence Replicates", "Proportion of Sequence Reads and Replicates", "Hard Cutoff"))
   )
+```
 
+```{r, eval=FALSE}
 tp <- sim.df_all %>%
   filter(sim.df_all$error == "True Positive")
 
@@ -174,7 +203,9 @@ tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nTrue Positives"))
+```
 
+```{r, eval=FALSE}
 fp <- sim.df_all %>%
   filter(sim.df_all$error == "False Positive")
 
@@ -193,7 +224,10 @@ fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nFalse Positives"))
+```
 
+
+```{r, eval=FALSE}
 tf <- sim.df_all %>%
   filter(sim.df_all$error == "TP-FP")
 
@@ -211,7 +245,10 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
        fill = "Mean Error") +
   theme(strip.text.x = element_text(size = 0)) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP"))
+```
 
+```{r, eval=FALSE}
 g <- (tp_plot + fp_plot + tf_plot + plot_layout(ncol=1) + plot_annotation(tag_levels = 'A'))
 
 ggsave("inst/figures/figure1.tiff", g, height = 12, width = 23)
+```

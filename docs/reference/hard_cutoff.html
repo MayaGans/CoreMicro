@@ -99,7 +99,11 @@ Here we use the hard cut off described in Lundberg (2012), but realize this is a
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/analysis_and_plots.html">analysis_and_plots</a>
+      <a href="../articles/analysis_and_plots.html">Analysis and Plots</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -140,7 +144,7 @@ In our example we set the minimum number of sites to 5 and the minimum number of
 Here we use the hard cut off described in Lundberg (2012), but realize this is any threshold.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hard_cutoff</span>(<span class='no'>otu_table</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>sites</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+    <pre class="usage"><span class='fu'>hard_cutoff</span><span class='op'>(</span><span class='va'>otu_table</span>, cutoff <span class='op'>=</span> <span class='fl'>25</span>, sites <span class='op'>=</span> <span class='fl'>5</span>, taxa_as_rows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,11 +155,17 @@ Here we use the hard cut off described in Lundberg (2012), but realize this is a
     </tr>
     <tr>
       <th>cutoff</th>
-      <td><p>the threshhold minimum number of reads</p></td>
+      <td><p>the threshhold minimum number of reads - defaults to 25</p></td>
     </tr>
     <tr>
       <th>sites</th>
-      <td><p>the theshhold minimum number of sites</p></td>
+      <td><p>the theshhold minimum number of sites - defaults to 5</p></td>
+    </tr>
+    <tr>
+      <th>taxa_as_rows</th>
+      <td><p><code>logical</code> data must be in a format where the taxa are rows
+and the sites are columns. The default value is <code>TRUE</code>,
+if <code>FALSE</code> data will be transposed for downstream analysis.</p></td>
     </tr>
     </table>
 
@@ -164,214 +174,10 @@ Here we use the hard cut off described in Lundberg (2012), but realize this is a
     <p>the names of OTUs which meet the hard cut off criteria</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='prop_reads.html'>prop_reads</a></span>(<span class='no'>arabidopsis</span>)</div><div class='output co'>#&gt;    [1] "OTU_19511" "OTU_11245" "OTU_10942" "OTU_14822" "OTU_4100"  "OTU_7054" 
-#&gt;    [7] "OTU_19108" "OTU_18954" "OTU_14834" "OTU_4035"  "OTU_11920" "OTU_19482"
-#&gt;   [13] "OTU_3802"  "OTU_5475"  "OTU_18240" "OTU_19245" "OTU_14820" "OTU_18209"
-#&gt;   [19] "OTU_1196"  "OTU_15877" "OTU_16757" "OTU_19706" "OTU_19383" "OTU_15154"
-#&gt;   [25] "OTU_9086"  "OTU_18761" "OTU_14431" "OTU_3327"  "OTU_15169" "OTU_19189"
-#&gt;   [31] "OTU_10317" "OTU_352"   "OTU_18468" "OTU_14814" "OTU_15808" "OTU_14293"
-#&gt;   [37] "OTU_14939" "OTU_3497"  "OTU_1460"  "OTU_9309"  "OTU_17465" "OTU_19859"
-#&gt;   [43] "OTU_3106"  "OTU_1274"  "OTU_18891" "OTU_14819" "OTU_3821"  "OTU_3613" 
-#&gt;   [49] "OTU_8809"  "OTU_14839" "OTU_3503"  "OTU_13390" "OTU_14747" "OTU_16467"
-#&gt;   [55] "OTU_8660"  "OTU_15348" "OTU_15151" "OTU_704"   "OTU_14586" "OTU_18567"
-#&gt;   [61] "OTU_19673" "OTU_12773" "OTU_12924" "OTU_14829" "OTU_15408" "OTU_16786"
-#&gt;   [67] "OTU_5635"  "OTU_19047" "OTU_7481"  "OTU_319"   "OTU_392"   "OTU_18945"
-#&gt;   [73] "OTU_12192" "OTU_18923" "OTU_13052" "OTU_14818" "OTU_13230" "OTU_14928"
-#&gt;   [79] "OTU_16273" "OTU_14830" "OTU_16330" "OTU_6206"  "OTU_14836" "OTU_14450"
-#&gt;   [85] "OTU_14937" "OTU_5043"  "OTU_10284" "OTU_12154" "OTU_13788" "OTU_1324" 
-#&gt;   [91] "OTU_15255" "OTU_15063" "OTU_17901" "OTU_12650" "OTU_20081" "OTU_16101"
-#&gt;   [97] "OTU_19656" "OTU_9848"  "OTU_12587" "OTU_14961" "OTU_15269" "OTU_11855"
-#&gt;  [103] "OTU_11102" "OTU_1602"  "OTU_13524" "OTU_13797" "OTU_20135" "OTU_2324" 
-#&gt;  [109] "OTU_14841" "OTU_16400" "OTU_12042" "OTU_1279"  "OTU_18190" "OTU_3286" 
-#&gt;  [115] "OTU_6893"  "OTU_18653" "OTU_16355" "OTU_14817" "OTU_18594" "OTU_3448" 
-#&gt;  [121] "OTU_7569"  "OTU_5826"  "OTU_13065" "OTU_12332" "OTU_14881" "OTU_17717"
-#&gt;  [127] "OTU_14870" "OTU_15529" "OTU_13893" "OTU_15091" "OTU_16827" "OTU_437"  
-#&gt;  [133] "OTU_16338" "OTU_16680" "OTU_13874" "OTU_14402" "OTU_18661" "OTU_3256" 
-#&gt;  [139] "OTU_14785" "OTU_2168"  "OTU_14787" "OTU_18756" "OTU_3189"  "OTU_3915" 
-#&gt;  [145] "OTU_5138"  "OTU_18720" "OTU_15863" "OTU_377"   "OTU_15667" "OTU_18407"
-#&gt;  [151] "OTU_4362"  "OTU_19298" "OTU_19720" "OTU_4382"  "OTU_10852" "OTU_15126"
-#&gt;  [157] "OTU_14784" "OTU_14800" "OTU_18752" "OTU_19728" "OTU_1724"  "OTU_14745"
-#&gt;  [163] "OTU_7562"  "OTU_14909" "OTU_14835" "OTU_18685" "OTU_19699" "OTU_16798"
-#&gt;  [169] "OTU_13846" "OTU_9793"  "OTU_1425"  "OTU_15539" "OTU_19523" "OTU_14158"
-#&gt;  [175] "OTU_15516" "OTU_4631"  "OTU_13494" "OTU_14438" "OTU_20024" "OTU_7536" 
-#&gt;  [181] "OTU_13635" "OTU_12018" "OTU_5098"  "OTU_14897" "OTU_8814"  "OTU_14952"
-#&gt;  [187] "OTU_20023" "OTU_14915" "OTU_12592" "OTU_9648"  "OTU_8455"  "OTU_8277" 
-#&gt;  [193] "OTU_9506"  "OTU_18470" "OTU_1768"  "OTU_8055"  "OTU_13272" "OTU_15214"
-#&gt;  [199] "OTU_14837" "OTU_19348" "OTU_15008" "OTU_16217" "OTU_14998" "OTU_3630" 
-#&gt;  [205] "OTU_14816" "OTU_14764" "OTU_14342" "OTU_14777" "OTU_16745" "OTU_18495"
-#&gt;  [211] "OTU_13556" "OTU_6529"  "OTU_1966"  "OTU_14956" "OTU_10598" "OTU_695"  
-#&gt;  [217] "OTU_2108"  "OTU_3152"  "OTU_7554"  "OTU_13822" "OTU_255"   "OTU_8518" 
-#&gt;  [223] "OTU_5543"  "OTU_14821" "OTU_15597" "OTU_3093"  "OTU_2544"  "OTU_14845"
-#&gt;  [229] "OTU_14429" "OTU_14376" "OTU_14506" "OTU_14916" "OTU_48"    "OTU_11219"
-#&gt;  [235] "OTU_13655" "OTU_18662" "OTU_5964"  "OTU_14771" "OTU_19825" "OTU_16199"
-#&gt;  [241] "OTU_2031"  "OTU_1793"  "OTU_17870" "OTU_7961"  "OTU_12673" "OTU_14516"
-#&gt;  [247] "OTU_6925"  "OTU_487"   "OTU_5627"  "OTU_14902" "OTU_14991" "OTU_15545"
-#&gt;  [253] "OTU_3676"  "OTU_18542" "OTU_14060" "OTU_4507"  "OTU_13428" "OTU_10839"
-#&gt;  [259] "OTU_14979" "OTU_4897"  "OTU_9929"  "OTU_474"   "OTU_9926"  "OTU_2898" 
-#&gt;  [265] "OTU_18475" "OTU_14737" "OTU_17579" "OTU_3616"  "OTU_10219" "OTU_15018"
-#&gt;  [271] "OTU_2647"  "OTU_300"   "OTU_10452" "OTU_14803" "OTU_2433"  "OTU_4896" 
-#&gt;  [277] "OTU_17800" "OTU_18269" "OTU_18404" "OTU_16468" "OTU_13687" "OTU_232"  
-#&gt;  [283] "OTU_7386"  "OTU_14583" "OTU_4286"  "OTU_14772" "OTU_15088" "OTU_6064" 
-#&gt;  [289] "OTU_19214" "OTU_12578" "OTU_4653"  "OTU_17113" "OTU_7010"  "OTU_9425" 
-#&gt;  [295] "OTU_12315" "OTU_14556" "OTU_14833" "OTU_3197"  "OTU_6144"  "OTU_19681"
-#&gt;  [301] "OTU_14865" "OTU_8307"  "OTU_1831"  "OTU_1250"  "OTU_17537" "OTU_19396"
-#&gt;  [307] "OTU_15188" "OTU_5532"  "OTU_2723"  "OTU_14809" "OTU_5001"  "OTU_14958"
-#&gt;  [313] "OTU_11128" "OTU_13953" "OTU_14925" "OTU_18137" "OTU_1538"  "OTU_14786"
-#&gt;  [319] "OTU_3498"  "OTU_4991"  "OTU_9906"  "OTU_631"   "OTU_4225"  "OTU_4516" 
-#&gt;  [325] "OTU_12023" "OTU_17549" "OTU_16921" "OTU_130"   "OTU_14520" "OTU_8404" 
-#&gt;  [331] "OTU_3349"  "OTU_14924" "OTU_485"   "OTU_1902"  "OTU_10487" "OTU_16753"
-#&gt;  [337] "OTU_2946"  "OTU_12792" "OTU_18855" "OTU_16942" "OTU_15553" "OTU_6606" 
-#&gt;  [343] "OTU_14576" "OTU_14493" "OTU_7907"  "OTU_18580" "OTU_12857" "OTU_1059" 
-#&gt;  [349] "OTU_14875" "OTU_3728"  "OTU_14587" "OTU_16845" "OTU_11173" "OTU_16195"
-#&gt;  [355] "OTU_16869" "OTU_9818"  "OTU_20120" "OTU_3149"  "OTU_14840" "OTU_9720" 
-#&gt;  [361] "OTU_13843" "OTU_16055" "OTU_5926"  "OTU_4142"  "OTU_331"   "OTU_14491"
-#&gt;  [367] "OTU_18015" "OTU_4521"  "OTU_14723" "OTU_4221"  "OTU_6361"  "OTU_14781"
-#&gt;  [373] "OTU_1032"  "OTU_15334" "OTU_9796"  "OTU_15463" "OTU_14926" "OTU_580"  
-#&gt;  [379] "OTU_16212" "OTU_12463" "OTU_14790" "OTU_5345"  "OTU_12914" "OTU_18203"
-#&gt;  [385] "OTU_2173"  "OTU_2343"  "OTU_18814" "OTU_18292" "OTU_20073" "OTU_15741"
-#&gt;  [391] "OTU_11795" "OTU_7730"  "OTU_19330" "OTU_18228" "OTU_4589"  "OTU_17254"
-#&gt;  [397] "OTU_5365"  "OTU_7800"  "OTU_10061" "OTU_700"   "OTU_10887" "OTU_11307"
-#&gt;  [403] "OTU_5226"  "OTU_13818" "OTU_16829" "OTU_11318" "OTU_14949" "OTU_18556"
-#&gt;  [409] "OTU_18865" "OTU_14713" "OTU_12978" "OTU_15409" "OTU_19029" "OTU_2527" 
-#&gt;  [415] "OTU_2608"  "OTU_11054" "OTU_18044" "OTU_14917" "OTU_20109" "OTU_14802"
-#&gt;  [421] "OTU_14878" "OTU_14887" "OTU_12383" "OTU_9984"  "OTU_14904" "OTU_18910"
-#&gt;  [427] "OTU_5670"  "OTU_321"   "OTU_8316"  "OTU_4003"  "OTU_4794"  "OTU_16572"
-#&gt;  [433] "OTU_14755" "OTU_14711" "OTU_17746" "OTU_15592" "OTU_7731"  "OTU_3341" 
-#&gt;  [439] "OTU_10819" "OTU_4584"  "OTU_4678"  "OTU_17301" "OTU_3291"  "OTU_14826"
-#&gt;  [445] "OTU_14613" "OTU_8897"  "OTU_3891"  "OTU_14778" "OTU_14284" "OTU_5307" 
-#&gt;  [451] "OTU_14034" "OTU_14918" "OTU_19576" "OTU_3779"  "OTU_14813" "OTU_18237"
-#&gt;  [457] "OTU_15515" "OTU_12716" "OTU_1971"  "OTU_11057" "OTU_19075" "OTU_17907"
-#&gt;  [463] "OTU_9005"  "OTU_760"   "OTU_14185" "OTU_6563"  "OTU_13067" "OTU_5121" 
-#&gt;  [469] "OTU_17741" "OTU_5091"  "OTU_1278"  "OTU_16349" "OTU_18886" "OTU_7689" 
-#&gt;  [475] "OTU_17571" "OTU_18249" "OTU_4233"  "OTU_14584" "OTU_7372"  "OTU_1588" 
-#&gt;  [481] "OTU_4935"  "OTU_10314" "OTU_16865" "OTU_881"   "OTU_18588" "OTU_14890"
-#&gt;  [487] "OTU_14710" "OTU_18672" "OTU_19423" "OTU_68"    "OTU_15917" "OTU_18655"
-#&gt;  [493] "OTU_14399" "OTU_12805" "OTU_14807" "OTU_14500" "OTU_12175" "OTU_14774"
-#&gt;  [499] "OTU_333"   "OTU_12000" "OTU_19899" "OTU_229"   "OTU_6454"  "OTU_1291" 
-#&gt;  [505] "OTU_6688"  "OTU_17863" "OTU_14842" "OTU_4277"  "OTU_6219"  "OTU_7625" 
-#&gt;  [511] "OTU_18422" "OTU_18314" "OTU_13997" "OTU_812"   "OTU_1651"  "OTU_14653"
-#&gt;  [517] "OTU_600"   "OTU_14799" "OTU_821"   "OTU_1481"  "OTU_9150"  "OTU_14149"
-#&gt;  [523] "OTU_5167"  "OTU_6802"  "OTU_13121" "OTU_16285" "OTU_13106" "OTU_14930"
-#&gt;  [529] "OTU_19221" "OTU_10594" "OTU_15440" "OTU_18554" "OTU_3003"  "OTU_5990" 
-#&gt;  [535] "OTU_773"   "OTU_19303" "OTU_16748" "OTU_2373"  "OTU_14432" "OTU_10535"
-#&gt;  [541] "OTU_13580" "OTU_14663" "OTU_19362" "OTU_2486"  "OTU_1138"  "OTU_13141"
-#&gt;  [547] "OTU_19484" "OTU_14021" "OTU_14658" "OTU_6920"  "OTU_11084" "OTU_2996" 
-#&gt;  [553] "OTU_2379"  "OTU_19235" "OTU_2160"  "OTU_15062" "OTU_7275"  "OTU_12200"
-#&gt;  [559] "OTU_6011"  "OTU_14857" "OTU_18937" "OTU_9191"  "OTU_18952" "OTU_1089" 
-#&gt;  [565] "OTU_9112"  "OTU_12909" "OTU_14748" "OTU_3864"  "OTU_9312"  "OTU_12294"
-#&gt;  [571] "OTU_10841" "OTU_3011"  "OTU_56"    "OTU_14470" "OTU_12282" "OTU_14561"
-#&gt;  [577] "OTU_8855"  "OTU_6608"  "OTU_10339" "OTU_17839" "OTU_19643" "OTU_14941"
-#&gt;  [583] "OTU_12776" "OTU_14702" "OTU_2820"  "OTU_14945" "OTU_10486" "OTU_6671" 
-#&gt;  [589] "OTU_14531" "OTU_19335" "OTU_1064"  "OTU_18259" "OTU_3751"  "OTU_15229"
-#&gt;  [595] "OTU_19992" "OTU_963"   "OTU_10372" "OTU_14368" "OTU_14541" "OTU_6457" 
-#&gt;  [601] "OTU_12710" "OTU_11694" "OTU_15745" "OTU_12401" "OTU_13182" "OTU_16537"
-#&gt;  [607] "OTU_5418"  "OTU_13244" "OTU_15770" "OTU_6970"  "OTU_14667" "OTU_14923"
-#&gt;  [613] "OTU_18565" "OTU_19740" "OTU_3300"  "OTU_10056" "OTU_15903" "OTU_8988" 
-#&gt;  [619] "OTU_13367" "OTU_14514" "OTU_17722" "OTU_10892" "OTU_3862"  "OTU_636"  
-#&gt;  [625] "OTU_11673" "OTU_2901"  "OTU_354"   "OTU_128"   "OTU_14899" "OTU_309"  
-#&gt;  [631] "OTU_8057"  "OTU_9106"  "OTU_15783" "OTU_16535" "OTU_12852" "OTU_14498"
-#&gt;  [637] "OTU_7820"  "OTU_15680" "OTU_16248" "OTU_624"   "OTU_7232"  "OTU_15266"
-#&gt;  [643] "OTU_12088" "OTU_16159" "OTU_14907" "OTU_15142" "OTU_18708" "OTU_14501"
-#&gt;  [649] "OTU_15632" "OTU_13074" "OTU_15082" "OTU_3469"  "OTU_3194"  "OTU_351"  
-#&gt;  [655] "OTU_15333" "OTU_17861" "OTU_15743" "OTU_16960" "OTU_12220" "OTU_6510" 
-#&gt;  [661] "OTU_14495" "OTU_15521" "OTU_5031"  "OTU_14497" "OTU_14636" "OTU_3276" 
-#&gt;  [667] "OTU_9294"  "OTU_136"   "OTU_16867" "OTU_19049" "OTU_8309"  "OTU_10146"
-#&gt;  [673] "OTU_7647"  "OTU_9590"  "OTU_16919" "OTU_12455" "OTU_14692" "OTU_10347"
-#&gt;  [679] "OTU_14810" "OTU_14477" "OTU_16734" "OTU_4676"  "OTU_14526" "OTU_15717"
-#&gt;  [685] "OTU_16816" "OTU_19889" "OTU_4555"  "OTU_2181"  "OTU_16164" "OTU_19020"
-#&gt;  [691] "OTU_7471"  "OTU_19222" "OTU_14073" "OTU_15252" "OTU_14524" "OTU_15526"
-#&gt;  [697] "OTU_20067" "OTU_15026" "OTU_4275"  "OTU_11974" "OTU_18631" "OTU_14668"
-#&gt;  [703] "OTU_15582" "OTU_11252" "OTU_12885" "OTU_17524" "OTU_12907" "OTU_15752"
-#&gt;  [709] "OTU_4348"  "OTU_12903" "OTU_17515" "OTU_15511" "OTU_2179"  "OTU_9892" 
-#&gt;  [715] "OTU_10890" "OTU_12944" "OTU_15455" "OTU_1569"  "OTU_18037" "OTU_14570"
-#&gt;  [721] "OTU_5182"  "OTU_3359"  "OTU_12022" "OTU_14612" "OTU_4356"  "OTU_11763"
-#&gt;  [727] "OTU_14121" "OTU_17553" "OTU_1075"  "OTU_14258" "OTU_15340" "OTU_427"  
-#&gt;  [733] "OTU_14763" "OTU_14873" "OTU_9614"  "OTU_12800" "OTU_13614" "OTU_16316"
-#&gt;  [739] "OTU_19297" "OTU_3858"  "OTU_13290" "OTU_6055"  "OTU_1132"  "OTU_18309"
-#&gt;  [745] "OTU_1899"  "OTU_5238"  "OTU_12654" "OTU_18086" "OTU_13217" "OTU_6815" 
-#&gt;  [751] "OTU_9607"  "OTU_14301" "OTU_14812" "OTU_50"    "OTU_19070" "OTU_4662" 
-#&gt;  [757] "OTU_16679" "OTU_878"   "OTU_14644" "OTU_14503" "OTU_3015"  "OTU_13075"
-#&gt;  [763] "OTU_1370"  "OTU_15359" "OTU_19916" "OTU_13352" "OTU_19864" "OTU_5130" 
-#&gt;  [769] "OTU_11157" "OTU_5234"  "OTU_10574" "OTU_20027" "OTU_5240"  "OTU_19414"
-#&gt;  [775] "OTU_12846" "OTU_3261"  "OTU_20026" "OTU_2465"  "OTU_264"   "OTU_18414"
-#&gt;  [781] "OTU_5432"  "OTU_8373"  "OTU_10113" "OTU_13348" "OTU_10733" "OTU_6101" 
-#&gt;  [787] "OTU_12637" "OTU_14536" "OTU_5611"  "OTU_612"   "OTU_16364" "OTU_9977" 
-#&gt;  [793] "OTU_13493" "OTU_13770" "OTU_2279"  "OTU_14577" "OTU_12061" "OTU_18294"
-#&gt;  [799] "OTU_16406" "OTU_19769" "OTU_11731" "OTU_14645" "OTU_1183"  "OTU_15884"
-#&gt;  [805] "OTU_19122" "OTU_19919" "OTU_12173" "OTU_14891" "OTU_3242"  "OTU_19114"
-#&gt;  [811] "OTU_3045"  "OTU_4104"  "OTU_467"   "OTU_8839"  "OTU_19405" "OTU_8850" 
-#&gt;  [817] "OTU_17480" "OTU_17930" "OTU_6875"  "OTU_7702"  "OTU_18898" "OTU_14440"
-#&gt;  [823] "OTU_14442" "OTU_14670" "OTU_18968" "OTU_5519"  "OTU_1056"  "OTU_16145"
-#&gt;  [829] "OTU_19371" "OTU_14473" "OTU_14770" "OTU_15028" "OTU_14888" "OTU_19224"
-#&gt;  [835] "OTU_618"   "OTU_9610"  "OTU_12525" "OTU_15379" "OTU_2575"  "OTU_8047" 
-#&gt;  [841] "OTU_14428" "OTU_551"   "OTU_18020" "OTU_11346" "OTU_11740" "OTU_14592"
-#&gt;  [847] "OTU_3940"  "OTU_710"   "OTU_10918" "OTU_17542" "OTU_2896"  "OTU_14173"
-#&gt;  [853] "OTU_1611"  "OTU_19241" "OTU_2773"  "OTU_7077"  "OTU_13730" "OTU_14443"
-#&gt;  [859] "OTU_3257"  "OTU_4986"  "OTU_6876"  "OTU_13406" "OTU_19937" "OTU_2246" 
-#&gt;  [865] "OTU_9647"  "OTU_18815" "OTU_11208" "OTU_12172" "OTU_2239"  "OTU_12955"
-#&gt;  [871] "OTU_16428" "OTU_17366" "OTU_778"   "OTU_10116" "OTU_1583"  "OTU_5471" 
-#&gt;  [877] "OTU_12241" "OTU_12356" "OTU_15439" "OTU_16440" "OTU_1910"  "OTU_12751"
-#&gt;  [883] "OTU_19276" "OTU_14067" "OTU_4384"  "OTU_11756" "OTU_11985" "OTU_14391"
-#&gt;  [889] "OTU_8139"  "OTU_12146" "OTU_2708"  "OTU_6617"  "OTU_15242" "OTU_15710"
-#&gt;  [895] "OTU_1699"  "OTU_1841"  "OTU_13306" "OTU_15513" "OTU_19533" "OTU_11993"
-#&gt;  [901] "OTU_13848" "OTU_20052" "OTU_16369" "OTU_6146"  "OTU_6797"  "OTU_6869" 
-#&gt;  [907] "OTU_9805"  "OTU_14619" "OTU_15746" "OTU_18318" "OTU_12913" "OTU_4378" 
-#&gt;  [913] "OTU_7287"  "OTU_7315"  "OTU_15555" "OTU_3316"  "OTU_19333" "OTU_9460" 
-#&gt;  [919] "OTU_19960" "OTU_268"   "OTU_10684" "OTU_14741" "OTU_1308"  "OTU_13779"
-#&gt;  [925] "OTU_19046" "OTU_20025" "OTU_14426" "OTU_419"   "OTU_12502" "OTU_14722"
-#&gt;  [931] "OTU_7247"  "OTU_15181" "OTU_17455" "OTU_11992" "OTU_1798"  "OTU_6416" 
-#&gt;  [937] "OTU_11998" "OTU_15994" "OTU_16060" "OTU_1701"  "OTU_15608" "OTU_4158" 
-#&gt;  [943] "OTU_6024"  "OTU_15727" "OTU_20049" "OTU_7859"  "OTU_11616" "OTU_12858"
-#&gt;  [949] "OTU_14016" "OTU_14455" "OTU_14676" "OTU_3734"  "OTU_9099"  "OTU_14649"
-#&gt;  [955] "OTU_15449" "OTU_17931" "OTU_886"   "OTU_9838"  "OTU_18916" "OTU_247"  
-#&gt;  [961] "OTU_14294" "OTU_15527" "OTU_18548" "OTU_10621" "OTU_3183"  "OTU_5467" 
-#&gt;  [967] "OTU_8041"  "OTU_15567" "OTU_15744" "OTU_15620" "OTU_80"    "OTU_15704"
-#&gt;  [973] "OTU_16113" "OTU_8576"  "OTU_16253" "OTU_2212"  "OTU_9809"  "OTU_19421"
-#&gt;  [979] "OTU_10924" "OTU_14806" "OTU_5131"  "OTU_310"   "OTU_14449" "OTU_14115"
-#&gt;  [985] "OTU_7527"  "OTU_7897"  "OTU_14716" "OTU_1503"  "OTU_19692" "OTU_11767"
-#&gt;  [991] "OTU_15458" "OTU_15777" "OTU_5227"  "OTU_9332"  "OTU_14548" "OTU_16912"
-#&gt;  [997] "OTU_4517"  "OTU_1789"  "OTU_18873" "OTU_12524" "OTU_12759" "OTU_13666"
-#&gt; [1003] "OTU_1970"  "OTU_11875" "OTU_14363" "OTU_14606" "OTU_3980"  "OTU_12695"
-#&gt; [1009] "OTU_19723" "OTU_4058"  "OTU_5150"  "OTU_13071" "OTU_13213" "OTU_13519"
-#&gt; [1015] "OTU_17572" "OTU_18045" "OTU_4309"  "OTU_1328"  "OTU_7129"  "OTU_8075" 
-#&gt; [1021] "OTU_11051" "OTU_15106" "OTU_18879" "OTU_19500" "OTU_1761"  "OTU_5300" 
-#&gt; [1027] "OTU_12693" "OTU_17598" "OTU_5011"  "OTU_18139" "OTU_4367"  "OTU_573"  
-#&gt; [1033] "OTU_18313" "OTU_18687" "OTU_19939" "OTU_10108" "OTU_14386" "OTU_8911" 
-#&gt; [1039] "OTU_16857" "OTU_8954"  "OTU_15351" "OTU_19274" "OTU_9039"  "OTU_11806"
-#&gt; [1045] "OTU_3972"  "OTU_7717"  "OTU_9339"  "OTU_13184" "OTU_15377" "OTU_16018"
-#&gt; [1051] "OTU_17041" "OTU_14469" "OTU_19893" "OTU_3617"  "OTU_7435"  "OTU_18001"
-#&gt; [1057] "OTU_10099" "OTU_13345" "OTU_17825" "OTU_1097"  "OTU_376"   "OTU_12225"
-#&gt; [1063] "OTU_14337" "OTU_15404" "OTU_15615" "OTU_16264" "OTU_11772" "OTU_14545"
-#&gt; [1069] "OTU_14832" "OTU_15059" "OTU_14268" "OTU_14725" "OTU_14815" "OTU_17558"
-#&gt; [1075] "OTU_15021" "OTU_2873"  "OTU_9754"  "OTU_12534" "OTU_15844" "OTU_1454" 
-#&gt; [1081] "OTU_14750" "OTU_17275" "OTU_4097"  "OTU_5042"  "OTU_9733"  "OTU_13327"
-#&gt; [1087] "OTU_15058" "OTU_20082" "OTU_10504" "OTU_11979" "OTU_19827" "OTU_19952"
-#&gt; [1093] "OTU_9894"  "OTU_14339" "OTU_2737"  "OTU_692"   "OTU_18393" "OTU_3140" 
-#&gt; [1099] "OTU_1069"  "OTU_13241" "OTU_12181" "OTU_12976" "OTU_13613" "OTU_14863"
-#&gt; [1105] "OTU_15248" "OTU_19758" "OTU_10097" "OTU_17030" "OTU_14621" "OTU_15144"
-#&gt; [1111] "OTU_16676" "OTU_16961" "OTU_20038" "OTU_14044" "OTU_15658" "OTU_18734"
-#&gt; [1117] "OTU_16059" "OTU_17009" "OTU_2398"  "OTU_14057" "OTU_18008" "OTU_19261"
-#&gt; [1123] "OTU_16665" "OTU_14999" "OTU_15673" "OTU_19858" "OTU_13947" "OTU_6722" 
-#&gt; [1129] "OTU_15289" "OTU_17846" "OTU_6520"  "OTU_15569" "OTU_6089"  "OTU_10796"
-#&gt; [1135] "OTU_14660" "OTU_15742" "OTU_14461" "OTU_15182" "OTU_3251"  "OTU_12188"
-#&gt; [1141] "OTU_14464" "OTU_6251"  "OTU_11513" "OTU_13418" "OTU_14936" "OTU_16580"
-#&gt; [1147] "OTU_8180"  "OTU_9599"  "OTU_10241" "OTU_1942"  "OTU_768"   "OTU_12984"
-#&gt; [1153] "OTU_13262" "OTU_14889" "OTU_18745" "OTU_4001"  "OTU_12497" "OTU_14047"
-#&gt; [1159] "OTU_14593" "OTU_17545" "OTU_15962" "OTU_13985" "OTU_18131" "OTU_6016" 
-#&gt; [1165] "OTU_3528"  "OTU_6830"  "OTU_13271" "OTU_14628" "OTU_6975"  "OTU_1348" 
-#&gt; [1171] "OTU_15296" "OTU_19506" "OTU_317"   "OTU_326"   "OTU_3438"  "OTU_4900" 
-#&gt; [1177] "OTU_13528" "OTU_15617" "OTU_15857" "OTU_16098" "OTU_19042" "OTU_15571"
-#&gt; [1183] "OTU_17968" "OTU_3160"  "OTU_6824"  "OTU_7956"  "OTU_8600"  "OTU_14626"
-#&gt; [1189] "OTU_14868" "OTU_9833"  "OTU_713"   "OTU_14637" "OTU_18707" "OTU_5324" 
-#&gt; [1195] "OTU_7959"  "OTU_12087" "OTU_1418"  "OTU_3388"  "OTU_14687" "OTU_15653"
-#&gt; [1201] "OTU_9003"  "OTU_985"   "OTU_11510" "OTU_13807" "OTU_14686" "OTU_14933"
-#&gt; [1207] "OTU_15257" "OTU_2736"  "OTU_477"   "OTU_6142"  "OTU_13529" "OTU_15005"
-#&gt; [1213] "OTU_11766" "OTU_14092" "OTU_14901" "OTU_15007" "OTU_17175" "OTU_6395" 
-#&gt; [1219] "OTU_12186" "OTU_1450"  "OTU_15678" "OTU_16657" "OTU_15388" "OTU_16699"
-#&gt; [1225] "OTU_17607" "OTU_3351"  "OTU_7851"  "OTU_7990"  "OTU_13410" "OTU_14484"
-#&gt; [1231] "OTU_14101" "OTU_14181" "OTU_14463" "OTU_1688"  "OTU_19059" "OTU_3711" 
-#&gt; [1237] "OTU_4843"  "OTU_5909"  "OTU_12687" "OTU_15235" "OTU_17382" "OTU_15444"
-#&gt; [1243] "OTU_3899"  "OTU_6487"  "OTU_10049"</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>hard_cutoff</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -388,7 +194,7 @@ Here we use the hard cut off described in Lundberg (2012), but realize this is a
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

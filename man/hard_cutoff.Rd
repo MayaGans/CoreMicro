@@ -28,6 +28,8 @@ In our example we set the minimum number of sites to 5 and the minimum number of
 Here we use the hard cut off described in Lundberg (2012), but realize this is any threshold.
 }
 \examples{
-prop_reads(arabidopsis)
+\dontrun{
+hard_cutoff(arabidopsis)
+}
 
 }

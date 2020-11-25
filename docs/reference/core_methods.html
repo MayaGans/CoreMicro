@@ -100,7 +100,11 @@ hard_cutoff methods" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/analysis_and_plots.html">analysis_and_plots</a>
+      <a href="../articles/analysis_and_plots.html">Analysis and Plots</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -142,7 +146,7 @@ hard_cutoff methods" />
 <code>hard_cutoff</code> methods</p>
     </div>
 
-    <pre class="usage"><span class='fu'>core_methods</span>(<span class='no'>otu_table</span>)</pre>
+    <pre class="usage"><span class='fu'>core_methods</span><span class='op'>(</span><span class='va'>otu_table</span>, taxa_as_rows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +155,12 @@ hard_cutoff methods" />
       <th>otu_table</th>
       <td><p>a dataframe of OTUs where
 the first row is the OTU ID and column names refer to sites</p></td>
+    </tr>
+    <tr>
+      <th>taxa_as_rows</th>
+      <td><p><code>logical</code> data must be in a format where the taxa are rows
+and the sites are columns. The default value is <code>TRUE</code>,
+if <code>FALSE</code> data will be transposed for downstream analysis.</p></td>
     </tr>
     </table>
 
@@ -161,21 +171,9 @@ their inclusion to the core by method (delineated as a 1 or 0),
 the mean, variance, and coefficient of variation.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>core_methods</span>(<span class='no'>arabidopsis</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 59,560 x 6</span><span>
-#&gt;    X            Mean Variance    CV name                                   value
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                                  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> OTU_100   0.368    0.707   1.92  Hard Cut Off                               0
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> OTU_100   0.368    0.707   1.92  Proportion of Sequence Replicates          0
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Hard Cut Off                               0
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> OTU_1000  0.006</span><span style='text-decoration: underline;'>94</span><span>  0.006</span><span style='text-decoration: underline;'>92</span><span> 0.997 Proportion of Sequence Replicates          0
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> OTU_10000 0.698    5.85    8.38  Proportion of Sequence Reads               0
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> OTU_10000 0.698    5.85    8.38  Proportion of Sequence Reads and Repl…     0
-#&gt; </span><span style='color: #949494;'># … with 59,550 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>core_methods</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -191,7 +189,7 @@ the mean, variance, and coefficient of variation.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

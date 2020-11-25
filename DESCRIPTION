@@ -2,11 +2,15 @@ Package: CoreMicro
 Type: Package
 Title: Testing  Widely Used Core Microbiome Assignment Methods 
 Version: 0.0.1
-Authors@R: as.person(c(
-    "Maya Gans <jaffe.maya@gmail.com> [aut, cre]", 
-    "Gordon Custer <gordon.custer91@gmail.com> [aut]"
-  ))
-Maintainer: <jaffe.maya@gmail.com>
+Authors@R: 
+    c(person(given = "Maya",
+             family = "Gans",
+             role = c("aut", "cre"),
+             email = "jaffe.maya@gmail.com.com"),
+      person(given = "Gordon",
+             family = "Custer",
+             role = c("aut"),
+             email = "gordon.custer91@gmail.com"))
 Description: Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted
     with simulated and empirical data. Package allows for the comparison of commonly utilized methods for assignment of 
     taxa into core or non-core groups. Package includes tools for calculation of summary statistics for taxon abundance data
@@ -27,8 +31,7 @@ Imports:
     glue,
     rlang,
     tidyr,
-    ggVennDiagram,
-    phyloseq
+    ggVennDiagram
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)

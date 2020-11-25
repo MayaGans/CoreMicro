@@ -1,6 +1,28 @@
+---
+title: "Figure 2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Figure 2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
 library(patchwork)
+```
+
 
 # Figure 2
+
+```{r, eval=FALSE}
 p2.1 <- core_methods(human_stool) %>%
   core_plots(legend_title = "HMP Taxa Count") +
   theme(axis.title.x=element_blank(),
@@ -15,9 +37,12 @@ p2.2 <- core_methods(arabidopsis) %>%
 figure2 <- p2.1 / p2.2 + patchwork::plot_annotation(tag_levels = "A")
 
 ggsave("inst/figures/figure2.tiff", figure2, width = 15)
+```
+
 
 # Figure 3
 
+```{r, eval=FALSE}
 p3.1 <- arabidopsis %>% core_methods() %>% core_venn() + 
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
   theme(plot.title = element_text(size = 20, hjust = 0.5)) +
@@ -30,5 +55,5 @@ p3.2 <- human_stool %>% core_methods() %>% core_venn() +
 figure3 <- p3.1 + p3.2
 
 ggsave("inst/figures/figure3.tiff", figure3, height = 16, width = 23)
-
+```
 

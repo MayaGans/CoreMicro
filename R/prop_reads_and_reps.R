@@ -18,7 +18,7 @@
 #' @return the names of OTUs which meet the proportion of reads and replicate criteria
 #'
 #' @examples
-#' prop_reads(arabidopsis)
+#' prop_reads_and_reps(arabidopsis)
 #'
 #' @export
 
