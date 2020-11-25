@@ -31,8 +31,25 @@ human_core_df <- core_methods(human_stool) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
 ```
 
+# Load in phyloseq object from the github
+
+This datsaet was used for comparison of core assignment methods. This human_ps phyloseq object contains all samples from the human microbiome project.
+
+
 ```{r, eval=FALSE}
-human_working_set <- readRDS("../data-raw/human_working_set.rda")
+githubURL <- ("https://raw.githubusercontent.com/MayaGans/CoreMicro/master/data-raw/human_ps.rda")
+download.file(githubURL,"human_ps.rda", method="curl")
+human_ps <- readRDS("human_ps.rda")
+```
+
+# Create subset 
+
+For the manuscript, we used a subset of the above data, filtering to only include stool samples:
+
+```{r, eval=FALSE}
+hmbp_working_set<-subset_samples(physeq = human_ps, HMPbodysubsite=="Stool")
+
+human_working_set<- prune_taxa(taxa_sums(hmbp_working_set) >=1, hmbp_working_set)
 ```
 
 ```{r, eval=FALSE}

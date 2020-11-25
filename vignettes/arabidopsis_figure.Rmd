@@ -31,8 +31,25 @@ human_core_df <- core_methods(arabidopsis) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
 ```
 
+### Get the phyloseq object from our github repo 
+
+Data derived from Lundberg et al. 2012. Dataset used for core assignment comparisons is a subset of the entire core Arabidopsis thaliana root microbiome dataset.The entire raw arabidopsis datset is named arabidopsis_ps.
+
+
 ```{r, eval=FALSE}
-arabidopsis_m21_4 <- readRDS("../data-raw/arabidopsis_m21_4.rda")
+githubURL <- ("https://raw.githubusercontent.com/MayaGans/CoreMicro/master/data-raw/arabidopsis_ps.rda")
+download.file(githubURL,"arabidopsis_ps.rda", method="curl")
+arab_ps <- readRDS("arabidopsis_ps.rda")
+```
+
+# Create the subsetted data to use in analysis
+
+We utilized only the rhizosphere (r) samples from the m21 site for our comparisons of core assignment methods:
+
+```{r, eval=FALSE}
+arab_working_set<-subset_samples(physeq = arab_ps, Soil.Type=="M21" & Treatment == "R")
+
+arabidopsis_m21_r <- prune_taxa(taxa_sums(arab_working_set) >=1, arab_working_set)
 ```
 
 Create table all taxa that are never assigned.
@@ -54,8 +71,8 @@ prop_seq_readsnrep_core<-(wide_human[wide_human$`Proportion of Sequence Reads an
 HC_core<-(wide_human[wide_human$`Hard Cut Off`==1,])$X
 prop_rep_core<-(wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$X
 
-md_a<-data.frame(sample_data(arabidopsis_m21_4))
-otu_a<-data.frame(otu_table(arabidopsis_m21_4))
+md_a<-data.frame(sample_data(arabidopsis_m21_r))
+otu_a<-data.frame(otu_table(arabidopsis_m21_r))
 otu_a_t<-data.frame(t(otu_a))
 otu_a_t<-data.matrix(otu_a_t)
 otu_human_dist<-parallelDist(otu_a_t, method = "bray")
@@ -104,9 +121,9 @@ human_prop_rep_core_dist<-parallelDist(human_prop_rep_core, method = "bray")
 human_prop_rep_core_dist<-parallelDist(human_prop_rep_core, method = "binary")
 #adonis(human_prop_rep_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 
-md_a<-data.frame(sample_data(arabidopsis_m21_4))
+md_a<-data.frame(sample_data(arabidopsis_m21_r))
 md_a$visitno<-as.factor(md_a$visitno)
-otu_a<-data.frame(otu_table(arabidopsis_m21_4))
+otu_a<-data.frame(otu_table(arabidopsis_m21_r))
 #Network of full dataset
 #http://pablobarbera.com/big-data-upf/html/02b-networks-descriptive-analysis.html
 network_test_dat<-otu_a
