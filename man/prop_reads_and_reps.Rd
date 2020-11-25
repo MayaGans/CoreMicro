@@ -34,6 +34,6 @@ In this example, a core taxa must account for 0.02% of the total reads
 for the entire otu table and be present in at least 50% of sites.
 }
 \examples{
-prop_reads(arabidopsis)
+prop_reads_and_reps(arabidopsis)
 
 }

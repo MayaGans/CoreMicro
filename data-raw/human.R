@@ -33,4 +33,4 @@ rownames(otu_human_a)=NULL
 
 human_stool<-otu_human_a
 
-usethis::use_data(human_stool, "/data/human_stool.rda")
+usethis::use_data(human_stool, compress = "xz", internal = TRUE)

@@ -17,7 +17,9 @@
 #' @return the names of OTUs which meet the hard cut off criteria
 #'
 #' @examples
-#' prop_reads(arabidopsis)
+#' \dontrun{
+#' hard_cutoff(arabidopsis)
+#'}
 #'
 #' @export
 
