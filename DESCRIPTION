@@ -27,8 +27,7 @@ Imports:
     glue,
     rlang,
     tidyr,
-    ggVennDiagram,
-    phyloseq
+    ggVennDiagram
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
@@ -37,5 +36,6 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    gt
+    gt,
+    phyloseq
 VignetteBuilder: knitr
