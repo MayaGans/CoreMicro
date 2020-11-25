@@ -5,10 +5,11 @@ Version: 0.0.1
 Authors@R: 
     c(person(given = "Maya",
              family = "Gans",
-             role = "aut",
-             email = "jaffe.maya@gmail.com.com")
+             role = c("aut", "cre"),
+             email = "jaffe.maya@gmail.com.com"),
       person(given = "Gordon",
              family = "Custer",
+             role = c("aut"),
              email = "gordon.custer91@gmail.com"))
 Description: Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted
     with simulated and empirical data. Package allows for the comparison of commonly utilized methods for assignment of 
@@ -39,6 +40,5 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    gt,
-    phyloseq
+    gt
 VignetteBuilder: knitr
