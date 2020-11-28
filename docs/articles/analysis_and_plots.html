@@ -53,12 +53,33 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Using CoreMicro</li>
+    <li>
       <a href="../articles/analysis_and_plots.html">Analysis and Plots</a>
     </li>
     <li class="divider">
+    <li class="dropdown-header">Manuscript Reproducibility</li>
     <li>
-      <a href="../articles/index.html">More...</a>
+      <a href="../articles/figure1.html">Figure 1</a>
+    </li>
+    <li>
+      <a href="../articles/figure2.html">Figure 2</a>
+    </li>
+    <li>
+      <a href="../articles/figure3.html">Figure 3</a>
+    </li>
+    <li>
+      <a href="../articles/human_figure.html">Figure: Human Venn Diagram</a>
+    </li>
+    <li>
+      <a href="../articles/arabidopsis_figure.html">Figure: Arabidopsis Venn Diagram</a>
+    </li>
+    <li>
+      <a href="../articles/common-counts.html">Common Counts</a>
+    </li>
+    <li>
+      <a href="../articles/co-occurance.html">Human Microbiome Cooccurance</a>
     </li>
   </ul>
 </li>
@@ -100,19 +121,19 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>Comes with arabidopsis dataset - blah blah</p>
+<p>We include two datasets with the package. One of which is the Arabidopsis dataset derived from Lundberg et al. 2012. The dataset included is a subset of the entire core <i>Arabidopsis thaliana</i> root microbiome dataset. We utilized only the rhizosphere samples from the M21 site.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arabidopsis</span></code></pre></div>
 </div>
-<div id="data-structure-for-coremico" class="section level1">
+<div id="data-structure" class="section level1">
 <h1 class="hasAnchor">
-<a href="#data-structure-for-coremico" class="anchor"></a>Data Structure for {CoreMico}</h1>
+<a href="#data-structure" class="anchor"></a>Data Structure</h1>
 <p>By default {coremicro} assumes your data is in a wide format:</p>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tnutarborw .gt_table {
+#qyinmuzzot .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -137,7 +158,7 @@
   border-left-color: #D3D3D3;
 }
 
-#tnutarborw .gt_heading {
+#qyinmuzzot .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -149,7 +170,7 @@
   border-right-color: #D3D3D3;
 }
 
-#tnutarborw .gt_title {
+#qyinmuzzot .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -159,7 +180,7 @@
   border-bottom-width: 0;
 }
 
-#tnutarborw .gt_subtitle {
+#qyinmuzzot .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -169,13 +190,13 @@
   border-top-width: 0;
 }
 
-#tnutarborw .gt_bottom_border {
+#qyinmuzzot .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tnutarborw .gt_col_headings {
+#qyinmuzzot .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -190,7 +211,7 @@
   border-right-color: #D3D3D3;
 }
 
-#tnutarborw .gt_col_heading {
+#qyinmuzzot .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -210,7 +231,7 @@
   overflow-x: hidden;
 }
 
-#tnutarborw .gt_column_spanner_outer {
+#qyinmuzzot .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -222,15 +243,15 @@
   padding-right: 4px;
 }
 
-#tnutarborw .gt_column_spanner_outer:first-child {
+#qyinmuzzot .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tnutarborw .gt_column_spanner_outer:last-child {
+#qyinmuzzot .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tnutarborw .gt_column_spanner {
+#qyinmuzzot .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -242,7 +263,7 @@
   width: 100%;
 }
 
-#tnutarborw .gt_group_heading {
+#qyinmuzzot .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -264,7 +285,7 @@
   vertical-align: middle;
 }
 
-#tnutarborw .gt_empty_group_heading {
+#qyinmuzzot .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -279,15 +300,15 @@
   vertical-align: middle;
 }
 
-#tnutarborw .gt_from_md > :first-child {
+#qyinmuzzot .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tnutarborw .gt_from_md > :last-child {
+#qyinmuzzot .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tnutarborw .gt_row {
+#qyinmuzzot .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -306,7 +327,7 @@
   overflow-x: hidden;
 }
 
-#tnutarborw .gt_stub {
+#qyinmuzzot .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -318,7 +339,7 @@
   padding-left: 12px;
 }
 
-#tnutarborw .gt_summary_row {
+#qyinmuzzot .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -328,7 +349,7 @@
   padding-right: 5px;
 }
 
-#tnutarborw .gt_first_summary_row {
+#qyinmuzzot .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -338,7 +359,7 @@
   border-top-color: #D3D3D3;
 }
 
-#tnutarborw .gt_grand_summary_row {
+#qyinmuzzot .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -348,7 +369,7 @@
   padding-right: 5px;
 }
 
-#tnutarborw .gt_first_grand_summary_row {
+#qyinmuzzot .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -358,11 +379,11 @@
   border-top-color: #D3D3D3;
 }
 
-#tnutarborw .gt_striped {
+#qyinmuzzot .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tnutarborw .gt_table_body {
+#qyinmuzzot .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -371,7 +392,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#tnutarborw .gt_footnotes {
+#qyinmuzzot .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -385,13 +406,13 @@
   border-right-color: #D3D3D3;
 }
 
-#tnutarborw .gt_footnote {
+#qyinmuzzot .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#tnutarborw .gt_sourcenotes {
+#qyinmuzzot .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -405,46 +426,46 @@
   border-right-color: #D3D3D3;
 }
 
-#tnutarborw .gt_sourcenote {
+#qyinmuzzot .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#tnutarborw .gt_left {
+#qyinmuzzot .gt_left {
   text-align: left;
 }
 
-#tnutarborw .gt_center {
+#qyinmuzzot .gt_center {
   text-align: center;
 }
 
-#tnutarborw .gt_right {
+#qyinmuzzot .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tnutarborw .gt_font_normal {
+#qyinmuzzot .gt_font_normal {
   font-weight: normal;
 }
 
-#tnutarborw .gt_font_bold {
+#qyinmuzzot .gt_font_bold {
   font-weight: bold;
 }
 
-#tnutarborw .gt_font_italic {
+#qyinmuzzot .gt_font_italic {
   font-style: italic;
 }
 
-#tnutarborw .gt_super {
+#qyinmuzzot .gt_super {
   font-size: 65%;
 }
 
-#tnutarborw .gt_footnote_marks {
+#qyinmuzzot .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="tnutarborw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
+<div id="qyinmuzzot" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">X</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">site_1</th>
@@ -473,7 +494,7 @@
 <div id="mean-variance-covariance" class="section level1">
 <h1 class="hasAnchor">
 <a href="#mean-variance-covariance" class="anchor"></a>Mean, Variance, Covariance</h1>
-<p>What is this…</p>
+<p>The <code>summarize_taxa</code> function can be used to calculate the mean <code>Mean</code>, variance <code>Variance</code>, and coefficient of variance <code>CV</code>, for each taxa in the dataset:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/summarise_taxa.html">summarise_taxa</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 14,890 x 4
@@ -498,37 +519,37 @@
 <div id="hard-cutoff" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hard-cutoff" class="anchor"></a>Hard Cutoff</h3>
-<p>What this method is, arguments you can change</p>
+<p>This method assigns taxa to the core if they are present in more than a pre-determined number of sites. The default threshhold is 25 counts in at least 5 sites, you can change these two parameters using the <code>cutoff</code> and <code>site</code> arguments</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hard_cutoff.html">hard_cutoff</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hard_cutoff.html">hard_cutoff</a></span><span class="op">(</span><span class="va">arabidopsis</span>, cutoff <span class="op">=</span> <span class="fl">25</span>, sites <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="proportion-of-sequence-reads" class="section level3">
+<div id="summation-of-sequence-reads" class="section level3">
 <h3 class="hasAnchor">
-<a href="#proportion-of-sequence-reads" class="anchor"></a>Proportion of Sequence Reads</h3>
-<p>What this method is, arguments you can change</p>
+<a href="#summation-of-sequence-reads" class="anchor"></a>Summation of Sequence Reads</h3>
+<p>This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the <code>nreads</code> argument</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/sum_reads.html">sum_reads</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/sum_reads.html">sum_reads</a></span><span class="op">(</span><span class="va">arabidopsis</span>, nreads <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="proportion-of-sequence-replicates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#proportion-of-sequence-replicates" class="anchor"></a>Proportion of Sequence Replicates</h3>
-<p>What this method is, arguments you can change</p>
+<p>This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reps.html">prop_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reps.html">prop_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span>, prop_reps <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="proportion-of-sequence-reads-and-replicates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#proportion-of-sequence-reads-and-replicates" class="anchor"></a>Proportion of Sequence Reads and Replicates</h3>
-<p>What this method is, arguments you can change</p>
+<p>This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reads_and_reps.html">prop_reads_and_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span></code></pre></div>
-<p>We encourage collaboration – please submit a PR or issue if you’d like to see more methods included in the package!</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reads_and_reps.html">prop_reads_and_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span>, prop_reps <span class="op">=</span> <span class="fl">0.5</span>, prop_reads <span class="op">=</span> <span class="fl">0.0002</span><span class="op">)</span></code></pre></div>
+<p><strong>We encourage collaboration – please submit a PR or issue if you’d like to see more methods included in the package!</strong></p>
 </div>
 </div>
 <div id="all-methods" class="section level1">
 <h1 class="hasAnchor">
 <a href="#all-methods" class="anchor"></a>All Methods</h1>
-<p>The main function of the package is <code>combine_methods</code>, a function which prints your taxa table and a <code>logical</code> column for each method if that taxa is included in the column’s method. It also adds the class <code>core_methods</code> to your dataset so it can be used in subsequent plotting:</p>
+<p>Rather than look at each method in isolation, we can use the main function of the package: <code>combine_methods</code>. This function prints your taxa table and a <code>logical</code> column for each method if that taxa is included in the column’s method. It also adds the class <code>core_methods</code> to your dataset so it can be used in subsequent plotting:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span>
 <span class="va">combine_arab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/core_methods.html">core_methods</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span>
@@ -554,7 +575,7 @@
 <div id="histo-bins" class="section level2">
 <h2 class="hasAnchor">
 <a href="#histo-bins" class="anchor"></a>Histo-bins</h2>
-<p>This function takes on the output of <code>core_methods</code>. This plot…….. The function has one neccessary argument, <code>combined_otu_data</code>, but you can include the low and high colors for hex fills as well as a more informative legend title:</p>
+<p>This function takes on the output of <code>core_methods</code>. This plot is a hex bin plot to visually inspect the taxa that each method includes and the number of counts for each of those taxa. The function has one neccessary argument, <code>combined_otu_data</code>, but you can include the low and high colors for hex fills as well as a more informative legend title:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/core_plots.html">core_plots</a></span><span class="op">(</span><span class="va">combine_arab</span>, high<span class="op">=</span> <span class="st">"#1B301E"</span>, low <span class="op">=</span> <span class="st">"#E1E4E1"</span>, legend_title <span class="op">=</span> <span class="st">"Arabidopsis Taxa Count"</span><span class="op">)</span></code></pre></div>
 <p><img src="analysis_and_plots_files/figure-html/unnamed-chunk-10-1.png" width="864"></p>
@@ -562,7 +583,6 @@
 <div id="venn-diagram" class="section level2">
 <h2 class="hasAnchor">
 <a href="#venn-diagram" class="anchor"></a>Venn Diagram</h2>
-<p>Explanation</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">combine_arab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/core_venn.html">core_venn</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="analysis_and_plots_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
