@@ -17,22 +17,24 @@ knitr::opts_chunk$set(
 ```{r setup, eval=FALSE}
 library(CoreMicro)
 library(patchwork)
+library(ggplot2)
 ```
 
 
 # Figure 3
 
 ```{r, eval=FALSE}
-p3.1 <- arabidopsis %>% core_methods() %>% core_venn() + 
+p3.1 <- arabidopsis %>% core_methods() %>% 
+  core_venn(low = "#EAE6f3", high = "#432976") + 
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
-  theme(plot.title = element_text(size = 20, hjust = 0.5)) +
-  guides(fill = FALSE)
+  theme(plot.title = element_text(size = 20, hjust = 0.5))
 
-p3.2 <- human_stool %>% core_methods() %>% core_venn() + 
+p3.2 <- human_stool %>% core_methods() %>% 
+  core_venn(high= "#1B301E", low = "#E1E4E1") + 
   ggtitle("Shared Core Membership of HMBP") +
   theme(plot.title = element_text(size = 20, hjust = 0.5))
 
-figure3 <- p3.1 + p3.2
+figure3 <- p3.1 + p3.2 + plot_layout(guides = "collect")
 
-ggsave("inst/figures/figure3.tiff", figure3, height = 16, width = 23)
+ggsave("figure3.tiff", figure3, height = 8, width = 15)
 ```

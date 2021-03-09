@@ -27,10 +27,10 @@ library(CoreMiro)
 ```
 
 ```{r, eval=FALSE}
-hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/v35_map_uniquebyPSN.txt", sep = "\t")
+hmbp_md<-read.csv("../data-raw/v35_map_uniquebyPSN.txt", sep = "\t")
 rownames(hmbp_md)<-hmbp_md$X.SampleID
 hmbp_md$X.SampleID = NULL
-hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/otu_table_psn_v35.txt", sep = "\t")
+hmbp_otu<-read.csv("../data-raw/otu_table_psn_v35.txt", sep = "\t")
 #end long so it grabs everything
 names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
 rownames(hmbp_otu)<-hmbp_otu$.OTU.ID
@@ -43,11 +43,11 @@ hmpb_tax<-as.character(hmbp_otu$onsensus.Lineage)
 commonalities<-intersect(names(hmbp_otu), rownames(hmbp_md))
 hmbp_otu_sub<-hmbp_otu[,names(hmbp_otu) %in% commonalities]
 hmbp_md_sub<-hmbp_md[rownames(hmbp_md) %in% commonalities,]
-human_tax<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/In Review/Core_community/November2020/Data_for_additional_analyses/Human_taxonomy.csv", header = T)
+human_tax<-read.csv("../data-raw/Human_taxonomy.csv", header = T)
 rownames(human_tax)<-human_tax$OTU_ID
 human_tax$OTU_ID=NULL
-human_tax<-as.matrix(human_tax)
-human_tab<-otu_table(hmbp_otu_sub, taxa_are_rows = T)
+human_tax<- as.matrix(human_tax)
+human_tab<- otu_table(hmbp_otu_sub, taxa_are_rows = T)
 human_sample_data<-sample_data(hmbp_md_sub)
 human_taxonomy<-tax_table(human_tax)
 human_ps<-phyloseq(human_tab, human_sample_data, human_taxonomy)
