@@ -1,9 +1,10 @@
 articles:
-- title: 'Using CoreMicro'
-  navbar: ~
+- title: Using CoreMicro
+  navbar: Using CoreMicro
   contents:
   - analysis_and_plots
-- title: 'Manuscript Reproducibility'
+- title: Manuscript Reproducibility
+  navbar: Manuscript Reproducibility
   contents:
   - figure1
   - figure2
