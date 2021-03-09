@@ -67,6 +67,8 @@ prop_seq_reads_core <- (wide_arab[wide_arab$`Proportion of Sequence Reads`==1,])
 prop_seq_readsnrep_core <-(wide_arab[wide_arab$`Proportion of Sequence Reads and Replicates`==1,])$X
 HC_core <- (wide_arab[wide_arab$`Hard Cut Off`==1,])$X
 prop_rep_core <- (wide_arab[wide_arab$`Proportion of Sequence Replicates`==1,])$X
+
+assigned_by_any<-unique(c(prop_seq_reads_core, prop_seq_readsnrep_core, HC_core, prop_rep_core))
 ```
 
 # Adonis
@@ -170,7 +172,27 @@ nodes_with_sig_full_arab<-node_extract_full_arab[lapply(node_extract_full_arab,l
 full_arab_node_w_num_edges<-sort(lengths(nodes_with_sig_full_arab), decreasing = T) 
 str(full_arab_node_w_num_edges)
 arab_node_list<-names(full_arab_node_w_num_edges)
+
 ```
+```{r}
+
+# calculate average number of edges for all taxa
+all_edges<-lapply(node_extract_full_arab,length)
+summary(unlist(all_edges))
+
+#calculate average number of edges for core taxa
+all_edges_vec<-data.frame(unlist(all_edges))
+core_edges<- all_edges_vec[rownames(all_edges_vec) %in% assigned_by_any,]
+table(core_edges)
+summary(core_edges)
+
+#calculate average number of edges for non-core taxa
+all_edges_vec<-data.frame(unlist(all_edges))
+noncore_edges<- all_edges_vec[!rownames(all_edges_vec) %in% assigned_by_any,]
+summary(noncore_edges)
+```
+
+
 
 Comparison of human nodes with taxa identified by core methods
 Intersetion of core assignment methods with global signficance network nodes
