@@ -175,6 +175,13 @@ str(full_human_node_w_num_edges)
 human_node_list<-names(full_human_node_w_num_edges)
 
 
+
+#prop_seq_reads_core<-(wide_human[wide_human$`Proportion of Sequence Reads`==1,])$X
+#prop_seq_readsnrep_core<-(wide_human[wide_human$`Proportion of Sequence Reads and Replicates`==1,])$X
+#HC_core<-(wide_human[wide_human$`Hard Cut Off`==1,])$X
+#prop_rep_core<-(wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$X
+
+
 #Core_4
 #core_network_non_common_core4<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(core_4, human_node_list)]
 core_network_non_common_core4<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(core_4, human_node_list)]
@@ -183,12 +190,12 @@ core_network_commanlity_core4<-full_human_node_w_num_edges[names(full_human_node
 #Prop_Reads
 #core_network_non_common_prop_reads<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
 #core_network_commanlity_prop_reads<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
+length(prop_seq_reads_core[!prop_seq_reads_core %in% human_node_list]) 
 
-core_network_non_common_prop_reads<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
-core_network_commanlity_prop_reads<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
 #Prop_Reps
 core_network_non_common_prop_reps<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
 core_network_commanlity_prop_reps<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
+
 #PropRnR
 core_network_non_common_PropRnR<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_seq_readsnrep_core, human_node_list)]
 core_network_commanlity_Prop_RnR<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_seq_readsnrep_core, human_node_list)]
@@ -200,9 +207,10 @@ taxa_in_core_by_any_method <- unique(c(as.character(prop_seq_reads_core), as.cha
 #taxa in network with edge > 1
 full_human_node_w_num_edges
 #could be accomplished with just the intersect command too. Its currenlty the long way. 
-Shared_core_network_taxa<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(taxa_in_core_by_any_method, human_node_list)]
-taxa_only_in_core<-taxa_in_core_by_any_method[!taxa_in_core_by_any_method %in% names(Shared_core_network_taxa)]
-taxa_only_in_network<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% names(Shared_core_network_taxa)] 
+#Shared_core_network_taxa<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(taxa_in_core_by_any_method, human_node_list)]
+Shared_core_network_taxa<-intersect(taxa_in_core_by_any_method, human_node_list)
+taxa_only_in_core<-taxa_in_core_by_any_method[!taxa_in_core_by_any_method %in% Shared_core_network_taxa]
+taxa_only_in_network<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% Shared_core_network_taxa] 
 #summary of degree of each node. No info is available for taxa only in the core becasue they werent included in the network. 
 summary(Shared_core_network_taxa)
 summary(taxa_only_in_network)
@@ -240,15 +248,24 @@ ggplot(middlecircle,aes(x,y)) +
   annotate("text", x = 1, y=-2, label = "Proportion of Replicates") +
   annotate("text", x = -1.05, y=-2, label = "Hard Cut Off") +
   annotate("text", x = 0, y=0.2, label = "Network") +
+  #taxa only in network
   annotate("text", x = 0, y=-0, label = length(taxa_only_in_network), size= 8) +
-  annotate("text", x = 1.2, y=1.2, label = length(core_network_non_common_prop_reads), size= 8) +
-  annotate("text", x = 0.5, y=0.8, label = length(core_network_commanlity_prop_reads), size= 8) +
-  annotate("text", x = 1.2, y=-1.2, label = length(core_network_non_common_prop_reps), size= 8) +
-  annotate("text", x = 0.5, y=-0.8, label = length(core_network_commanlity_prop_reps), size= 8) +
-  annotate("text", x = -1.2, y=1.2, label = length(core_network_non_common_PropRnR), size= 8) +
-  annotate("text", x = -0.5, y=0.8, label = length(core_network_commanlity_Prop_RnR), size= 8) +
-  annotate("text", x = -1.2, y=-1.2, label = length(core_network_non_common_HC), size= 8) +
-  annotate("text", x = -0.5, y=-0.8, label = length(core_network_commanlity_HC), size= 8) +
+  #taxa only in summation of reads
+  annotate("text", x = 1.2, y=1.2, label = length(prop_seq_reads_core[!prop_seq_reads_core %in% human_node_list]) , size= 8) +
+  #taxa shared by network and summation
+  annotate("text", x = 0.5, y=0.8, label = length(intersect(prop_seq_reads_core, human_node_list)), size= 8) +
+  #taxa only in prop reps
+  annotate("text", x = 1.2, y=-1.2, label = length(prop_rep_core[!prop_rep_core %in% human_node_list]), size= 8) +
+  #taxa shared by network and prop reps
+  annotate("text", x = 0.5, y=-0.8, label = length(intersect(prop_rep_core, human_node_list)), size= 8) +
+  #taxa only in porp reads and reps
+  annotate("text", x = -1.2, y=1.2, label = length(prop_seq_readsnrep_core[!prop_seq_readsnrep_core %in% human_node_list]), size= 8) +
+  #taxa shared by network and porp reps and reads
+  annotate("text", x = -0.5, y=0.8, label = length(intersect(prop_seq_readsnrep_core, human_node_list)), size= 8) +
+  #taxa only in hard cutoffs
+  annotate("text", x = -1.2, y=-1.2, label = length(HC_core[!HC_core %in% human_node_list]), size= 8) +
+  #taxa shared by hard cutoff and network
+  annotate("text", x = -0.5, y=-0.8, label = length(intersect(HC_core, human_node_list)), size= 8) +
   ggtitle("Human Microbiome Dataset") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 ```
