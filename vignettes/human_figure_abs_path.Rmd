@@ -243,11 +243,11 @@ ggplot(middlecircle,aes(x,y)) +
   geom_path(data = circle3, aes(x, y)) +
   geom_path(data = circle4, aes(x, y)) +
   theme_void() +
-  annotate("text", x = 1, y=2, label = "Summation of Reads") +
-  annotate("text", x = -1.05, y=2, label = "Proportion of Reads and Replicates") +
-  annotate("text", x = 1, y=-2, label = "Proportion of Replicates") +
-  annotate("text", x = -1.05, y=-2, label = "Hard Cut Off") +
-  annotate("text", x = 0, y=0.2, label = "Network") +
+  annotate("text", x = 1, y=2, label = "Summation of Reads", size= 6) +
+  annotate("text", x = -1.05, y=2.1, label = "Proportion of Reads \nand Replicates", size= 6) +
+  annotate("text", x = 1, y=-2, label = "Proportion of Replicates", size= 6) +
+  annotate("text", x = -1.05, y=-2, label = "Hard Cut Off", size= 6) +
+  annotate("text", x = 0, y=0.2, label = "Network", size= 6) +
   #taxa only in network
   annotate("text", x = 0, y=-0, label = length(taxa_only_in_network), size= 8) +
   #taxa only in summation of reads

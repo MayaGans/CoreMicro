@@ -154,6 +154,9 @@ nodes_with_sig_full_human<-node_extract_full_human[lapply(node_extract_full_huma
 full_human_node_w_num_edges<-sort(lengths(nodes_with_sig_full_human), decreasing = T) 
 str(full_human_node_w_num_edges)
 human_node_list<-names(full_human_node_w_num_edges)
+
+
+
 ```
 
 #Core_4
@@ -195,6 +198,15 @@ taxa in network with edge > 1
 
 ```{r, eval=FALSE}
 full_human_node_w_num_edges
+
+taxa_in_core_by_any_method <- unique(c(as.character(prop_seq_reads_core), as.character(prop_rep_core), as.character(prop_seq_readsnrep_core), as.character(HC_core)))
+#taxa in network with edge > 1
+full_human_node_w_num_edges
+#could be accomplished with just the intersect command too. Its currenlty the long way. 
+#Shared_core_network_taxa<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(taxa_in_core_by_any_method, human_node_list)]
+Shared_core_network_taxa<-intersect(taxa_in_core_by_any_method, human_node_list)
+taxa_only_in_core<-taxa_in_core_by_any_method[!taxa_in_core_by_any_method %in% Shared_core_network_taxa]
+taxa_only_in_network<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% Shared_core_network_taxa] 
 ```
 
 could be accomplished with just the intersect command too. Its currenlty the long way. 
@@ -233,6 +245,7 @@ middlecircle <- circleFun(c(0,0),2.5,npoints = 100)
 geom_path will do open circles, geom_polygon will do filled circles
 
 ```{r, eval=FALSE}
+#geom_path will do open circles, geom_polygon will do filled circles
 ggplot(middlecircle,aes(x,y)) + 
   geom_path() +
   geom_path(data = circle1, aes(x, y)) +
@@ -240,21 +253,30 @@ ggplot(middlecircle,aes(x,y)) +
   geom_path(data = circle3, aes(x, y)) +
   geom_path(data = circle4, aes(x, y)) +
   theme_void() +
-  annotate("text", x = 1, y=2, label = "Summation of Reads") +
-  annotate("text", x = -1.05, y=2, label = "Proportion of Reads and Replicates") +
-  annotate("text", x = 1, y=-2, label = "Proportion of Replicates") +
-  annotate("text", x = -1.05, y=-2, label = "Hard Cut Off") +
-  annotate("text", x = 0, y=0.2, label = "Network") +
+  annotate("text", x = 1, y=2, label = "Summation of Reads", size= 6) +
+  annotate("text", x = -1.05, y=2.1, label = "Proportion of Reads \nand Replicates", size= 6) +
+  annotate("text", x = 1, y=-2, label = "Proportion of Replicates", size= 6) +
+  annotate("text", x = -1.05, y=-2, label = "Hard Cut Off", size= 6) +
+  annotate("text", x = 0, y=0.2, label = "Network", size= 6) +
+  #taxa only in network
   annotate("text", x = 0, y=-0, label = length(taxa_only_in_network), size= 8) +
-  annotate("text", x = 1.2, y=1.2, label = length(core_network_non_common_prop_reads), size= 8) +
-  annotate("text", x = 0.5, y=0.8, label = length(core_network_commanlity_prop_reads), size= 8) +
-  annotate("text", x = 1.2, y=-1.2, label = length(core_network_non_common_prop_reps), size= 8) +
-  annotate("text", x = 0.5, y=-0.8, label = length(core_network_commanlity_prop_reps), size= 8) +
-  annotate("text", x = -1.2, y=1.2, label = length(core_network_non_common_PropRnR), size= 8) +
-  annotate("text", x = -0.5, y=0.8, label = length(core_network_commanlity_Prop_RnR), size= 8) +
-  annotate("text", x = -1.2, y=-1.2, label = length(core_network_non_common_HC), size= 8) +
-  annotate("text", x = -0.5, y=-0.8, label = length(core_network_commanlity_HC), size= 8) +
-  ggtitle(italic('Arabidopsis') ~ "Dataset") +
+  #taxa only in summation of reads
+  annotate("text", x = 1.2, y=1.2, label = length(prop_seq_reads_core[!prop_seq_reads_core %in% human_node_list]) , size= 8) +
+  #taxa shared by network and summation
+  annotate("text", x = 0.5, y=0.8, label = length(intersect(prop_seq_reads_core, human_node_list)), size= 8) +
+  #taxa only in prop reps
+  annotate("text", x = 1.2, y=-1.2, label = length(prop_rep_core[!prop_rep_core %in% human_node_list]), size= 8) +
+  #taxa shared by network and prop reps
+  annotate("text", x = 0.5, y=-0.8, label = length(intersect(prop_rep_core, human_node_list)), size= 8) +
+  #taxa only in porp reads and reps
+  annotate("text", x = -1.2, y=1.2, label = length(prop_seq_readsnrep_core[!prop_seq_readsnrep_core %in% human_node_list]), size= 8) +
+  #taxa shared by network and porp reps and reads
+  annotate("text", x = -0.5, y=0.8, label = length(intersect(prop_seq_readsnrep_core, human_node_list)), size= 8) +
+  #taxa only in hard cutoffs
+  annotate("text", x = -1.2, y=-1.2, label = length(HC_core[!HC_core %in% human_node_list]), size= 8) +
+  #taxa shared by hard cutoff and network
+  annotate("text", x = -0.5, y=-0.8, label = length(intersect(HC_core, human_node_list)), size= 8) +
+  ggtitle("Arabidopsis Dataset") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 ```
 
