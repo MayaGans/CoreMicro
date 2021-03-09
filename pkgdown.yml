@@ -1,0 +1,14 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  analysis_and_plots: analysis_and_plots.html
+  arabidopsis_figure: arabidopsis_figure.html
+  co-occurance: co-occurance.html
+  common-counts: common-counts.html
+  figure1: figure1.html
+  figure2: figure2.html
+  figure3: figure3.html
+  human_figure: human_figure.html
+last_built: 2021-03-09T20:19Z
+
