@@ -217,6 +217,15 @@ summary(taxa_only_in_network)
 # I think this would be better as a venn diagram actaully. 
 counts<-(c(length(Shared_core_network_taxa), length(taxa_only_in_core), length(taxa_only_in_network)))
 barplot(counts)
+
+library(ggVennDiagram)
+
+x <- list(
+CORE = taxa_in_core_by_any_method,
+NETWORK = human_node_list
+)
+
+ggVennDiagram(x)
 ```
 
 
