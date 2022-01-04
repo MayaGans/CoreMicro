@@ -35,14 +35,14 @@ core_methods <- function(otu_table, taxa_as_rows = TRUE) {
     dplyr::mutate(
       `Summation of Sequence Reads` = .data$X %in% sum_reads(otu_table),
       `Proportion of Sequence Reads and Replicates` = .data$X %in% prop_reads_and_reps(otu_table),
-      `Hard Cut Off` = .data$X %in% hard_cutoff(otu_table),
+      `Hard Cutoff` = .data$X %in% hard_cutoff(otu_table),
       `Proportion of Sequence Replicates` = .data$X %in% prop_reps(otu_table)) %>%
     dplyr::mutate_if(is.logical, as.numeric) %>%
     tidyr::pivot_longer(cols = 5:8) %>%
     dplyr::mutate(name = factor(.data$name, levels = c("Summation of Sequence Reads",
                                           "Proportion of Sequence Replicates",
                                           "Proportion of Sequence Reads and Replicates",
-                                          "Hard Cut Off")))
+                                          "Hard Cutoff")))
 
   class(temp) <- append(class(temp),"core_methods")
   return(temp)
