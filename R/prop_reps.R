@@ -33,8 +33,14 @@ prop_reps <- function(otu_table, prop_reps = 0.5, taxa_as_rows = TRUE) {
   otu_table %>%
     tidyr::pivot_longer(-1) %>%
     dplyr::group_by(.data$X) %>%
-    dplyr::summarise(abundance = sum(.data$value)) %>%
-    dplyr::filter(.data$abundance > prop_reps * ncol(otu_table)) %>%
-    dplyr::pull(.data$X)
-
+    dplyr::add_count(.data$X) %>%
+    dplyr::filter(.data$value > 0) %>%
+    dplyr::mutate(
+      # sites per OTU
+      num_sites = dplyr::n()) %>%
+    #dplyr::ungroup() %>%
+    # this one gives us results
+    dplyr::filter(.data$num_sites >= .data$n * prop_reps) %>%
+  dplyr::pull(.data$X) %>%
+    unique()
 }
