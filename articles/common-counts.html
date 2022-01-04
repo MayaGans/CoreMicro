@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CoreMicro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -54,12 +50,14 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="divider">
-    <li class="dropdown-header">Using CoreMicro</li>
+    </li>
+<li class="dropdown-header">Using CoreMicro</li>
     <li>
       <a href="../articles/analysis_and_plots.html">Analysis and Plots</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Manuscript Reproducibility</li>
+    </li>
+<li class="dropdown-header">Manuscript Reproducibility</li>
     <li>
       <a href="../articles/figure1.html">Figure 1</a>
     </li>
@@ -89,7 +87,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/MayaGans/CoreMicro/">
+  <a href="https://github.com/MayaGans/CoreMicro/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -110,7 +108,7 @@
       <h1 data-toc-skip>Common Counts</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/MayaGans/CoreMicro/blob/master/vignettes/common-counts.Rmd"><code>vignettes/common-counts.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MayaGans/CoreMicro/blob/HEAD/vignettes/common-counts.Rmd" class="external-link"><code>vignettes/common-counts.Rmd</code></a></small>
       <div class="hidden name"><code>common-counts.Rmd</code></div>
 
     </div>
@@ -118,17 +116,17 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mayagans.github.io/CoreMicro/">CoreMicro</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mayagans.github.io/CoreMicro/" class="external-link">CoreMicro</a></span><span class="op">)</span></code></pre></div>
 <p>This is a thought for antoher function. This would table counts of each method so we have an idea of the size of inclusion by each</p>
 <p>It may already be included in another funciton though and could just be an intermediate output.</p>
 <p>#arabidopsis</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arab_core</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/core_methods.html">core_methods</a></span><span class="op">(</span><span class="va">arabidopsis</span><span class="op">)</span>
-<span class="va">arab_core_df</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">arab_core</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">arab_core_df</span><span class="op">$</span><span class="va">name</span>, <span class="va">arab_core_df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></code></pre></div>
-<div id="create-table-all-taxa-that-are-never-assigned-" class="section level1">
-<h1 class="hasAnchor">
-<a href="#create-table-all-taxa-that-are-never-assigned-" class="anchor"></a>Create table all taxa that are never assigned.</h1>
+<span class="va">arab_core_df</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">arab_core</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">arab_core_df</span><span class="op">$</span><span class="va">name</span>, <span class="va">arab_core_df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></code></pre></div>
+<div class="section level1">
+<h1 id="create-table-all-taxa-that-are-never-assigned-">Create table all taxa that are never assigned.<a class="anchor" aria-label="anchor" href="#create-table-all-taxa-that-are-never-assigned-"></a>
+</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>wide_arab&lt;-<span class="kw">pivot_wider</span>(arab_core_df)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">table</span>(<span class="kw">rowSums</span>(wide_arab[,<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]))</span>
 <span id="cb3-3"><a href="#cb3-3"></a>wide_arab<span class="op">$</span>num_methods&lt;-(<span class="kw">rowSums</span>(wide_arab[,<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]))</span>
@@ -148,21 +146,21 @@
 
 <span class="va">prop_rep_core</span><span class="op">&lt;-</span><span class="op">(</span><span class="va">wide_arab</span><span class="op">[</span><span class="va">wide_arab</span><span class="op">$</span><span class="va">`Proportion of Sequence Replicates`</span><span class="op">==</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">X</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span><span class="op">)</span>
-<span class="va">otu_human_a</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">otu_human_a</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span><span class="op">=</span><span class="cn">NULL</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span><span class="op">)</span>
+<span class="va">otu_human_a</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">otu_human_a</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span><span class="op">=</span><span class="cn">NULL</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span></code></pre></div>
 <p>#HMBP</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">human_tib</span><span class="op">&lt;-</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">otu_human_a</span><span class="op">)</span>
 <span class="va">human_core</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/core_methods.html">core_methods</a></span><span class="op">(</span><span class="va">human_stool</span>, taxa_as_rows <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
-<span class="va">human_core_df</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">human_core</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">human_core_df</span><span class="op">$</span><span class="va">name</span>, <span class="va">human_core_df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></code></pre></div>
+<span class="va">human_core_df</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">human_core</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">human_core_df</span><span class="op">$</span><span class="va">name</span>, <span class="va">human_core_df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="create-table-all-taxa-that-are-never-assigned--1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#create-table-all-taxa-that-are-never-assigned--1" class="anchor"></a>Create table all taxa that are never assigned.</h1>
+<div class="section level1">
+<h1 id="create-table-all-taxa-that-are-never-assigned--1">Create table all taxa that are never assigned.<a class="anchor" aria-label="anchor" href="#create-table-all-taxa-that-are-never-assigned--1"></a>
+</h1>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>wide_human&lt;-<span class="kw">pivot_wider</span>(human_core_df)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">table</span>(<span class="kw">rowSums</span>(wide_human[,<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]))</span>
 <span id="cb8-3"><a href="#cb8-3"></a>tables number assigned by each method</span>
@@ -184,11 +182,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Maya Gans, Gordon Custer.</p>
+  <p></p>
+<p>Developed by Maya Gans, Gordon Custer.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -196,6 +196,8 @@
 
   
 
+
+  
 
   </body>
 </html>
