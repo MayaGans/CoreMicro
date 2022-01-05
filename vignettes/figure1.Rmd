@@ -26,9 +26,9 @@ library(tidyverse)
 ```
 
 
-# set the structure of our simlulated taxa table (not proritions of taxa, just 
+# set the structure of our simlulated taxa table
 ```{r, eval=FALSE}
-rows by columns and expected core)
+
 ntaxa<-1000
 ncore<-25
 nsites<-50
