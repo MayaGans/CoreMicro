@@ -22,7 +22,6 @@ library(ggplot2)
 library(RColorBrewer)
 library(gridExtra)
 library(patchwork)
-library(tidyverse)
 ```
 
 
@@ -250,5 +249,5 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
 ```{r, eval=FALSE}
 g <- (tp_plot + fp_plot + tf_plot + plot_layout(ncol=1) + plot_annotation(tag_levels = 'A'))
 
-ggsave("inst/figures/figure1.tiff", g, height = 12, width = 23)
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/Figure3.tiff", g, height = 12, width = 23)
 ```

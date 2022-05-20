@@ -27,7 +27,7 @@ library(visNetwork)
 
 
 ```{r, eval=FALSE}
-human_core_df <- core_methods(arabidopsis) %>% data.frame()
+human_core_df <- core_methods(human_stool) %>% data.frame()
 table(human_core_df$name, human_core_df$value)
 ```
 
@@ -37,9 +37,9 @@ Data derived from Lundberg et al. 2012. Dataset used for core assignment compari
 
 
 ```{r, eval=FALSE}
-githubURL <- ("https://raw.githubusercontent.com/MayaGans/CoreMicro/master/data-raw/arabidopsis_ps.rda")
-download.file(githubURL,"arabidopsis_ps.rda", method="curl")
-arab_ps <- readRDS("arabidopsis_ps.rda")
+#githubURL <- ("https://raw.githubusercontent.com/MayaGans/CoreMicro/master/data-raw/arabidopsis_ps.rda")
+#download.file(githubURL,"arabidopsis_ps.rda", method="curl")
+#arab_ps <- readRDS("arabidopsis_ps.rda")
 ```
 
 # Create the subsetted data to use in analysis
@@ -47,9 +47,12 @@ arab_ps <- readRDS("arabidopsis_ps.rda")
 We utilized only the rhizosphere (r) samples from the m21 site for our comparisons of core assignment methods:
 
 ```{r, eval=FALSE}
-arab_working_set<-subset_samples(physeq = arab_ps, Soil.Type=="M21" & Treatment == "R")
+#for testing
+#arab_working_set<-subset_samples(physeq = arab_ps, Soil.Type=="M21" & Treatment == "R")
 
-arabidopsis_m21_r <- prune_taxa(taxa_sums(arab_working_set) >=1, arab_working_set)
+#arabidopsis_m21_r <- prune_taxa(taxa_sums(arab_working_set) >=1, arab_working_set)
+
+arabidopsis_m21_r <- readRDS("../data/arabidopsis_m21_r.rda")
 ```
 
 Create table all taxa that are never assigned.
@@ -122,7 +125,7 @@ human_prop_rep_core_dist<-parallelDist(human_prop_rep_core, method = "binary")
 #adonis(human_prop_rep_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 
 md_a<-data.frame(sample_data(arabidopsis_m21_r))
-md_a$visitno<-as.factor(md_a$visitno)
+#md_a$visitno<-as.factor(md_a$visitno)
 otu_a<-data.frame(otu_table(arabidopsis_m21_r))
 #Network of full dataset
 #http://pablobarbera.com/big-data-upf/html/02b-networks-descriptive-analysis.html
