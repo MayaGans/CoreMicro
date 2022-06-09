@@ -23,7 +23,7 @@ library(backbone)
 library(tidyverse)
 library(igraph)
 library(visNetwork)
-library(CoreMiro)
+#library(CoreMiro)
 ```
 
 ```{r, eval=FALSE}
@@ -74,18 +74,18 @@ wide_human$num_methods<-(rowSums(wide_human[,5:8]))
 #pull out those common taxa found by all
 core_4<-(wide_human[wide_human$num_methods==4,])$X
 #pull out those taxa included by each method
-prop_seq_reads_core<-(wide_human[wide_human$`Proportion of Sequence Reads`==1,])$X
+prop_seq_reads_core<-(wide_human[wide_human$`Summation of Sequence Reads`==1,])$X
 prop_seq_readsnrep_core<-(wide_human[wide_human$`Proportion of Sequence Reads and Replicates`==1,])$X
-HC_core<-(wide_human[wide_human$`Hard Cut Off`==1,])$X
+HC_core<-(wide_human[wide_human$`Hard Cutoff`==1,])$X
 prop_rep_core<-(wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$X
 ```
 
 Adonis of full human microbiome stool dataset
 
 ```{r, eval=FALSE}
-md_a<-data.frame(sample_data(human_working_set))
+md_a<-data.frame(sample_data(human))
 md_a$visitno<-as.factor(md_a$visitno)
-otu_a<-data.frame(otu_table(human_working_set))
+otu_a<-data.frame(otu_table(human))
 otu_a_t<-data.frame(t(otu_a))
 otu_a_t<-data.matrix(otu_a_t)
 otu_human_dist<-parallelDist(otu_a_t, method = "bray")
@@ -153,9 +153,9 @@ adonis(human_prop_rep_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 
 #Network analysis 
 ```{r, eval=FALSE}
-md_a<-data.frame(sample_data(human_working_set))
+md_a<-data.frame(sample_data(human))
 md_a$visitno<-as.factor(md_a$visitno)
-otu_a<-data.frame(otu_table(human_working_set))
+otu_a<-data.frame(otu_table(human))
 #Network of full dataset
 #http://pablobarbera.com/big-data-upf/html/02b-networks-descriptive-analysis.html
 network_test_dat<-otu_a

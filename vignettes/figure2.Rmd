@@ -20,7 +20,7 @@ library(patchwork)
 ```
 
 
-# Figure 2
+# Figure 1 (6-8-22)
 
 ```{r, eval=FALSE}
 p2.1 <- core_methods(human_otu) %>%
