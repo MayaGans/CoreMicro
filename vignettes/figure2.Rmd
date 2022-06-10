@@ -20,23 +20,23 @@ library(patchwork)
 ```
 
 
-# Figure 2
+# Figure 1 (6-8-22)
 
 ```{r, eval=FALSE}
-p2.1 <- core_methods(human_stool) %>%
+p2.1 <- core_methods(human_otu) %>%
   core_plots(legend_title = "HMP Taxa Count") +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank())
 
-p2.2 <- core_methods(arabidopsis) %>%
+p2.2 <- core_methods(arab_otu) %>%
   core_plots(high= "#1B301E", 
              low = "#E1E4E1", 
              legend_title = "Arabidopsis Taxa Count")
 
 figure2 <- p2.1 / p2.2 + patchwork::plot_annotation(tag_levels = "A")
 
-ggsave("inst/figures/figure2.tiff", figure2, width = 15)
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure1.tiff", figure2, width = 15)
 ```
 
 

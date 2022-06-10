@@ -1,9 +1,9 @@
 
-hmbp_md<-read.csv("v35_map_uniquebyPSN.csv")
+hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/Core_community/November2020/Data_for_additional_analyses/old/v35_map_uniquebyPSN.csv")
 rownames(hmbp_md)<-hmbp_md$X.SampleID
 hmbp_md$X.SampleID = NULL
 
-hmbp_otu<-read.csv("otu_table_psn_v35_2.csv", sep = "\t")
+hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/Core_community/November2020/Data_for_additional_analyses/old/otu_table_psn_v35_2.csv", sep = "\t")
 #end long so it grabs everything
 names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
 rownames(hmbp_otu)<-hmbp_otu$.OTU_ID
@@ -34,3 +34,6 @@ rownames(otu_human_a)=NULL
 human_stool<-otu_human_a
 
 usethis::use_data(human_stool)
+
+
+saveRDS(human_working_set, "./data/human_working_set.rda")
