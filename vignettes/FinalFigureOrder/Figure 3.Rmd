@@ -247,7 +247,7 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
 ```
 
 ```{r, eval=FALSE}
-g <- (tp_plot + fp_plot + tf_plot + plot_layout(ncol=1) + plot_annotation(tag_levels = 'A'))
+g <- (tp_plot + fp_plot + tf_plot + plot_layout(ncol=1)) #+ plot_annotation(tag_levels = 'A'))
 
 ggsave("../../vignettes/FinalFigureOrder/Figures/Figure3.tiff", g, height = 12, width = 18)
 ```
