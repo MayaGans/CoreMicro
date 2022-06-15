@@ -26,7 +26,7 @@ library(visNetwork)
 #library(CoreMiro)
 ```
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 hmbp_md<-read.csv("../data-raw/v35_map_uniquebyPSN.csv", sep = ",")
 rownames(hmbp_md)<-hmbp_md$X.SampleID
 hmbp_md$X.SampleID = NULL
@@ -39,7 +39,7 @@ hmpb_tax<-as.character(hmbp_otu$onsensus.Lineage)
 #export and split to meet structure for inclusinon in phyloseq object
 ```
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 commonalities<-intersect(names(hmbp_otu), rownames(hmbp_md))
 hmbp_otu_sub<-hmbp_otu[,names(hmbp_otu) %in% commonalities]
 hmbp_md_sub<-hmbp_md[rownames(hmbp_md) %in% commonalities,]
@@ -81,7 +81,7 @@ prop_rep_core<-(wide_human[wide_human$`Proportion of Sequence Replicates`==1,])$
 
 Adonis of full human microbiome stool dataset
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 md_a<-data.frame(sample_data(human))
 md_a$visitno<-as.factor(md_a$visitno)
 otu_a<-data.frame(otu_table(human))
@@ -95,7 +95,7 @@ adonis(otu_human_dist ~ visitno + sex + RUNCENTER, data=md_a)
 
 Core 4
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 otu_a_t<-data.frame(otu_a_t)
 human_core_4<- otu_a_t[,names(otu_a_t) %in% core_4]
 human_core_4<-data.matrix(human_core_4)
@@ -107,7 +107,7 @@ adonis(human_core_4_dist ~ visitno + sex + RUNCENTER, data=md_a)
 
 Prop Seq reads
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 otu_a_t<-data.frame(otu_a_t)
 human_prop_seq_reads_core<- otu_a_t[,names(otu_a_t) %in% prop_seq_reads_core]
 human_prop_seq_reads_core<-data.matrix(human_prop_seq_reads_core)
@@ -118,7 +118,7 @@ adonis(human_prop_seq_reads_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 ```
 
 Prop Read N Rep
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 otu_a_t<-data.frame(otu_a_t)
 human_prop_rnr_core<- otu_a_t[,names(otu_a_t) %in% prop_seq_readsnrep_core]
 human_prop_rnr_core<-data.matrix(human_prop_rnr_core)
@@ -129,7 +129,7 @@ adonis(human_prop_rnr_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 ```
 
 HC
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 otu_a_t<-data.frame(otu_a_t)
 human_HC_core<- otu_a_t[,names(otu_a_t) %in% HC_core]
 human_HC_core<-data.matrix(human_HC_core)
@@ -140,7 +140,7 @@ adonis(human_HC_core_dist ~ visitno + sex + RUNCENTER, data=md_a)
 ```
 
 Prop Rep
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 otu_a_t<-data.frame(otu_a_t)
 human_prop_rep_core<- otu_a_t[,names(otu_a_t) %in% prop_rep_core]
 human_prop_rep_core<-data.matrix(human_prop_rep_core)
