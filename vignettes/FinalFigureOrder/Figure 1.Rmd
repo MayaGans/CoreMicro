@@ -21,7 +21,7 @@ library(patchwork)
 
 Create Human OTU and Arab OTU objects
 ```{r}
-human<-readRDS(file = "../data/human_working_set.rda")
+human<-readRDS(file = "../../data/human_working_set.rda")
 
 #extract dataframe and  prep dataframe for Core assignments
 human_otu  <- data.frame(otu_table(human))
@@ -30,7 +30,7 @@ human_otu<-cbind(X, human_otu)
 
 
 #read in file
-arabidopsis_m21_r<-readRDS(file = "../data/arabidopsis_m21_r.rda")
+arabidopsis_m21_r<-readRDS(file = "../../data/arabidopsis_m21_r.rda")
 
 #extract dataframe and  prep dataframe for Core assignments
 arab_otu  <- data.frame(otu_table(arabidopsis_m21_r))
@@ -42,39 +42,53 @@ arab_otu<-cbind(X, arab_otu)
 # Figure 1 (6-8-22)
 
 ```{r, eval=FALSE}
+core_plots.core_methods  <- function(combined_otu_data,
+                                     low = "#EAE6f3",
+                                     high = "#432976",
+                                     legend_title = "Taxa Count") {
+
+    combined_otu_data %>%
+      ggplot() +
+      aes(x = log(.data$Mean), y = .data$CV, color = as.factor(.data$value)) +
+      geom_hex(bins = 30) +
+      scale_color_manual(values = c("lightgray", "black")) +
+      scale_fill_gradient(low = low, high = high) +
+      theme_bw() +
+      facet_grid(.~ .data$name) +
+      guides(color = FALSE) +
+      ylab("Coefficient of Variance") +
+      labs(fill = legend_title)
+
+}
+
+
+
 p2.1 <- core_methods(human_otu) %>%
-  core_plots(legend_title = "HMP Taxa Count") +
+  core_plots.core_methods(legend_title = "HMP Taxa Count") +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +                                                           
+  theme(strip.text.x = element_text(size = 14)) +
+  theme(axis.text=element_text(size=14)) + 
+  theme(axis.title=element_text(size=14)) + 
   theme(strip.text.x = element_text(size = 13)) 
 
+
 p2.2 <- core_methods(arab_otu) %>%
-  core_plots(high= "#1B301E", 
+  core_plots.core_methods(high= "#1B301E", 
              low = "#E1E4E1", 
              legend_title = "Arabidopsis Taxa Count")+                                                           
+  theme(strip.text.x = element_text(size = 14))+
+  theme(axis.text=element_text(size=14))+ 
+  theme(axis.title=element_text(size=14)) + 
+
   theme(strip.text.x = element_text(size = 13))
 
-figure2 <- p2.1 / p2.2 + patchwork::plot_annotation(tag_levels = "A")
+figure2 <- p2.1 / p2.2 #+ patchwork::plot_annotation(tag_levels = "A")
 
 ggsave("../FinalFigureOrder/Figures/Figure1.tiff", figure2,height = 10 ,width = 20)
 ```
 
 
-# Figure 3
 
-```{r, eval=FALSE}
-p3.1 <- arabidopsis %>% core_methods() %>% core_venn() + 
-  ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
-  theme(plot.title = element_text(size = 20, hjust = 0.5)) +
-  guides(fill = FALSE)
-
-p3.2 <- human_stool %>% core_methods() %>% core_venn() + 
-  ggtitle("Shared Core Membership of HMBP") +
-  theme(plot.title = element_text(size = 20, hjust = 0.5))
-
-figure3 <- p3.1 + p3.2
-
-ggsave("inst/figures/figure3.tiff", figure3, height = 16, width = 23)
-```
 

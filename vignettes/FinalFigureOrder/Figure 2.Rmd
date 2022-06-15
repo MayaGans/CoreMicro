@@ -1,0 +1,76 @@
+---
+title: "Figure 3"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Figure 3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
+library(patchwork)
+library(ggplot2)
+```
+
+
+# Figure 2 (6-8-22)
+
+```{r, eval=FALSE}
+core_venn.core_methods <- function(combined_taxa_data,
+                                   #doing this so I can remove the figures manually. 
+                                     category_names = c("a",
+                                                        "b",
+                                                        "c",
+                                                        "d"),
+                                     low = "white",
+                                     high = "#7E191B") {
+
+    temp <-
+      data.frame(combined_taxa_data) %>%
+      dplyr::filter(.data$value == 1) %>%
+      dplyr::select(.data$X, .data$name)
+
+    temp <- lapply(split(temp, temp$name), `[[`, "X")
+
+    suppressMessages(
+      suppressWarnings(
+        ggVennDiagram::ggVennDiagram(temp, category.names = category_names, set_size = 12, label_size = 10) +
+          ggplot2::scale_fill_gradient(low=low,high = high) +
+          scale_color_manual(values = rep("black", 4))
+      )
+    )
+
+}
+
+p3.1 <- arab_otu %>% CoreMicro::core_methods() %>% 
+    core_venn.core_methods(high= "#1B301E", low = "#E1E4E1") + 
+  ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
+  theme(plot.title = element_text(size = 20, hjust = 0.5))  +
+          scale_color_manual(values = rep("black", 4))  + guides(fill="none") + ggtitle("") + theme(plot.title = element_text(size = 30))
+
+
+
+
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2a.tiff", height = 8, width = 11)
+
+p3.2 <- human_otu %>% core_methods() %>% 
+ core_venn.core_methods(low = "#EAE6f3", high = "#432976") +
+  ggtitle("") +
+  theme(plot.title = element_text(size = 20, hjust = 0.5)) +
+          scale_color_manual(values = rep("black", 4)) + guides(fill="none")  + theme(plot.title = element_text(size = 30)) 
+
+
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2b.tiff", height = 8, width = 11)
+
+figure3 <- p3.2+ p3.1 #+ patchwork::plot_annotation(tag_levels = "A")#+ plot_layout(guides = "collect")
+
+ggsave("../FinalFigureOrder/Figures/Figure2.tiff", height = 9, width =22)
+```
