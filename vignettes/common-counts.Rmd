@@ -36,10 +36,10 @@ table(arab_core_df$name, arab_core_df$value)
 wide_arab<-pivot_wider(arab_core_df)
 table(rowSums(wide_arab[,5:8]))
 wide_arab$num_methods<-(rowSums(wide_arab[,5:8]))
-tables number assigned by each method
-table(wide_arab$`Proportion of Sequence Reads`)
+#tables number assigned by each method
+table(wide_arab$`Summation of Sequence Reads`)
 table(wide_arab$`Proportion of Sequence Reads and Replicates`)
-table(wide_arab$`Hard Cut Off`)
+table(wide_arab$`Hard Cutoff`)
 table(wide_arab$`Proportion of Sequence Replicates`)
 ```
 
@@ -69,8 +69,8 @@ rownames(otu_human_a)
 #HMBP
 
 ```{r, eval=FALSE}
-human_tib<-as_tibble(otu_human_a)
-human_core<-core_methods(human_stool, taxa_as_rows = T)
+#human_tib<-as_tibble(otu_human_a)
+human_core<-core_methods(human_otu, taxa_as_rows = T)
 human_core_df<- data.frame(human_core)
 table(human_core_df$name, human_core_df$value)
 ```
@@ -80,9 +80,9 @@ table(human_core_df$name, human_core_df$value)
 ```{r, eval=FALSE}
 wide_human<-pivot_wider(human_core_df)
 table(rowSums(wide_human[,5:8]))
-tables number assigned by each method
-table(wide_human$`Proportion of Sequence Reads`)
+#tables number assigned by each method
+table(wide_human$`Summation of Sequence Reads`)
 table(wide_human$`Proportion of Sequence Reads and Replicates`)
-table(wide_human$`Hard Cut Off`)
+table(wide_human$`Hard Cutoff`)
 table(wide_human$`Proportion of Sequence Replicates`)
 ```
