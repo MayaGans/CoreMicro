@@ -1,0 +1,109 @@
+---
+title: "Analysis and Plots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysis and Plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+library(CoreMicro)
+library(gt)
+library(tidyr)
+library(tidyverse)
+library(parallelDist)
+```
+
+Assign core status to combine dataframes for adonis and ordination. 
+
+### Hard Cutoff
+
+This method assigns taxa to the core if they are present in more than a pre-determined number of sites. The default threshhold is 25 counts in at least 5 sites, you can change these two parameters using the `cutoff` and `site` arguments
+
+```{r, eval=FALSE}
+hcT<-hard_cutoff(arabidopsis, cutoff = 25, sites = 5)
+
+arabidopsis_hcT <- arabidopsis[arabidopsis$X %in% hcT,]
+names(arabidopsis_hcT) <- paste(names(arabidopsis_hcT), "_hcT", sep = "")
+names(arabidopsis_hcT)[1] <- "X"
+```
+
+### Summation of Sequence Reads 
+
+This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the `nreads` argument
+
+```{r, eval=FALSE}
+psT<-sum_reads(arabidopsis, readn = 0.75)
+
+arabidopsis_psT <- arabidopsis[arabidopsis$X %in% psT,]
+names(arabidopsis_psT) <- paste(names(arabidopsis_psT), "_pst", sep = "")
+names(arabidopsis_psT)[1] <- "X"
+```
+
+### Proportion of Sequence Replicates
+
+This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:
+
+```{r, eval=FALSE}
+prT<-prop_reps(arabidopsis, prop_reps = 0.5)
+
+arabidopsis_prT <- arabidopsis[arabidopsis$X %in% prT,]
+names(arabidopsis_prT) <- paste(names(arabidopsis_prT), "_prt", sep = "")
+
+names(arabidopsis_prT)[1] <- "X"
+```
+
+### Proportion of Sequence Reads and Replicates
+
+This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.
+
+```{r, eval=FALSE}
+prrT<-prop_reads_and_reps(arabidopsis, prop_reps = 0.5, prop_reads = 0.0002)
+
+arabidopsis_prrT <- arabidopsis[arabidopsis$X %in% prrT,]
+names(arabidopsis_prrT) <- paste(names(arabidopsis_prrT), "_prrt", sep = "")
+names(arabidopsis_prrT)[1] <- "X"
+```
+
+combine 4 core datasets with full 
+```{r}
+
+names(arabidopsis) <- paste(names(arabidopsis), "_full", sep = "")
+names(arabidopsis)[1] <- "X"
+
+merged_datasets<-full_join(arabidopsis_prrT, arabidopsis_prT, by = "X") %>% full_join(arabidopsis_hcT) %>% full_join(arabidopsis_psT) %>% full_join(arabidopsis) 
+merged_datasets <- data.frame(merged_datasets)
+merged_datasets[is.na(merged_datasets)] <- 0
+
+rownames(merged_datasets)<-merged_datasets$X
+merged_datasets$X = NULL
+
+merged_datasets_matrix<-as.matrix(merged_datasets)
+
+
+
+merged_datasets_matrix_t <- t(merged_datasets_matrix)
+
+
+
+dist<-parDist(merged_datasets_matrix_t, method = "bray")
+
+sd <- data.frame(rownames(merged_datasets_matrix_t))
+rownames(sd) <- rownames(merged_datasets_matrix_t)
+sd$CoreMethods <- str_sub(rownames(sd), start= -4)
+unique(sd$CoreMethods)
+
+library(vegan)
+
+
+anova(betadisper(dist, sd$CoreMethods))
+adonis2(dist ~ CoreMethods, data = sd, permutations = 1000)
+
+ord <- metaMDS(dist, distance = "bray", k = 3, maxit = 999, trymax = 500,  wascores = TRUE)
+goodness(ord) 
+stressplot(ord)
+plot(ord)
+orditorp(ord, "sites") 
+```
+  
