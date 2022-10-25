@@ -84,9 +84,9 @@ p2.2 <- core_methods(arab_otu) %>%
 
   theme(strip.text.x = element_text(size = 13))
 
-figure2 <- p2.1 / p2.2 #+ patchwork::plot_annotation(tag_levels = "A")
+figure1 <- p2.1 / p2.2 #+ patchwork::plot_annotation(tag_levels = "A")
 
-ggsave("../FinalFigureOrder/Figures/Figure1.tiff", figure2,height = 10 ,width = 20)
+#ggsave("../FinalFigureOrder/Figures/Figure1.tiff", figure2,height = 10 ,width = 20)
 ```
 
 

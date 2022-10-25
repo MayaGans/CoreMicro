@@ -234,20 +234,24 @@ breaks <- c(-900, -400, 0, 25)
 
 tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))) +
   geom_tile(aes(fill = mean), colour = "white") +
-  facet_grid(error~method) +
-  theme(legend.text=element_text(size=2)) +
+  #facet_grid(rows = error ~ method) +
+  facet_wrap(~ method, ncol = 2) +
+  theme(legend.text=element_text(size=12)) +
   theme_minimal() +
   scale_fill_gradientn(colours = myPalette, breaks = breaks) +
-  geom_text(aes(label = round(tf$mean, digits = 2))) +
+  geom_text(aes(label = round(tf$mean, digits = 2)), size=8) +
   labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
        y = expression(paste(theta)),
        fill = "Mean Error") +
-  theme(strip.text.x = element_text(size = 0)) +
+   theme(strip.text.x = element_text(size = 24, face = "bold"))  +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP"))
 ```
 
 ```{r, eval=FALSE}
-g <- (tp_plot + fp_plot + tf_plot + plot_layout(ncol=1)) #+ plot_annotation(tag_levels = 'A'))
+g <- (tp_plot + fp_plot + plot_layout(ncol=1)) #+ plot_annotation(tag_levels = 'A'))
+g
+ggsave("../../vignettes/FinalFigureOrder/Figures/Supp_Figure1.tiff", g, height = 12, width = 18)
 
-ggsave("../../vignettes/FinalFigureOrder/Figures/Figure3.tiff", g, height = 12, width = 18)
+tf_plot
+ggsave("../../vignettes/FinalFigureOrder/Figures/Figure3.tiff", tf_plot, height = 12, width = 18)
 ```

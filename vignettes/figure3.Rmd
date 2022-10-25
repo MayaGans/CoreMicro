@@ -24,7 +24,7 @@ library(ggplot2)
 # Figure 2 (6-8-22)
 
 ```{r, eval=FALSE}
-p3.1 <- arab_otu %>% CoreMicro::core_methods() %>% 
+p3.1 <- arabidopsis %>% CoreMicro::core_methods() %>% 
     core_venn(high= "#1B301E", low = "#E1E4E1") + 
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
   theme(plot.title = element_text(size = 20, hjust = 0.5))  
@@ -32,11 +32,13 @@ p3.1 <- arab_otu %>% CoreMicro::core_methods() %>%
 
 ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2a.tiff", height = 8, width = 11)
 
-p3.2 <- human_otu %>% core_methods() %>% 
+names(human_stool)[1] <- "X"
+human_stool$X <- as.character(human_stool$X)
+
+p3.2 <- human_stool %>% core_methods() %>% 
  core_venn(low = "#EAE6f3", high = "#432976") +
   ggtitle("Shared Core Membership of HMBP") +
   theme(plot.title = element_text(size = 20, hjust = 0.5)) 
-
 
 ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2b.tiff", height = 8, width = 11)
 

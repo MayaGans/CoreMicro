@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+#read in file
+arabidopsis_m21_r<-readRDS(file = "../../data/arabidopsis_m21_r.rda")
+
+#extract dataframe and  prep dataframe for Core assignments
+arab_otu  <- data.frame(otu_table(arabidopsis_m21_r))
+X <- rownames(arab_otu)
+arab_otu<-cbind(X, arab_otu)
+```
+
+
+```{r}
+#Add abundance information for core assignments, e.g., % core vs % non-core reads.
+arab_otu$reads_per_taxa <- rowSums(arab_otu[,-1])
+#assign membership to core
+arab_assignments_SSR <- arab_otu %>% CoreMicro::core_methods() %>% as.data.frame() %>% dplyr::filter(name == "Summation of Sequence Reads") 
+#join
+arab_otu_joined_SSR <- full_join(arab_otu, arab_assignments_SSR) 
+
+arab_assignments_HC <- arab_otu %>% CoreMicro::core_methods() %>% as.data.frame() %>% dplyr::filter(name == "Hard Cutoff") 
+arab_otu_joined_HC <- full_join(arab_otu, arab_assignments_HC) 
+
+arab_assignments_PRep <- arab_otu %>% CoreMicro::core_methods() %>% as.data.frame() %>% dplyr::filter(name == "Proportion of Sequence Replicates") 
+arab_otu_joined_PRep <- full_join(arab_otu, arab_assignments_PRep) 
+
+arab_assignments_PRR <- arab_otu %>% CoreMicro::core_methods() %>% as.data.frame() %>% dplyr::filter(name == "Proportion of Sequence Reads and Replicates") 
+arab_otu_joined_PRR <- full_join(arab_otu, arab_assignments_PRR) 
+
+
+stacked<-rbind(arab_otu_joined_SSR, arab_otu_joined_HC, arab_otu_joined_PRep, arab_otu_joined_PRR)
+
+
+
+arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Percent of total reads") + xlab("Core assignment method") +  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 15)) + scale_fill_discrete(labels=c('non-core', 'core')) + scale_fill_discrete(name = "Core membership") + theme_classic()
+#%>%
+
+```
