@@ -134,9 +134,9 @@ human_assignments_PRR <- human_otu %>% CoreMicro::core_methods() %>% as.data.fra
 human_otu_joined_PRR <- full_join(human_otu, human_assignments_PRR) 
 
 
-stacked<-rbind(human_otu_joined_SSR, human_otu_joined_HC, human_otu_joined_PRep, human_otu_joined_PRR)
+stackedh<-rbind(human_otu_joined_SSR, human_otu_joined_HC, human_otu_joined_PRep, human_otu_joined_PRR)
 
-human_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Percent of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+human_abund_core_plot<-stackedh %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Percent of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 #%>%
 ```
 

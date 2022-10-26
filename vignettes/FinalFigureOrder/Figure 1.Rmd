@@ -54,7 +54,7 @@ core_plots.core_methods  <- function(combined_otu_data,
       scale_color_manual(values = c("lightgray", "black")) +
       scale_fill_gradient(low = low, high = high) +
       theme_bw() +
-      facet_grid(.~ .data$name) +
+      facet_grid(.~ .data$name, labeller = label_wrap_gen(multi_line = TRUE)) +
       guides(color = FALSE) +
       ylab("Coefficient of Variance") +
       labs(fill = legend_title)
@@ -62,31 +62,27 @@ core_plots.core_methods  <- function(combined_otu_data,
 }
 
 
-
 p2.1 <- core_methods(human_otu) %>%
   core_plots.core_methods(legend_title = "HMP Taxa Count") +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +                                                           
-  theme(strip.text.x = element_text(size = 14)) +
-  theme(axis.text=element_text(size=14)) + 
-  theme(axis.title=element_text(size=14)) + 
-  theme(strip.text.x = element_text(size = 13)) 
+  theme(axis.text=element_text(size=20)) + 
+  theme(axis.title=element_text(size=20)) + 
+  theme(strip.text.x = element_text(size = 20))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 
 
 p2.2 <- core_methods(arab_otu) %>%
   core_plots.core_methods(high= "#1B301E", 
              low = "#E1E4E1", 
              legend_title = "Arabidopsis Taxa Count")+                                                           
-  theme(strip.text.x = element_text(size = 14))+
-  theme(axis.text=element_text(size=14))+ 
-  theme(axis.title=element_text(size=14)) + 
-
-  theme(strip.text.x = element_text(size = 13))
+  theme(axis.text=element_text(size=20))+ 
+  theme(axis.title=element_text(size=20)) + 
+  theme(strip.text.x = element_text(size = 20)) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 
 figure1 <- p2.1 / p2.2 #+ patchwork::plot_annotation(tag_levels = "A")
 
-#ggsave("../FinalFigureOrder/Figures/Figure1.tiff", figure2,height = 10 ,width = 20)
+ggsave("../FinalFigureOrder/Figures/Figure1.tiff", figure1,height = 10 ,width = 20)
 ```
 
 

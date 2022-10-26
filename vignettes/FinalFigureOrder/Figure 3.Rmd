@@ -189,11 +189,11 @@ tp <- sim.df_all %>%
 
 tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))) +
   geom_tile(aes(fill = mean), colour = "white") +
-  facet_grid(error~method) +
+  facet_grid(error~method, labeller = label_wrap_gen(multi_line = TRUE)) +
   theme(legend.text=element_text(size=2)) +
   theme_minimal() +
   scale_fill_gradientn(colours = myPalette2, values = scales::rescale(c(-1000, -500, -25,0, 100, 500, 1000))) +
-  geom_text(aes(label = round(mean, digits = 2))) +
+  geom_text(aes(label = round(mean, digits = 2)), size = 8) +
   labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
        y = expression(paste(theta)),
        fill = "Mean Error") +
@@ -201,7 +201,9 @@ tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
-  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nTrue Positives"))
+  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nTrue Positives"))+
+   theme(strip.text.x = element_text(size = 20))  +
+  theme(text = element_text(size = 20)) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
 
 ```{r, eval=FALSE}
@@ -210,11 +212,11 @@ fp <- sim.df_all %>%
 
 fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))) +
   geom_tile(aes(fill = mean), colour = "white") +
-  facet_grid(error~method) +
+  facet_grid(error~method, labeller = label_wrap_gen(multi_line = TRUE)) +
   theme(legend.text=element_text(size=2)) +
   theme_minimal() +
   scale_fill_gradientn(colours = myPalette2, values = scales::rescale(c(1000, 500, 25,0, -100, -500, -1000))) +
-  geom_text(aes(label = round(fp$mean, digits = 2))) +
+  geom_text(aes(label = round(fp$mean, digits = 2)), size = 8) +
   labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
        y = expression(paste(theta)),
        fill = "Mean Error") +
@@ -222,7 +224,7 @@ fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
-  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nFalse Positives"))
+  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nFalse Positives")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
 
 
@@ -243,8 +245,8 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
        y = expression(paste(theta)),
        fill = "Mean Error") +
-   theme(strip.text.x = element_text(size = 24, face = "bold"))  +
-  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP"))
+   theme(strip.text.x = element_text(size = 24))  +
+  theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
 
 ```{r, eval=FALSE}
