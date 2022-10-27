@@ -194,12 +194,11 @@ tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme_minimal() +
   scale_fill_gradientn(colours = myPalette2, values = scales::rescale(c(-1000, -500, -25,0, 100, 500, 1000))) +
   geom_text(aes(label = round(mean, digits = 2)), size = 8) +
-  labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
-       y = expression(paste(theta)),
+   labs(x = expression(paste("Ratio of core:non-core abundance", " (", pi, " core / ", pi, " non-core)" )),
+       y = expression(paste("Variance (", theta, ")")),
        fill = "Mean Error") +
   theme(strip.text.x = element_text(size = 12)) +
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
+  theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nTrue Positives"))+
    theme(strip.text.x = element_text(size = 20))  +
@@ -217,12 +216,11 @@ fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme_minimal() +
   scale_fill_gradientn(colours = myPalette2, values = scales::rescale(c(1000, 500, 25,0, -100, -500, -1000))) +
   geom_text(aes(label = round(fp$mean, digits = 2)), size = 8) +
-  labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
-       y = expression(paste(theta)),
+   labs(x = expression(paste("Ratio of core:non-core abundance", " (", pi, " core / ", pi, " non-core)" )),
+       y = expression(paste("Variance (", theta, ")")),
        fill = "Mean Error") +
   theme(strip.text.x = element_text(size = 0)) +
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
+  theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nFalse Positives")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
@@ -240,10 +238,11 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   facet_wrap(~ method, ncol = 2) +
   theme(legend.text=element_text(size=12)) +
   theme_minimal() +
+ theme(axis.title = element_text(size = 28)) +
   scale_fill_gradientn(colours = myPalette, breaks = breaks) +
   geom_text(aes(label = round(tf$mean, digits = 2)), size=8) +
-  labs(x = expression(paste("(", pi, " core / ", pi, " non-core)")),
-       y = expression(paste(theta)),
+  labs(x = expression(paste("Ratio of core:non-core abundance", " (", pi, " core / ", pi, " non-core)" )),
+       y = expression(paste("Variance (", theta, ")")),
        fill = "Mean Error") +
    theme(strip.text.x = element_text(size = 24))  +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
