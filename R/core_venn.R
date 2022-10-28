@@ -69,7 +69,7 @@ core_venn.core_methods <- function(combined_taxa_data,
 
     suppressMessages(
       suppressWarnings(
-        ggVennDiagram::ggVennDiagram(temp, category.names = category_names, set_size = 12) +
+        ggVennDiagram::ggVennDiagram(temp, category.names = category_names, set_size = 12, label_size = 10) +
           ggplot2::scale_fill_gradient(low=low,high = high) +
           scale_color_manual(values = rep("black", 4))
       )

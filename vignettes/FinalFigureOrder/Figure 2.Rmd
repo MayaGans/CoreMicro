@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 library(CoreMicro)
 library(patchwork)
 library(ggplot2)
+library(tidyverse)
+library(phyloseq)
 ```
 
 
@@ -45,7 +47,7 @@ arab_otu<-cbind(X, arab_otu)
 
 # Figure 2 (6-8-22)
 
-```{r, eval=FALSE}
+```{#r, eval=FALSE}
 core_venn.core_methods <- function(combined_taxa_data,
                                    #doing this so I can remove the figures manually. 
                                      category_names = c("a",
@@ -76,7 +78,7 @@ core_venn.core_methods <- function(combined_taxa_data,
 
 ```{r}
 arab_venn <- arab_otu %>% CoreMicro::core_methods() %>% 
-    core_venn.core_methods(high= "#1B301E", low = "#E1E4E1") + 
+    CoreMicro::core_venn(high= "#1B301E", low = "#E1E4E1") + 
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
   theme(plot.title = element_text(size = 20, hjust = 0.5))  +
           scale_color_manual(values = rep("black", 4))  + guides(fill="none") + ggtitle("") + theme(plot.title = element_text(size = 30))
@@ -111,7 +113,7 @@ arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>%
 ```{r}
 
 human_venn <- human_otu %>% core_methods() %>% 
- core_venn.core_methods(low = "#EAE6f3", high = "#432976") +
+ core_venn(low = "#EAE6f3", high = "#432976") +
   ggtitle("") +
   theme(plot.title = element_text(size = 20, hjust = 0.5)) +
           scale_color_manual(values = rep("black", 4)) + guides(fill="none")  + theme(plot.title = element_text(size = 30)) 
