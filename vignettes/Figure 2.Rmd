@@ -47,7 +47,7 @@ arab_otu<-cbind(X, arab_otu)
 
 # Figure 2 (6-8-22)
 
-```{#r, eval=FALSE}
+```{r, eval=FALSE}
 core_venn.core_methods <- function(combined_taxa_data,
                                    #doing this so I can remove the figures manually. 
                                      category_names = c("a",
@@ -77,8 +77,11 @@ core_venn.core_methods <- function(combined_taxa_data,
 
 
 ```{r}
-arab_venn <- arab_otu %>% CoreMicro::core_methods() %>% 
-    CoreMicro::core_venn(high= "#1B301E", low = "#E1E4E1") + 
+
+arab_otu2<-arab_otu
+
+arab_venn <- arab_otu2 %>% core_methods() %>% 
+    core_venn.core_methods(high= "#1B301E", low = "#E1E4E1") + 
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
   theme(plot.title = element_text(size = 20, hjust = 0.5))  +
           scale_color_manual(values = rep("black", 4))  + guides(fill="none") + ggtitle("") + theme(plot.title = element_text(size = 30))
@@ -103,7 +106,7 @@ arab_otu_joined_PRR <- full_join(arab_otu, arab_assignments_PRR)
 
 stacked<-rbind(arab_otu_joined_SSR, arab_otu_joined_HC, arab_otu_joined_PRep, arab_otu_joined_PRR)
 
-arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Percent of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Proportion of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 #%>%
 #%>%
 
@@ -111,9 +114,10 @@ arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>%
 
 
 ```{r}
+human_otu2 <- human_otu
 
 human_venn <- human_otu %>% core_methods() %>% 
- core_venn(low = "#EAE6f3", high = "#432976") +
+ core_venn.core_methods(low = "#EAE6f3", high = "#432976") +
   ggtitle("") +
   theme(plot.title = element_text(size = 20, hjust = 0.5)) +
           scale_color_manual(values = rep("black", 4)) + guides(fill="none")  + theme(plot.title = element_text(size = 30)) 
@@ -138,7 +142,7 @@ human_otu_joined_PRR <- full_join(human_otu, human_assignments_PRR)
 
 stackedh<-rbind(human_otu_joined_SSR, human_otu_joined_HC, human_otu_joined_PRep, human_otu_joined_PRR)
 
-human_abund_core_plot<-stackedh %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Percent of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+human_abund_core_plot <- stackedh %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Proportion of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 14)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 #%>%
 ```
 
@@ -147,11 +151,9 @@ human_abund_core_plot<-stackedh %>% dplyr::select(reads_per_taxa, value, name) %
 
 #ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2b.tiff", height = 8, width = 11)
 
-figure2 <- human_venn + arab_venn #+ patchwork::plot_annotation(tag_levels = "A")#+ plot_layout(guides = "collect")
+figure2 <- human_venn + arab_venn2 #+ patchwork::plot_annotation(tag_levels = "A")#+ plot_layout(guides = "collect")
 ggsave("../FinalFigureOrder/Figures/Figure2a.tiff", height = 9, width =22)
 figure2a <- human_abund_core_plot + arab_abund_core_plot + plot_layout(guides = "collect")
 ggsave("../FinalFigureOrder/Figures/Figure2b.tiff", height = 9, width =22)
-
-
 
 ```
