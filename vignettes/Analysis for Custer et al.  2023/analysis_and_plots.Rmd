@@ -1,0 +1,109 @@
+---
+title: "Analysis and Plots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysis and Plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+library(CoreMicro)
+library(gt)
+library(tidyr)
+```
+
+# Introduction
+
+We include two datasets with the package. One of which is the Arabidopsis dataset derived from Lundberg et al. 2012. The dataset included is a subset of the entire core <i>Arabidopsis thaliana</i> root microbiome dataset. We utilized only the rhizosphere samples from the M21 site.
+
+```{r, results='hide'}
+arabidopsis
+```
+
+# Data Structure
+
+By default {coremicro} assumes your data is in a wide format:
+
+```{r, echo=FALSE, warning=FALSE}
+tibble(
+  X = c("OTU_1", "OTU_2", "OTU_3"),
+  site_1 = c(0,10,20),
+  site_2 = c(20,1,20)
+) %>% gt()
+```
+
+Where the first column is your taxa names, and all subsequent columns are numeric containing your taxa counts. If your data is in long format you can set `taxa_as_rows = FALSE`
+
+# Mean, Variance, Covariance
+
+The `summarize_taxa` function can be used to calculate the mean `Mean`, variance `Variance`, and coefficient of variance `CV`, for each taxa in the dataset:
+
+```{r}
+summarise_taxa(arabidopsis)
+```
+
+# Single Methods
+
+We can use the built in `arabidopsis` dataset to look at each of the core methods included in the package thusfar:
+
+### Hard Cutoff
+
+This method assigns taxa to the core if they are present in more than a pre-determined number of sites. The default threshhold is 25 counts in at least 5 sites, you can change these two parameters using the `cutoff` and `site` arguments
+
+```{r, eval=FALSE}
+hard_cutoff(arabidopsis, cutoff = 25, sites = 5)
+```
+
+### Summation of Sequence Reads 
+
+This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the `nreads` argument
+
+```{r, eval=FALSE}
+sum_reads(arabidopsis, nreads = 0.75)
+```
+
+### Proportion of Sequence Replicates
+
+This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:
+
+```{r, eval=FALSE}
+prop_reps(arabidopsis, prop_reps = 0.5)
+```
+
+### Proportion of Sequence Reads and Replicates
+
+This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.
+
+```{r, eval=FALSE}
+prop_reads_and_reps(arabidopsis, prop_reps = 0.5, prop_reads = 0.0002)
+```
+
+<strong>We encourage collaboration -- please submit a PR or issue if you'd like to see more methods included in the package!</strong>
+
+# All Methods
+
+Rather than look at each method in isolation, we can use the main function of the package: `combine_methods`. This function prints your taxa table and a `logical` column for each method if that taxa is included in the column's method. It also adds the class `core_methods` to your dataset so it can be used in subsequent plotting:
+
+```{r}
+(
+combine_arab <- core_methods(arabidopsis)
+)
+```
+
+
+# Plot
+
+## Histo-bins
+
+This function takes on the output of `core_methods`. This plot is a hex bin plot to visually inspect the taxa that each method includes and the number of counts for each of those taxa. The function has one neccessary argument, `combined_otu_data`, but you can include the low and high colors for hex fills as well as a more informative legend title: 
+
+```{r, fig.width=9, fig.height=3}
+core_plots(combine_arab, high= "#1B301E", low = "#E1E4E1", legend_title = "Arabidopsis Taxa Count")
+```
+
+## Venn Diagram
+
+```{r}
+combine_arab %>% core_venn()
+```

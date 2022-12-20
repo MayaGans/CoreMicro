@@ -1,0 +1,96 @@
+---
+title: "Common Counts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Common Counts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
+```
+
+
+```{r}
+#read in file
+arabidopsis_m21_r<-readRDS(file = "../../CoreMicro/data/arabidopsis_m21_r.rda")
+
+#extract dataframe and  prep dataframe for Core assignments
+arab_otu  <- data.frame(otu_table(arabidopsis_m21_r))
+X <- rownames(arab_otu)
+arab_otu<-cbind(X, arab_otu)
+```
+
+
+#arabidopsis
+
+```{r eval=FALSE}
+arab_core<-core_methods(arab_otu)
+arab_core_df<- data.frame(arab_core)
+table(arab_core_df$name, arab_core_df$value)
+```
+
+# Create table all taxa that are never assigned.
+```{r, eval=FALSE}
+wide_arab<-pivot_wider(arab_core_df)
+table(rowSums(wide_arab[,5:8]))
+wide_arab$num_methods<-(rowSums(wide_arab[,5:8]))
+#tables number assigned by each method
+table(wide_arab$`Summation of Sequence Reads`)
+table(wide_arab$`Proportion of Sequence Reads and Replicates`)
+table(wide_arab$`Hard Cutoff`)
+table(wide_arab$`Proportion of Sequence Replicates`)
+```
+
+#pull out those common taxa found by all
+```{r, eval=FALSE}
+(wide_arab[wide_arab$num_methods==4,])$X
+#pull out those taxa included by each method
+prop_seq_reads_core<-(wide_arab[wide_arab$`Summation of Sequence Reads`==1,])$X
+```
+
+```{r, eval=FALSE}
+prop_seq_readsnrep_core<-(wide_arab[wide_arab$`Proportion of Sequence Reads and Replicates`==1,])$X
+
+HC_core<-(wide_arab[wide_arab$`Hard Cutoff`==1,])$X
+
+prop_rep_core<-(wide_arab[wide_arab$`Proportion of Sequence Replicates`==1,])$X
+```
+
+```{r, eval=FALSE}
+human<-readRDS(file = "../../CoreMicro/data/human_working_set.rda")
+
+#extract dataframe and  prep dataframe for Core assignments
+human_otu  <- data.frame(otu_table(human))
+X <- rownames(human_otu)
+human_otu<-cbind(X, human_otu)
+```
+
+#HMBP
+
+```{r, eval=FALSE}
+#human_tib<-as_tibble(otu_human_a)
+human_core<-core_methods(human_otu, taxa_as_rows = T)
+human_core_df<- data.frame(human_core)
+table(human_core_df$name, human_core_df$value)
+```
+
+# Create table all taxa that are never assigned.
+
+```{r, eval=FALSE}
+wide_human<-pivot_wider(human_core_df)
+table(rowSums(wide_human[,5:8]))
+#tables number assigned by each method
+table(wide_human$`Summation of Sequence Reads`)
+table(wide_human$`Proportion of Sequence Reads and Replicates`)
+table(wide_human$`Hard Cutoff`)
+table(wide_human$`Proportion of Sequence Replicates`)
+```

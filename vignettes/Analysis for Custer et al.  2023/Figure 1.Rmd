@@ -1,0 +1,119 @@
+---
+title: "Figure 1"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Figure 1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE}
+library(CoreMicro)
+library(patchwork)
+library(phyloseq)
+library(ggplot2)
+```
+
+Create Human OTU and Arab OTU objects
+```{r}
+human<-readRDS(file = "../../data/human_working_set.rda")
+
+#extract dataframe and  prep dataframe for Core assignments
+human_otu  <- data.frame(otu_table(human))
+X <- rownames(human_otu)
+human_otu<-cbind(X, human_otu)
+
+
+#read in file
+arabidopsis_m21_r<-readRDS(file = "../../data/arabidopsis_m21_r.rda")
+
+#extract dataframe and  prep dataframe for Core assignments
+arab_otu  <- data.frame(otu_table(arabidopsis_m21_r))
+X <- rownames(arab_otu)
+arab_otu<-cbind(X, arab_otu)
+```
+
+
+# Figure 1 (6-8-22)
+
+```{r, eval=FALSE}
+core_plots.core_methods  <- function(combined_otu_data,
+                                     low = "#EAE6f3",
+                                     high = "#432976",
+                                     legend_title = "Taxa Count") {
+
+    combined_otu_data %>%
+      ggplot() +
+      aes(x = log(.data$Mean), y = .data$CV, color = as.factor(.data$value)) +
+      geom_hex(bins = 30) +
+      scale_color_manual(values = c("lightgray", "black")) +
+      scale_fill_gradient(low = low, high = high) +
+      theme_bw() +
+      facet_grid(.~ .data$name, labeller = label_wrap_gen(multi_line = TRUE)) +
+      guides(color = FALSE) +
+      ylab("Coefficient of Variance") +
+      labs(fill = legend_title)
+
+}
+
+
+
+dat <- core_methods(human_otu)
+
+#dat$name<-recode_factor(dat$name, Abundance = "Summation of Sequence Reads ", 
+ #                               `Abundance and Occupancy` = "Proportion of Sequence Reads and Replicates ",
+  #                              Occupancy = "Proportion of Sequence Replicates ",
+   #                             `Hard Cutoffs` = "Hard Cutoff ")
+
+levels(dat$name)[1] <- 'Abundance'
+levels(dat$name)[2] <- 'Occupancy'
+levels(dat$name)[3] <- 'Abundance and Occupancy'
+levels(dat$name)[4] <- 'Hard Cutoffs'
+
+p1.1 <-core_plots.core_methods(dat, legend_title = "HMP Taxa Count")  +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +                                                           
+  theme(axis.text=element_text(size=20)) + 
+  theme(axis.title=element_text(size=20)) + 
+  theme(strip.text.x = element_text(size = 20))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+
+
+
+  
+  dat <- core_methods(arab_otu)
+
+#dat$name<-recode_factor(dat$name, Abundance = "Summation of Sequence Reads ", 
+ #                               `Abundance and Occupancy` = "Proportion of Sequence Reads and Replicates ",
+  #                              Occupancy = "Proportion of Sequence Replicates ",
+   #                             `Hard Cutoffs` = "Hard Cutoff ")
+
+levels(dat$name)[1] <- 'Abundance'
+levels(dat$name)[2] <- 'Occupancy'
+levels(dat$name)[3] <- 'Abundance and Occupancy'
+levels(dat$name)[4] <- 'Hard Cutoffs'
+
+ p1.2 <-  core_plots.core_methods(dat, high= "#1B301E", 
+             low = "#E1E4E1", 
+             legend_title = "Arabidopsis Taxa Count")+                                                           
+  theme(axis.text=element_text(size=20))+ 
+  theme(axis.title=element_text(size=20)) + 
+  theme(strip.text.x = element_text(size = 20)) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))   
+
+figure1 <- p1.1 / p1.2 #+ patchwork::plot_annotation(tag_levels = "A")
+
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure1.tiff", figure1,height = 10 ,width = 20)
+
+ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure1.eps", figure1,height = 10 ,width = 20)
+```
+
+
+
+
