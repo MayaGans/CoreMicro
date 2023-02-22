@@ -1,4 +1,4 @@
-arab_md<-read.csv("./data-raw/Lundberg454_MetadataF.csv")
+arab_md<-read.csv("https://zenodo.org/record/4909346/files/Lundberg454_MetadataF.csv?download=1")
 rownames(arab_md) <- arab_md$Sample
 arab_md$Sample = NULL
 

@@ -1,10 +1,13 @@
 
-hmbp_md<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/Core_community/November2020/Data_for_additional_analyses/old/v35_map_uniquebyPSN.csv")
+hmbp_md<-read.csv("https://zenodo.org/record/4909346/files/v35_map_uniquebyPSN.txt?download=1", sep = "\t")
 rownames(hmbp_md)<-hmbp_md$X.SampleID
 hmbp_md$X.SampleID = NULL
 
-hmbp_otu<-read.csv("/Users/gordoncuster/Desktop/Manuscript Submissions/Core_community/November2020/Data_for_additional_analyses/old/otu_table_psn_v35_2.csv", sep = "\t")
-#end long so it grabs everything
+temp <- tempfile()
+download.file("https://zenodo.org/record/4909346/files/otu_table_psn_v35.txt.zip?download=1",temp)
+hmbp_otu <- read.delim(unz(temp, "otu_table_psn_v35.txt"))
+unlink(temp)
+
 names(hmbp_otu)<-substr(names(hmbp_otu), start = 2, stop = 20)
 rownames(hmbp_otu)<-hmbp_otu$.OTU_ID
 hmbp_otu$.OTU_ID = NULL
