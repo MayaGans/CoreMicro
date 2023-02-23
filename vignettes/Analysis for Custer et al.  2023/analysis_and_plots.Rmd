@@ -60,7 +60,7 @@ hard_cutoff(arabidopsis, cutoff = 25, sites = 5)
 This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the `nreads` argument
 
 ```{r, eval=FALSE}
-sum_reads(arabidopsis, nreads = 0.75)
+abundance_core(arabidopsis, nreads = 0.75)
 ```
 
 ### Proportion of Sequence Replicates
@@ -68,7 +68,7 @@ sum_reads(arabidopsis, nreads = 0.75)
 This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:
 
 ```{r, eval=FALSE}
-prop_reps(arabidopsis, prop_reps = 0.5)
+occupancy_core(arabidopsis, prop_rep =  0.5)
 ```
 
 ### Proportion of Sequence Reads and Replicates
@@ -76,7 +76,7 @@ prop_reps(arabidopsis, prop_reps = 0.5)
 This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.
 
 ```{r, eval=FALSE}
-prop_reads_and_reps(arabidopsis, prop_reps = 0.5, prop_reads = 0.0002)
+abundance_and_occupancy_core(arabidopsis, prop_rep =  0.5, prop_reads = 0.0002)
 ```
 
 <strong>We encourage collaboration -- please submit a PR or issue if you'd like to see more methods included in the package!</strong>

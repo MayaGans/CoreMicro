@@ -1,5 +1,5 @@
 ---
-title: "Figure 1"
+title: "Figure 3"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Figure 1}
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, eval=FALSE}
+```{r}
 library(CoreMicro)
 library(MCMCpack)
 library(tidyverse)
@@ -26,7 +26,7 @@ library(patchwork)
 
 
 # set the structure of our simlulated taxa table
-```{r, eval=FALSE}
+```{r}
 
 ntaxa<-1000
 ncore<-25
@@ -143,7 +143,7 @@ for(trt in 1:(nrow(sim.df))){
 ```
 
 
-```{r, eval=FALSE}
+```{r}
 myPalette <- c("#800000", "#A04040", "#DFBFBF", "#ffffff", "#0b45a3")
 myPalette2 <- c("#ffffff", "#C2D1E8", "#678BC6", "#0b45a3")
 myPalette3 <- c("#ffffff", "#C2D1E8")
@@ -155,7 +155,7 @@ FP were equally valuable.
 With this we just look at the differencea and make no
 assumiption of the value. 
 
-```{r, eval=FALSE}
+```{r}
 sim.df$HardCut_ratio <- sim.df$HardCut_TP_num - sim.df$HardCut_FP_num
 sim.df$PropRead_ratio <- sim.df$PropRead_TP_num - sim.df$PropRead_FP_num
 sim.df$PropReps_ratio <- sim.df$PropReps_TP_num - sim.df$PropReps_FP_num
@@ -183,7 +183,7 @@ sim.df_all <- sim.df %>%
   )
 ```
 
-```{r, eval=FALSE}
+```{r}
 tp <- sim.df_all %>%
   filter(sim.df_all$error == "True Positive")
 
@@ -210,7 +210,7 @@ tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme(text = element_text(size = 20)) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
 
-```{r, eval=FALSE}
+```{r}
 fp <- sim.df_all %>%
   filter(sim.df_all$error == "False Positive")
 
@@ -234,7 +234,7 @@ fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
 ```
 
 
-```{r, eval=FALSE}
+```{r}
 tf <- sim.df_all %>%
   filter(sim.df_all$error == "TP-FP")
 
@@ -262,21 +262,10 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
 ```
 
-```{r, eval=FALSE}
+```{r}
 g <- (tp_plot + fp_plot + plot_layout(ncol=1)) #+ plot_annotation(tag_levels = 'A'))
 g
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Supp_Figure1combined.eps", height = 12, width = 18)
-
 tp_plot
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Supp_Figure1a.eps", height = 12, width = 18)
 fp_plot
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Supp_Figure1b.eps", height = 12, width = 18)
-
-
 tf_plot
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure3.tiff", height = 12, width = 18)
-
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure3.pdf", height = 12, width = 18)
-
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure3.eps", height = 12, width = 18)
 ```

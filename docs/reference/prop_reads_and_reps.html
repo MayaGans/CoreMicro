@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Proportion of Reads and Replicates: — prop_reads_and_reps • CoreMicro</title>
+<title>Proportion of Reads and Replicates: — abundance_and_occupancy_core • CoreMicro</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Proportion of Reads and Replicates: — prop_reads_and_reps" />
+<meta property="og:title" content="Proportion of Reads and Replicates: — abundance_and_occupancy_core" />
 <meta property="og:description" content="This method assigns taxa to the core
 if they account for some proportion of the total reads for the sequencing run
 and if they are present in at least x
@@ -153,8 +153,8 @@ for the entire otu table and be present in at least 50" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Proportion of Reads and Replicates:</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MayaGans/CoreMicro/blob/master/R/prop_reads_and_reps.R'><code>R/prop_reads_and_reps.R</code></a></small>
-    <div class="hidden name"><code>prop_reads_and_reps.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/MayaGans/CoreMicro/blob/master/R/abundance_and_occupancy_core.R'><code>R/abundance_and_occupancy_core.R</code></a></small>
+    <div class="hidden name"><code>abundance_and_occupancy_core.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -165,9 +165,9 @@ and if they are present in at least x<!-- % of the total number of replicates. -
 for the entire otu table and be present in at least 50<!-- % of sites. --></p>
     </div>
 
-    <pre class="usage"><span class='fu'>prop_reads_and_reps</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>abundance_and_occupancy_core</span><span class='op'>(</span>
   <span class='va'>otu_table</span>,
-  prop_reps <span class='op'>=</span> <span class='fl'>0.5</span>,
+  occupancy_core <span class='op'>=</span> <span class='fl'>0.5</span>,
   prop_reads <span class='op'>=</span> <span class='fl'>2e-04</span>,
   taxa_as_rows <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -180,7 +180,7 @@ for the entire otu table and be present in at least 50<!-- % of sites. --></p>
       <td><p>a dataframe of OTUs where the first row is the OTU ID and column names refer to sites</p></td>
     </tr>
     <tr>
-      <th>prop_reps</th>
+      <th>occupancy_core</th>
       <td><p>percentage of replicates</p></td>
     </tr>
     <tr>
@@ -200,7 +200,7 @@ if <code>FALSE</code> data will be transposed for downstream analysis.</p></td>
     <p>the names of OTUs which meet the proportion of reads and replicate criteria</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>prop_reads_and_reps</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>abundance_and_occupancy_core</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   [1] "OTU_14834" "OTU_18567" "OTU_14402" "OTU_14822" "OTU_16757" "OTU_15154"
 #&gt;   [7] "OTU_7054"  "OTU_1196"  "OTU_18954" "OTU_14839" "OTU_13797" "OTU_11245"
 #&gt;  [13] "OTU_19706" "OTU_19511" "OTU_19108" "OTU_4555"  "OTU_19383" "OTU_18240"

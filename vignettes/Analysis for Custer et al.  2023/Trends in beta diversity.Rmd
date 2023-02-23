@@ -183,9 +183,9 @@ core_network_commanlity_core4<-full_human_node_w_num_edges[names(full_human_node
 #Prop_Reads
 core_network_non_common_prop_reads<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
 core_network_commanlity_prop_reads<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_seq_reads_core, human_node_list)]
-#Prop_Reps
-core_network_non_common_prop_reps<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
-core_network_commanlity_prop_reps<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
+#occupancy_core
+core_network_non_common_occupancy_core<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
+core_network_commanlity_occupancy_core<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_rep_core, human_node_list)]
 #PropRnR
 core_network_non_common_PropRnR<-full_human_node_w_num_edges[!names(full_human_node_w_num_edges) %in% intersect(prop_seq_readsnrep_core, human_node_list)]
 core_network_commanlity_Prop_RnR<-full_human_node_w_num_edges[names(full_human_node_w_num_edges) %in% intersect(prop_seq_readsnrep_core, human_node_list)]
