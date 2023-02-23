@@ -25,9 +25,6 @@ if they account for some proportion of the total reads for the sequencing run
 and if they are present in at least x% of the total number of replicates.
 In this example, a core taxa must account for 0.01% of the total reads
 for the entire otu table and be present in at least 50% of sites.
-
-According to the mansucript it should be 0.5 x total reps.
-I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.
 }
 \examples{
 prop_reps(arabidopsis)
