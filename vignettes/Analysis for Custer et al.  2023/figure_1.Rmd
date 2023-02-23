@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+Load packages
 ```{r setup}
 library(CoreMicro)
 library(patchwork)
@@ -22,7 +23,7 @@ library(ggplot2)
 library(tidyverse)
 ```
 
-Create Human OTU and Arab OTU objects
+Create Human OTU and Arab OTU objects from data included in package
 ```{r}
 human_stool<-CoreMicro::human_stool
 names(human_stool)[1] <- "X"
@@ -35,8 +36,9 @@ names(arabidopsis_rhizo)[1] <- "X"
 arab_otu <- arabidopsis_rhizo
 ```
 
-# Figure 1 (6-8-22)
+# Figure 1
 
+Define core_plots.core_methods function for plotting figure
 ```{r, fig.height=3, fig.width=7}
 core_plots.core_methods  <- function(combined_otu_data,
                                      low = "#EAE6f3",
@@ -56,15 +58,11 @@ core_plots.core_methods  <- function(combined_otu_data,
       labs(fill = legend_title)
 
 }
+```
 
-
-
+Create panels of figure 1 for both datasets
+```{r}
 dat <- CoreMicro::core_methods(human_otu)
-
-#dat$name<-recode_factor(dat$name, Abundance = "Summation of Sequence Reads ", 
- #                               `Abundance and Occupancy` = "Proportion of Sequence Reads and Replicates ",
-  #                              Occupancy = "Proportion of Sequence Replicates ",
-   #                             `Hard Cutoffs` = "Hard Cutoff ")
 
 levels(dat$name)[1] <- 'Abundance'
 levels(dat$name)[2] <- 'Occupancy'
@@ -83,11 +81,6 @@ p1.1 <-core_plots.core_methods(dat, legend_title = "HMP Taxa Count")  +
 
   
   dat <- core_methods(arab_otu)
-
-#dat$name<-recode_factor(dat$name, Abundance = "Summation of Sequence Reads ", 
- #                               `Abundance and Occupancy` = "Proportion of Sequence Reads and Replicates ",
-  #                              Occupancy = "Proportion of Sequence Replicates ",
-   #                             `Hard Cutoffs` = "Hard Cutoff ")
 
 levels(dat$name)[1] <- 'Abundance'
 levels(dat$name)[2] <- 'Occupancy'

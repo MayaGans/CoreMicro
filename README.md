@@ -4,19 +4,12 @@ CoreMicro
 <!-- badges: start -->
 <!-- badges: end -->
 
-Companion package to manuscript: The hypothesis of a ‘core’ community receives poor support when confronted with simulated and empirical data. Package allows for the comparison of commonly utilized methods for assignment of taxa into core or non-core groups. Package includes tools for calculation of summary statistics for taxon abundance data and visualization of subsequent core and non-core assignments. Each of the four core assignment methods included can be customized to alter thresholds required for core inclusion. This allows researchers to alter cutoffs and determine if core assignment methods agree at certain cutoffs, facilitating comparison of multiple core assignment methods. As per the companion manuscript, core assignments should only be used for biological interpretation when assignment is robust to methodology, e.g. multiple methods agree on core assignment. 
+Companion package to manuscript: Comparative Analysis of Core Microbiome Assignments: Implications for Ecological Synthesis (DOI: https://doi.org/10.1128/msystems.01066-22). This package allows for the comparison of commonly implemented methods for core assignments in microbiome studies. Each of the four core assignment methods included can be customized to alter thresholds required for core inclusion. This allows researchers to alter cutoffs and determine if core assignment methods agree at certain cutoffs, facilitating comparison of multiple core assignment methods. 
 
 Installation
 ------------
 
-You can install the released version of CoreMicro from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("CoreMicro")
-```
-
-You can install the released version of applicable from CRAN with:
+You can install CoreMicro from
 
 ```
 # install.packages("devtools")
@@ -41,6 +34,6 @@ arabidopsis %>% # use built in dataset
 Vignettes
 ------
 
-To learn about how to use CoreMicro, check out the vignette:
+To learn about how to use CoreMicro was used in Comparative Analysis of Core Microbiome Assignments: Implications for Ecological Synthesis (DOI: https://doi.org/10.1128/msystems.01066-22), check out the vignettes folder. 
 
-vignette("analysis_and_plots", "CoreMicro"): Learn how to use all functions exported by the package
+vignette("analysis_and_plots", "CoreMicro"): Learn how to use all functions exported by the package.

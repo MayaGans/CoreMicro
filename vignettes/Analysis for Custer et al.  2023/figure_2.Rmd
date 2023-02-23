@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+Load packages
 ```{r}
 library(CoreMicro)
 library(patchwork)
@@ -22,7 +23,7 @@ library(tidyverse)
 library(phyloseq)
 ```
 
-Create Human OTU and Arab OTU objects
+Create Human OTU and Arab OTU objects from data incldued in package
 ```{r}
 human_stool <- human_stool
 names(human_stool)[1] <- "X"
@@ -37,6 +38,8 @@ arab_otu <- arabidopsis_rhizo
 ```
 
 # Figure 2
+
+Define core_venn.core_method function for creating figure 2
 ```{r}
 core_venn.core_methods <- function(combined_taxa_data,
                                    #doing this so I can remove the figures manually. 
@@ -65,7 +68,7 @@ core_venn.core_methods <- function(combined_taxa_data,
 }
 ```
 
-
+calculate core venn diagram
 ```{r}
 
 arab_otu2<-arab_otu
@@ -106,7 +109,7 @@ arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>%
 arab_abund_core_plot
 ```
 
-
+calculate core venn diagram
 ```{r}
 human_otu2 <- human_otu
 
@@ -145,7 +148,7 @@ human_abund_core_plot <- stackedh %>% dplyr::select(reads_per_taxa, value, name)
 #%>%
 ```
 
-
+Plot figure 2 by combining both panels
 ```{r}
 figure2a <- human_venn + arab_venn #+ patchwork::plot_annotation(tag_levels = "A")#+ plot_layout(guides = "collect")
 figure2b <- human_abund_core_plot + arab_abund_core_plot + plot_layout(guides = "collect")

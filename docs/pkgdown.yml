@@ -2,14 +2,11 @@ pandoc: 2.17.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  Figure 1: Analysis for Custer et al.  2023/Figure 1.html
-  Figure 2: Analysis for Custer et al.  2023/Figure 2.html
-  Figure 3: Analysis for Custer et al.  2023/Figure 3.html
-  SimulatedTaxaTables: Analysis for Custer et al.  2023/SimulatedTaxaTables.html
-  Trends in beta diversity: Analysis for Custer et al.  2023/Trends in beta diversity.html
-  'additional beta_diversity analsyis ': Analysis for Custer et al.  2023/additional
-    beta_diversity analsyis .html
-  analysis_and_plots: Analysis for Custer et al.  2023/analysis_and_plots.html
-  common-counts: Analysis for Custer et al.  2023/common-counts.html
-last_built: 2023-02-23T19:18Z
+  'additional_beta_diversity_analsyis ': Analysis for Custer et al.  2023/additional_beta_diversity_analsyis
+    .html
+  figure_1: Analysis for Custer et al.  2023/figure_1.html
+  figure_2: Analysis for Custer et al.  2023/figure_2.html
+  figure_3: Analysis for Custer et al.  2023/figure_3.html
+  trends_in_beta_diversity: Analysis for Custer et al.  2023/trends_in_beta_diversity.html
+last_built: 2023-02-23T19:30Z
 

@@ -1,5 +1,5 @@
 ---
-title: "Analysis and Plots"
+title: "Additional analysis of beta-diversity trends requested by reviewer"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Analysis and Plots}
@@ -7,6 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+load in packages
 ```{r}
 library(CoreMicro)
 library(gt)
@@ -16,42 +17,26 @@ library(parallelDist)
 library(vegan)
 ```
 
-Assign core status to combine dataframes for adonis and ordination. 
+Assign core status to combine dataframes for PERMANOVA testing (adonis) and ordinations. 
 
-### Hard Cutoff
-
-This method assigns taxa to the core if they are present in more than a pre-determined number of sites. The default threshhold is 25 counts in at least 5 sites, you can change these two parameters using the `cutoff` and `site` arguments
-
+hard cutoff core
 ```{r}
 hcT<-hard_cutoff(arabidopsis_rhizo, cutoff = 25, sites = 5)
-
 arabidopsis_hcT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% hcT,]
 names(arabidopsis_hcT) <- paste(names(arabidopsis_hcT), "_hcT", sep = "")
 names(arabidopsis_hcT)[1] <- "X"
 ```
 
-### Summation of Sequence Reads 
-
-This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the `nreads` argument
-
+abundance based core
 ```{r}
 psT<-abundance_core(arabidopsis_rhizo, readn = 0.75)
-
 arabidopsis_psT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% psT,]
 names(arabidopsis_psT) <- paste(names(arabidopsis_psT), "_pst", sep = "")
 names(arabidopsis_psT)[1] <- "X"
-
-#testing idea of back testing to identify best method for core assignemnts:
-#get mean abudnace of core taxa assigned by this method:
 arabidopsis_rhizo[arabidopsis_rhizo$X %in% psT,]
-
-
 ```
 
-### Proportion of Sequence Replicates
-
-This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:
-
+occupancy based core
 ```{r}
 prT<-occupancy_core(arabidopsis_rhizo, prop_rep =  0.5)
 
@@ -61,10 +46,7 @@ names(arabidopsis_prT) <- paste(names(arabidopsis_prT), "_prt", sep = "")
 names(arabidopsis_prT)[1] <- "X"
 ```
 
-### Proportion of Sequence Reads and Replicates
-
-This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.
-
+abundance and occupancy based core
 ```{r}
 prrT<-abundance_and_occupancy_core(arabidopsis_rhizo, prop_rep =  0.5, prop_reads = 0.0002)
 
@@ -81,7 +63,7 @@ non_core_abundance <- summarise_taxa(arabidopsis_rhizo[!(arabidopsis_rhizo$X %in
 #core_abundance[10,3]
 ```
 
-combine 4 core datasets with full 
+combine 4 core datasets to create one dataframe for PERMANOVA
 ```{r}
 names(arabidopsis_rhizo) <- paste(names(arabidopsis_rhizo), "_full", sep = "")
 names(arabidopsis_rhizo)[1] <- "X"
@@ -94,79 +76,56 @@ merged_datasets_matrix<-as.matrix(merged_datasets)
 merged_datasets_matrix_t <- t(merged_datasets_matrix)
 ```
 
-
+calculate bray-curtis dissimliarity, run tests of dispersion, adonis, and plot 
 ```{r}
 dist<-parDist(merged_datasets_matrix_t, method = "bray")
-
 sd <- data.frame(rownames(merged_datasets_matrix_t))
 rownames(sd) <- rownames(merged_datasets_matrix_t)
 sd$CoreMethods <- str_sub(rownames(sd), start= -4)
 unique(sd$CoreMethods)
-
-
 anova(betadisper(dist, sd$CoreMethods, type = "centroid"))
 plot(betadisper(dist, sd$CoreMethods, type = "centroid"), main = "Arabidopsis")
 boxplot(betadisper(dist, sd$CoreMethods, type = "centroid"))
-
 adonis2(dist ~ CoreMethods, data = sd, permutations = 100)
 #pairwise.adonis(dist, factors = sd$CoreMethods, perm = 1000)
 ```
 
+##Rerun all analysis for human microbiome project
 
-Human Microbiome stuff now 
-
-### Hard Cutoff
-
-This method assigns taxa to the core if they are present in more than a pre-determined number of sites. The default threshhold is 25 counts in at least 5 sites, you can change these two parameters using the `cutoff` and `site` arguments
-
+hard cutoff core
 ```{r}
 names(human_stool)[1] <- "X"
-
 hcT<-hard_cutoff(human_stool, cutoff = 25, sites = 5)
-
 human_stool_hcT <- human_stool[human_stool$X %in% hcT,]
 names(human_stool_hcT) <- paste(names(human_stool_hcT), "_hcT", sep = "")
 names(human_stool_hcT)[1] <- "X"
 ```
 
-### Summation of Sequence Reads 
-
-This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the `nreads` argument
-
+abundance based core
 ```{r}
 psT<-abundance_core(human_stool, readn = 0.75)
-
 human_stool_psT <- human_stool[human_stool$X %in% psT,]
 names(human_stool_psT) <- paste(names(human_stool_psT), "_pst", sep = "")
 names(human_stool_psT)[1] <- "X"
 ```
 
-### Proportion of Sequence Replicates
-
-This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:
-
+occupancy based core
 ```{r}
 prT<-occupancy_core(human_stool, prop_rep =  0.5)
-
 human_stool_prT <- human_stool[human_stool$X %in% prT,]
 names(human_stool_prT) <- paste(names(human_stool_prT), "_prt", sep = "")
-
 names(human_stool_prT)[1] <- "X"
 ```
 
-### Proportion of Sequence Reads and Replicates
-
-This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.
-
+abundance and occupancy based core
 ```{r}
 prrT<-abundance_and_occupancy_core(human_stool, prop_rep =  0.5, prop_reads = 0.0002)
-
 human_stool_prrT <- human_stool[human_stool$X %in% prrT,]
 names(human_stool_prrT) <- paste(names(human_stool_prrT), "_prrt", sep = "")
 names(human_stool_prrT)[1] <- "X"
 ```
 
-combine 4 core datasets with full 
+combine 4 core datasets to create one dataframe for PERMANOVA
 ```{r}
 names(human_stool) <- paste(names(human_stool), "_full", sep = "")
 names(human_stool)[1] <- "X"
@@ -179,19 +138,16 @@ merged_datasets_matrix<-as.matrix(merged_datasets)
 merged_datasets_matrix_t <- t(merged_datasets_matrix)
 ```
 
-
+calculate bray-curtis dissimliarity, run tests of dispersion, adonis, and plot
 ```{r}
 sd <- data.frame(rownames(merged_datasets_matrix_t))
 rownames(sd) <- rownames(merged_datasets_matrix_t)
 sd$CoreMethods <- str_sub(rownames(sd), start= -4)
 unique(sd$CoreMethods)
-
 dist<-parDist(merged_datasets_matrix_t, method = "bray")
-
 anova(betadisper(dist, sd$CoreMethods, type = "centroid"))
 plot(betadisper(dist, sd$CoreMethods, type = "centroid"), main = "human")
 boxplot(betadisper(dist, sd$CoreMethods, type = "centroid"))
 #pairwise.adonis(dist, factors = sd$CoreMethods, perm = 1000)
-
 adonis2(dist ~ CoreMethods, data = sd, permutations = 100)
 ```
