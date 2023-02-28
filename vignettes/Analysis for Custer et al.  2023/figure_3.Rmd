@@ -2,7 +2,7 @@
 title: "Figure 3"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Figure 1}
+  %\VignetteIndexEntry{Figure 3}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,7 +27,6 @@ library(patchwork)
 
 # set the structure of our simlulated taxa table
 ```{r}
-
 ntaxa<-1000
 ncore<-25
 nsites<-50
@@ -208,9 +207,11 @@ tp_plot <- ggplot(tp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nTrue Positives"))+
    theme(strip.text.x = element_text(size = 20))  +
   theme(text = element_text(size = 20)) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+
+tp_plot
 ```
 
-```{r}
+```{r, eval=F}
 fp <- sim.df_all %>%
   filter(sim.df_all$error == "False Positive")
 
@@ -231,10 +232,12 @@ fp_plot <- ggplot(fp, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
        fill = "Mean Error") +
   theme(strip.text.x = element_text(size = 0)) +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="Proportion of\nFalse Positives")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
+
+fp_plot
 ```
 
 
-```{r}
+```{r, eval=F}
 tf <- sim.df_all %>%
   filter(sim.df_all$error == "TP-FP")
 
@@ -260,12 +263,6 @@ tf_plot <- ggplot(tf, aes(x = as.factor(corenoncoreratio), y = as.factor(theta))
        fill = "Mean Error") +
    theme(strip.text.x = element_text(size = 24))  +
   theme(text = element_text(size = 20)) + guides(fill=guide_legend(title="TP-FP")) + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
-```
 
-```{r}
-g <- (tp_plot + fp_plot + plot_layout(ncol=1)) #+ plot_annotation(tag_levels = 'A'))
-g
-tp_plot
-fp_plot
 tf_plot
 ```
