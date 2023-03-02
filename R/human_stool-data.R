@@ -1,5 +1,8 @@
 #' Descritpion for subset of the human microbiome dataset used for comparison of core assignment methods. 
 #' Methods for filtering of the original dataset can be found in data-raw/human.R. 
+#' 
+#' Script used to prune dataset to only rhizosphere samples can be 
+#' found (\href{https://github.com/MayaGans/CoreMicro/blob/master/data-raw/human.R}{here}).
 #'
 #' @docType data
 #'

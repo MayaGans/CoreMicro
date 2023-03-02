@@ -1,14 +1,11 @@
-pandoc: 2.3.1
-pkgdown: 1.6.1
+pandoc: 2.17.1.1
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  analysis_and_plots: analysis_and_plots.html
-  arabidopsis_figure: arabidopsis_figure.html
-  co-occurance: co-occurance.html
-  common-counts: common-counts.html
-  figure1: figure1.html
-  figure2: figure2.html
-  figure3: figure3.html
-  human_figure: human_figure.html
-last_built: 2020-11-28T16:39Z
+  'additional_beta_diversity_analsyis ': Analysis for Custer et al.  2023/additional_beta_diversity_analsyis
+    .html
+  figure_1: Analysis for Custer et al.  2023/figure_1.html
+  figure_2: Analysis for Custer et al.  2023/figure_2.html
+  figure_3: Analysis for Custer et al.  2023/figure_3.html
+last_built: 2023-02-28T18:11Z
 

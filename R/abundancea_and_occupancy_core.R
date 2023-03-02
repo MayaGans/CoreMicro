@@ -13,16 +13,16 @@
 #' and the sites are columns. The default value is \code{TRUE},
 #' if \code{FALSE} data will be transposed for downstream analysis.
 #' @param prop_reads percentage of reads
-#' @param prop_reps percentage of replicates
+#' @param occupancy_core percentage of replicates
 #'
 #' @return the names of OTUs which meet the proportion of reads and replicate criteria
 #'
 #' @examples
-#' prop_reads_and_reps(arabidopsis)
+#' abundance_and_occupancy_core(arabidopsis)
 #'
 #' @export
 
-prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.0002, taxa_as_rows = TRUE) {
+abundance_and_occupancy_core <- function(otu_table, prop_rep =  0.5, prop_reads = 0.0002, taxa_as_rows = TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)
@@ -51,7 +51,7 @@ prop_reads_and_reps <- function(otu_table, prop_reps = 0.5, prop_reads = 0.0002,
     ) %>%
     dplyr::ungroup() %>%
     # this one gives us results
-    dplyr::filter(.data$num_sites >= .data$n * prop_reps) %>%
+    dplyr::filter(.data$num_sites >= .data$n * prop_rep) %>%
     # this leaves us with nothing...
     dplyr::filter(.data$num_reads >= prop_reads * .data$s) %>%
     dplyr::pull(.data$X) %>%

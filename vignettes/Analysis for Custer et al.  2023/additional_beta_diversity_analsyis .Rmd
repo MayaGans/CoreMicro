@@ -1,0 +1,153 @@
+---
+title: "Additional analysis of beta-diversity trends requested by reviewer"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Additional analysis of beta-diversity trends requested by reviewer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+load in packages
+```{r, eval=FALSE}
+library(CoreMicro)
+library(gt)
+library(tidyr)
+library(tidyverse)
+library(parallelDist)
+library(vegan)
+```
+
+Assign core status to combine dataframes for PERMANOVA testing (adonis) and ordinations. 
+
+hard cutoff core
+```{r, eval=FALSE}
+hcT<-hard_cutoff(arabidopsis_rhizo, cutoff = 25, sites = 5)
+arabidopsis_hcT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% hcT,]
+names(arabidopsis_hcT) <- paste(names(arabidopsis_hcT), "_hcT", sep = "")
+names(arabidopsis_hcT)[1] <- "X"
+```
+
+abundance based core
+```{r, eval=FALSE}
+psT<-abundance_core(arabidopsis_rhizo, readn = 0.75)
+arabidopsis_psT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% psT,]
+names(arabidopsis_psT) <- paste(names(arabidopsis_psT), "_pst", sep = "")
+names(arabidopsis_psT)[1] <- "X"
+arabidopsis_rhizo[arabidopsis_rhizo$X %in% psT,]
+```
+
+occupancy based core
+```{r, eval=FALSE}
+prT<-occupancy_core(arabidopsis_rhizo, prop_rep =  0.5)
+
+arabidopsis_prT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% prT,]
+names(arabidopsis_prT) <- paste(names(arabidopsis_prT), "_prt", sep = "")
+
+names(arabidopsis_prT)[1] <- "X"
+```
+
+abundance and occupancy based core
+```{r, eval=FALSE}
+prrT<-abundance_and_occupancy_core(arabidopsis_rhizo, prop_rep =  0.5, prop_reads = 0.0002)
+
+arabidopsis_prrT <- arabidopsis_rhizo[arabidopsis_rhizo$X %in% prrT,]
+names(arabidopsis_prrT) <- paste(names(arabidopsis_prrT), "_prrt", sep = "")
+names(arabidopsis_prrT)[1] <- "X"
+
+#pullout mean and variance to use when parameterizing dm draws in simulations
+core_abundance <- summarise_taxa(arabidopsis_rhizo[arabidopsis_rhizo$X %in% prrT,]) %>% summary() %>% data.frame() 
+non_core_abundance <- summarise_taxa(arabidopsis_rhizo[!(arabidopsis_rhizo$X %in% prrT),]) %>% summary()
+
+
+#core_abundance[core_abundance$Var2 == "     Mean"]
+#core_abundance[10,3]
+```
+
+combine 4 core datasets to create one dataframe for PERMANOVA
+```{r, eval=FALSE}
+names(arabidopsis_rhizo) <- paste(names(arabidopsis_rhizo), "_full", sep = "")
+names(arabidopsis_rhizo)[1] <- "X"
+merged_datasets<-full_join(arabidopsis_prrT, arabidopsis_prT, by = "X") %>% full_join(arabidopsis_hcT) %>% full_join(arabidopsis_psT) %>% full_join(arabidopsis_rhizo) 
+merged_datasets <- data.frame(merged_datasets)
+merged_datasets[is.na(merged_datasets)] <- 0
+rownames(merged_datasets)<-merged_datasets$X
+merged_datasets$X = NULL
+merged_datasets_matrix<-as.matrix(merged_datasets)
+merged_datasets_matrix_t <- t(merged_datasets_matrix)
+```
+
+calculate bray-curtis dissimilarity, run tests of dispersion, adonis, and plot 
+```{r, eval=FALSE}
+dist<-parDist(merged_datasets_matrix_t, method = "bray")
+sd <- data.frame(rownames(merged_datasets_matrix_t))
+rownames(sd) <- rownames(merged_datasets_matrix_t)
+sd$CoreMethods <- str_sub(rownames(sd), start= -4)
+unique(sd$CoreMethods)
+anova(betadisper(dist, sd$CoreMethods, type = "centroid"))
+plot(betadisper(dist, sd$CoreMethods, type = "centroid"), main = "Arabidopsis")
+boxplot(betadisper(dist, sd$CoreMethods, type = "centroid"))
+adonis2(dist ~ CoreMethods, data = sd, permutations = 100)
+#pairwise.adonis(dist, factors = sd$CoreMethods, perm = 1000)
+```
+
+##Rerun all analysis for human microbiome project
+
+hard cutoff core
+```{r, eval=FALSE}
+names(human_stool)[1] <- "X"
+hcT<-hard_cutoff(human_stool, cutoff = 25, sites = 5)
+human_stool_hcT <- human_stool[human_stool$X %in% hcT,]
+names(human_stool_hcT) <- paste(names(human_stool_hcT), "_hcT", sep = "")
+names(human_stool_hcT)[1] <- "X"
+```
+
+abundance based core
+```{r, eval=FALSE}
+psT<-abundance_core(human_stool, readn = 0.75)
+human_stool_psT <- human_stool[human_stool$X %in% psT,]
+names(human_stool_psT) <- paste(names(human_stool_psT), "_pst", sep = "")
+names(human_stool_psT)[1] <- "X"
+```
+
+occupancy based core
+```{r, eval=FALSE}
+prT<-occupancy_core(human_stool, prop_rep =  0.5)
+human_stool_prT <- human_stool[human_stool$X %in% prT,]
+names(human_stool_prT) <- paste(names(human_stool_prT), "_prt", sep = "")
+names(human_stool_prT)[1] <- "X"
+```
+
+abundance and occupancy based core
+```{r, eval=FALSE}
+prrT<-abundance_and_occupancy_core(human_stool, prop_rep =  0.5, prop_reads = 0.0002)
+human_stool_prrT <- human_stool[human_stool$X %in% prrT,]
+names(human_stool_prrT) <- paste(names(human_stool_prrT), "_prrt", sep = "")
+names(human_stool_prrT)[1] <- "X"
+```
+
+combine 4 core datasets to create one dataframe for PERMANOVA
+```{r, eval=FALSE}
+names(human_stool) <- paste(names(human_stool), "_full", sep = "")
+names(human_stool)[1] <- "X"
+merged_datasets<-full_join(human_stool_prrT, human_stool_prT, by = "X") %>% full_join(human_stool_hcT) %>% full_join(human_stool_psT) %>% full_join(human_stool) 
+merged_datasets <- data.frame(merged_datasets)
+merged_datasets[is.na(merged_datasets)] <- 0
+rownames(merged_datasets)<-merged_datasets$X
+merged_datasets$X = NULL
+merged_datasets_matrix<-as.matrix(merged_datasets)
+merged_datasets_matrix_t <- t(merged_datasets_matrix)
+```
+
+calculate bray-curtis dissimliarity, run tests of dispersion, adonis, and plot
+```{r, eval=FALSE}
+sd <- data.frame(rownames(merged_datasets_matrix_t))
+rownames(sd) <- rownames(merged_datasets_matrix_t)
+sd$CoreMethods <- str_sub(rownames(sd), start= -4)
+unique(sd$CoreMethods)
+dist<-parDist(merged_datasets_matrix_t, method = "bray")
+anova(betadisper(dist, sd$CoreMethods, type = "centroid"))
+plot(betadisper(dist, sd$CoreMethods, type = "centroid"), main = "human")
+boxplot(betadisper(dist, sd$CoreMethods, type = "centroid"))
+#pairwise.adonis(dist, factors = sd$CoreMethods, perm = 1000)
+adonis2(dist ~ CoreMethods, data = sd, permutations = 100)
+```

@@ -23,8 +23,8 @@ the mean, variance, and coefficient of variation.
 A wrapper for
 \code{summarise_taxa}
 \code{prop_reads},
-\code{prop_reps},
-\code{prop_reads_and_reps} and
+\code{occupancy_core},
+\code{abundance_and_occupancy_core} and
 \code{hard_cutoff} methods
 }
 \examples{

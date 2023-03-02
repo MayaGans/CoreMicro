@@ -24,18 +24,18 @@ test_that("hard cut off works", {
 })
 
 test_that("sum reads method works", {
-  expect_equal(sum_reads(dummy), "OTU_1")
-  expect_equal(sum_reads(dummy_t, taxa_as_rows = FALSE), "OTU_1")
+  expect_equal(abundance_core(dummy), "OTU_1")
+  expect_equal(abundance_core(dummy_t, taxa_as_rows = FALSE), "OTU_1")
 })
 
 test_that("prop reps method works", {
-  expect_equal(prop_reps(dummy), c("OTU_1", "OTU_2", "OTU_3"))
-  expect_equal(prop_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
+  expect_equal(occupancy_core(dummy), c("OTU_1", "OTU_2", "OTU_3"))
+  expect_equal(occupancy_core(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
 })
 
 test_that("prop reads and reps method works", {
-   expect_equal(prop_reads_and_reps(dummy), c("OTU_1", "OTU_2", "OTU_3"))
-   expect_equal(prop_reads_and_reps(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
+   expect_equal(abundance_and_occupancy_core(dummy), c("OTU_1", "OTU_2", "OTU_3"))
+   expect_equal(abundance_and_occupancy_core(dummy_t, taxa_as_rows = FALSE), c("OTU_1", "OTU_2", "OTU_3"))
 })
 
 test_that("combining methods works", {

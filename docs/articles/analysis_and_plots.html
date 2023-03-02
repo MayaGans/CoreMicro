@@ -528,21 +528,21 @@
 <a href="#summation-of-sequence-reads" class="anchor"></a>Summation of Sequence Reads</h3>
 <p>This method assigns taxa to the core if they are in the top X% of reads. Taxa are ranked in abundance and the cumulative sum is recorded. Any taxa which appears before some cutoff percentage is included in the core. The default is for taxa to be assigned to the core if they account for the first 75% of the reads. You can change this using the <code>nreads</code> argument</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/sum_reads.html">sum_reads</a></span><span class="op">(</span><span class="va">arabidopsis</span>, nreads <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/abundance_core.html">abundance_core</a></span><span class="op">(</span><span class="va">arabidopsis</span>, nreads <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="proportion-of-sequence-replicates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#proportion-of-sequence-replicates" class="anchor"></a>Proportion of Sequence Replicates</h3>
 <p>This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run. As a default, taxa must be present in at least 50% of sites:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reps.html">prop_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span>, prop_reps <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/occupancy_core.html">occupancy_core</a></span><span class="op">(</span><span class="va">arabidopsis</span>, occupancy_core <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="proportion-of-sequence-reads-and-replicates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#proportion-of-sequence-reads-and-replicates" class="anchor"></a>Proportion of Sequence Reads and Replicates</h3>
 <p>This method assigns taxa to the core if they account for some proportion of the total reads for the sequencing run and if they are present in at least x% of the total number of replicates. In this example, a core taxa must account for 0.02% of the total reads for the entire otu table and be present in at least 50% of sites.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/prop_reads_and_reps.html">prop_reads_and_reps</a></span><span class="op">(</span><span class="va">arabidopsis</span>, prop_reps <span class="op">=</span> <span class="fl">0.5</span>, prop_reads <span class="op">=</span> <span class="fl">0.0002</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/abundance_and_occupancy_core.html">abundance_and_occupancy_core</a></span><span class="op">(</span><span class="va">arabidopsis</span>, occupancy_core <span class="op">=</span> <span class="fl">0.5</span>, prop_reads <span class="op">=</span> <span class="fl">0.0002</span><span class="op">)</span></code></pre></div>
 <p><strong>We encourage collaboration – please submit a PR or issue if you’d like to see more methods included in the package!</strong></p>
 </div>
 </div>

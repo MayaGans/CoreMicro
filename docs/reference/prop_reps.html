@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Proportion of Replicates — prop_reps • CoreMicro</title>
+<title>Proportion of Replicates — occupancy_core • CoreMicro</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Proportion of Replicates — prop_reps" />
+<meta property="og:title" content="Proportion of Replicates — occupancy_core" />
 <meta property="og:description" content="This method assigns taxa to the core
 if they account for some proportion of the total reads for the sequencing run
 and if they are present in at least x
@@ -155,8 +155,8 @@ I hope we didnt do 10 x totalreps when calculating the number of taxa included e
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Proportion of Replicates</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MayaGans/CoreMicro/blob/master/R/prop_reps.R'><code>R/prop_reps.R</code></a></small>
-    <div class="hidden name"><code>prop_reps.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/MayaGans/CoreMicro/blob/master/R/occupancy_core.R'><code>R/occupancy_core.R</code></a></small>
+    <div class="hidden name"><code>occupancy_core.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -169,7 +169,7 @@ for the entire otu table and be present in at least 50<!-- % of sites. --></p>
 I hope we didnt do 10 x totalreps when calculating the number of taxa included etc.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prop_reps</span><span class='op'>(</span><span class='va'>otu_table</span>, prop_reps <span class='op'>=</span> <span class='fl'>0.5</span>, taxa_as_rows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>occupancy_core</span><span class='op'>(</span><span class='va'>otu_table</span>, occupancy_core <span class='op'>=</span> <span class='fl'>0.5</span>, taxa_as_rows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,7 +180,7 @@ I hope we didnt do 10 x totalreps when calculating the number of taxa included e
 the first row is the OTU ID and column names refer to sites</p></td>
     </tr>
     <tr>
-      <th>prop_reps</th>
+      <th>occupancy_core</th>
       <td><p>some definition</p></td>
     </tr>
     <tr>
@@ -196,7 +196,7 @@ if <code>FALSE</code> data will be transposed for downstream analysis.</p></td>
     <p>the names of OTUs which meet the proportion of replicate criteria</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>prop_reps</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>occupancy_core</span><span class='op'>(</span><span class='va'>arabidopsis</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    [1] "OTU_10000" "OTU_10011" "OTU_10030" "OTU_10042" "OTU_10049" "OTU_10056"
 #&gt;    [7] "OTU_10061" "OTU_1008"  "OTU_10097" "OTU_10099" "OTU_10108" "OTU_10110"
 #&gt;   [13] "OTU_10111" "OTU_10113" "OTU_10116" "OTU_10146" "OTU_10149" "OTU_10219"

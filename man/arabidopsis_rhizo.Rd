@@ -18,6 +18,10 @@ Data derived from Lundberg et al. 2012. Dataset used for core assignment compari
 core Arabidopsis thaliana root microbiome dataset. We utilized only the rhizosphere samples from the M21 site
 for our comparisons of core assignment methods.
 }
+\details{
+Script used to prune dataset to only rhizosphere samples can be 
+found (\href{https://github.com/MayaGans/CoreMicro/blob/master/data-raw/arabidopsis.R }{here}).
+}
 \examples{
 \dontrun{data(arabidopsis_rhizo)}
 \dontrun{core_methods(arabidopsis_rhizo)}

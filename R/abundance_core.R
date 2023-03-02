@@ -15,11 +15,11 @@
 #' @return the names of OTUs which meet the proportion of reads criteria
 #'
 #' @examples
-#' sum_reads(arabidopsis)
+#' abundance_core(arabidopsis)
 #'
 #' @export
 
-sum_reads <- function(otu_table, readn = 0.75, taxa_as_rows =TRUE) {
+abundance_core <- function(otu_table, readn = 0.75, taxa_as_rows =TRUE) {
 
   # transpose data if rows are not taxa
   if (!taxa_as_rows) otu_table <- transpose_taxa(otu_table)

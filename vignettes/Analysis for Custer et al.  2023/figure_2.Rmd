@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, eval=FALSE}
+Load packages
+```{r}
 library(CoreMicro)
 library(patchwork)
 library(ggplot2)
@@ -22,28 +23,24 @@ library(tidyverse)
 library(phyloseq)
 ```
 
-
-Create Human OTU and Arab OTU objects
+Create Human OTU and Arab OTU objects from data incldued in package
 ```{r}
-human<-readRDS(file = "../..//data/human_working_set.rda")
-
-#extract dataframe and  prep dataframe for Core assignments
-human_otu  <- data.frame(otu_table(human))
-X <- rownames(human_otu)
-human_otu<-cbind(X, human_otu)
+human_stool <- human_stool
+names(human_stool)[1] <- "X"
+human_stool$X <- as.character(human_stool$X)
+human_otu <- human_stool
 
 
 #read in file
-arabidopsis_m21_r<-readRDS(file = "../../data/arabidopsis_m21_r.rda")
-
-#extract dataframe and  prep dataframe for Core assignments
-arab_otu  <- data.frame(otu_table(arabidopsis_m21_r))
-X <- rownames(arab_otu)
-arab_otu<-cbind(X, arab_otu)
+arabidopsis_rhizo <- arabidopsis_rhizo
+names(arabidopsis_rhizo)[1] <- "X"
+arab_otu <- arabidopsis_rhizo
 ```
 
 # Figure 2
-```{r, eval=FALSE}
+
+Define core_venn.core_method function for creating figure 2
+```{r}
 core_venn.core_methods <- function(combined_taxa_data,
                                    #doing this so I can remove the figures manually. 
                                      category_names = c("a",
@@ -71,7 +68,7 @@ core_venn.core_methods <- function(combined_taxa_data,
 }
 ```
 
-
+calculate core venn diagram
 ```{r}
 
 arab_otu2<-arab_otu
@@ -81,7 +78,7 @@ arab_venn <- arab_otu2 %>% core_methods() %>%
   ggtitle(expression(paste("Shared Core Membership of ", italic("Arabidopsis")))) +
   theme(plot.title = element_text(size = 20, hjust = 0.5))  +
           scale_color_manual(values = rep("black", 4))  + guides(fill="none") + ggtitle("") + theme(plot.title = element_text(size = 30))
-#ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure2.tiff", height = 8, width = 11)
+
 
 #Add abundance information for core assignments, e.g., % core vs % non-core reads.
 arab_otu$reads_per_taxa <- rowSums(arab_otu[,-1])
@@ -108,12 +105,11 @@ levels(stacked$name)[3] <- 'Abundance and Occupancy'
 levels(stacked$name)[4] <- 'Hard Cutoffs'
 
 arab_abund_core_plot<-stacked %>% dplyr::select(reads_per_taxa, value, name) %>% ggplot( aes( fill=as.factor(value), y = reads_per_taxa, x = name)) +  geom_bar(position="fill", stat="identity") + ylab("Proportion of total reads") + xlab("") +  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 22))  + scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 12)) + scale_fill_discrete(name ="Core \nmembership", labels=c('non-core', 'core'))  + theme_classic() + theme(axis.text.x=element_text(size=22))+ theme(axis.text.y=element_text(size=22)) + theme( axis.title.y = element_text(size = 30))  + theme(legend.text=element_text(size=22)) + theme(legend.title = element_text(size = 24))
-#%>%
-#%>%
 
+arab_abund_core_plot
 ```
 
-
+calculate core venn diagram
 ```{r}
 human_otu2 <- human_otu
 
@@ -152,20 +148,9 @@ human_abund_core_plot <- stackedh %>% dplyr::select(reads_per_taxa, value, name)
 #%>%
 ```
 
-
+Plot figure 2 by combining both panels
 ```{r}
-
-#ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/figure2b.tiff", height = 8, width = 11)
-
 figure2a <- human_venn + arab_venn #+ patchwork::plot_annotation(tag_levels = "A")#+ plot_layout(guides = "collect")
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure2a.tiff", height = 9, width =22)
-
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure2a.eps", height = 9, width =22)
-
-
 figure2b <- human_abund_core_plot + arab_abund_core_plot + plot_layout(guides = "collect")
 figure2b
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure2b.tiff", height = 9, width =22)
-ggsave("/Users/gordoncuster/Desktop/Quick_Sync/Manuscripts in progress/CoreCommunity/March22/MSystems /Revision/Final Docs/Dec22_Revision/FinalFiguresCusteretal2023_Msystems/Final Figures 12-20-22/Figure2b.eps", height = 9, width =22)
-
 ```

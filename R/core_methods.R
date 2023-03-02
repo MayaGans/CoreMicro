@@ -3,8 +3,8 @@
 #' @description A wrapper for
 #' \code{summarise_taxa}
 #' \code{prop_reads},
-#' \code{prop_reps},
-#' \code{prop_reads_and_reps} and
+#' \code{occupancy_core},
+#' \code{abundance_and_occupancy_core} and
 #' \code{hard_cutoff} methods
 #'
 #' @param otu_table a dataframe of OTUs where
@@ -33,15 +33,15 @@ core_methods <- function(otu_table, taxa_as_rows = TRUE) {
 
   temp <- summarise_taxa(otu_table) %>%
     dplyr::mutate(
-      `Summation of Sequence Reads` = .data$X %in% sum_reads(otu_table),
-      `Proportion of Sequence Reads and Replicates` = .data$X %in% prop_reads_and_reps(otu_table),
+      `Abundance core` = .data$X %in% abundance_core(otu_table),
+      `Abundance and occupancy core` = .data$X %in% abundance_and_occupancy_core(otu_table),
       `Hard Cutoff` = .data$X %in% hard_cutoff(otu_table),
-      `Proportion of Sequence Replicates` = .data$X %in% prop_reps(otu_table)) %>%
+      `Occupancy core` = .data$X %in% occupancy_core(otu_table)) %>%
     dplyr::mutate_if(is.logical, as.numeric) %>%
     tidyr::pivot_longer(cols = 5:8) %>%
-    dplyr::mutate(name = factor(.data$name, levels = c("Summation of Sequence Reads",
-                                          "Proportion of Sequence Replicates",
-                                          "Proportion of Sequence Reads and Replicates",
+    dplyr::mutate(name = factor(.data$name, levels = c("Abundance core",
+                                          "Occupancy core",
+                                          "Abundance and occupancy core",
                                           "Hard Cutoff")))
 
   class(temp) <- append(class(temp),"core_methods")
